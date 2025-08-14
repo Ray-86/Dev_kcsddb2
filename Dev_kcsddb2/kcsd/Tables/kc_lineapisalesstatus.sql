@@ -1,0 +1,27 @@
+﻿CREATE TABLE [kcsd].[kc_lineapisalesstatus] (
+    [ID]             INT            IDENTITY (1, 1) NOT NULL,
+    [kc_line_id]     VARCHAR (33)   NULL,
+    [kc_step_id]     VARCHAR (4)    NULL,
+    [kc_step_state]  INT            NULL,
+    [kc_step_end]    BIT            NULL,
+    [UserSeq]        VARCHAR (4)    NULL,
+    [kc_cust_nameu]  NVARCHAR (60)  NULL,
+    [kc_id_no]       VARCHAR (10)   NULL,
+    [kc_prod_type]   VARCHAR (2)    NULL,
+    [kc_comp_code]   VARCHAR (4)    NULL,
+    [kc_dealer_data] NVARCHAR (500) NULL,
+    [kc_dealer_memo] NVARCHAR (500) NULL,
+    [kc_cp_no]       VARCHAR (11)   NULL,
+    [kc_cust_type]   VARCHAR (3)    NULL,
+    [kc_pay_fee]     INT            NULL,
+    [kc_break_amt]   INT            NULL,
+    [CreatePerson]   VARCHAR (20)   NULL,
+    [CreateDate]     DATETIME       NULL,
+    [kc_updt_user]   VARCHAR (20)   NULL,
+    [kc_updt_date]   DATETIME       NULL,
+    [kc_mobil_no]    VARCHAR (20)   NULL,
+    [kc_licn_no]     VARCHAR (30)   NULL,
+    [kc_eng_no]      VARCHAR (30)   NULL,
+    CONSTRAINT [PK_kc_lineapisalesstatus] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

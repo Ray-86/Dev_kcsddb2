@@ -1,0 +1,25 @@
+﻿CREATE TABLE [kcsd].[kc_lineapitesttarotstatus] (
+    [ID]             INT           IDENTITY (1, 1) NOT NULL,
+    [kc_line_id]     VARCHAR (33)  NULL,
+    [kc_step_id]     VARCHAR (4)   NULL,
+    [kc_step_state]  INT           NULL,
+    [kc_step_end]    BIT           NULL,
+    [CreatePerson]   VARCHAR (20)  NULL,
+    [CreateDate]     DATETIME      NULL,
+    [kc_updt_user]   VARCHAR (20)  NULL,
+    [kc_updt_date]   DATETIME      NULL,
+    [kc_nick_name]   VARCHAR (30)  NULL,
+    [kc_nick_name1]  VARCHAR (30)  NULL,
+    [kc_tarot_card]  VARCHAR (200) NULL,
+    [kc_tarot_card1] VARCHAR (100) NULL,
+    [kc_tarot_card2] VARCHAR (100) NULL,
+    [kc_tarot_card3] VARCHAR (100) NULL,
+    [kc_tarot_card4] VARCHAR (100) NULL,
+    [kc_tarot_card5] VARCHAR (100) NULL,
+    [kc_tarot_card6] VARCHAR (100) NULL,
+    [kc_tarot_card7] VARCHAR (100) NULL,
+    [kc_tarot_memo]  VARCHAR (150) NULL,
+    [kc_tarot_log]   VARCHAR (MAX) NULL,
+    CONSTRAINT [PK_kc_lineapitesttarotstatus] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

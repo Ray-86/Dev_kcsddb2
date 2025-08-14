@@ -1,0 +1,25 @@
+﻿CREATE TABLE [kcsd].[kc_prize] (
+    [kc_prize_no]     VARCHAR (10) NOT NULL,
+    [kc_apply_date]   DATETIME     NULL,
+    [kc_area_code]    VARCHAR (5)  NULL,
+    [kc_prize_type]   VARCHAR (30) NULL,
+    [UserSeq]         VARCHAR (10) NULL,
+    [kc_prize_pee]    INT          NULL,
+    [kc_tax_bool]     VARCHAR (1)  NULL,
+    [kc_prize_goal]   VARCHAR (5)  NULL,
+    [kc_prize_finish] VARCHAR (5)  NULL,
+    [kc_prize_memo]   VARCHAR (40) NULL,
+    [kc_apply_user1]  VARCHAR (10) NULL,
+    [kc_apply_user2]  VARCHAR (10) NULL,
+    [kc_apply_user3]  VARCHAR (10) NULL,
+    [kc_give_date]    DATETIME     NULL,
+    [kc_declare_date] DATETIME     NULL,
+    [CreatePerson]    VARCHAR (10) NULL,
+    [CreateDate]      DATETIME     NULL,
+    [kc_updt_user]    VARCHAR (10) NULL,
+    [kc_updt_date]    DATETIME     NULL,
+    [JobType]         VARCHAR (1)  NULL,
+    [kc_years_type]   VARCHAR (6)  NULL,
+    CONSTRAINT [PK_kc_prize] PRIMARY KEY CLUSTERED ([kc_prize_no] ASC)
+);
+

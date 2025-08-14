@@ -1,0 +1,5 @@
+﻿CREATE TABLE [kcsd].[Tally] (
+    [N] INT NOT NULL,
+    CONSTRAINT [PK_Tally] PRIMARY KEY CLUSTERED ([N] ASC)
+);
+

@@ -1,0 +1,25 @@
+﻿CREATE TABLE [kcsd].[kc_caragentbranchProd] (
+    [kc_agent_code]      VARCHAR (30)  NOT NULL,
+    [kc_item_no]         INT           NULL,
+    [kc_prod_type]       VARCHAR (2)   NULL,
+    [kc_loan_perd]       VARCHAR (2)   NULL,
+    [IsEnable]           BIT           NULL,
+    [CreatePerson]       VARCHAR (20)  NULL,
+    [CreateDate]         DATETIME      NULL,
+    [kc_updt_user]       VARCHAR (20)  NULL,
+    [kc_updt_date]       SMALLDATETIME NULL,
+    [IsEnable_cfm]       BIT           NULL,
+    [kc_mobile_no]       VARCHAR (11)  NULL,
+    [IsEnable_franchise] BIT           NULL,
+    [kc_sales_code]      VARCHAR (4)   NULL,
+    [kc_rate_type]       VARCHAR (2)   NULL,
+    [kc_ID0K_type]       VARCHAR (2)   NULL,
+    [kc_loan_type]       VARCHAR (4)   NULL,
+    [kc_prod_namedudu]   VARCHAR (100) NULL,
+    [IsEnable_pmp]       BIT           NULL,
+    [IsEnable_ID0J]      BIT           NULL,
+    [IsEnable_brok]      BIT           NULL,
+    [kc_give_amt]        INT           NULL,
+    [IsEnable_premium]   BIT           NULL
+);
+

@@ -1,0 +1,3 @@
+﻿CREATE ROLE [OPER]
+    AUTHORIZATION [dbo];
+

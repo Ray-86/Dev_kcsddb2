@@ -1,0 +1,26 @@
+﻿CREATE TABLE [kcsd].[ConvertWinningList] (
+    [ID]             INT           IDENTITY (1, 1) NOT NULL,
+    [YearMonth]      VARCHAR (10)  NULL,
+    [kc_invo_no]     VARCHAR (10)  NULL,
+    [kc_issu_desc]   VARCHAR (30)  NULL,
+    [kc_uniform_no]  VARCHAR (10)  NULL,
+    [kc_invo_date]   SMALLDATETIME NULL,
+    [SubTotal]       INT           NULL,
+    [PriceFee]       INT           NULL,
+    [kc_case_no]     VARCHAR (10)  NULL,
+    [kc_cust_nameu]  VARCHAR (30)  NULL,
+    [kc_mobil_no]    VARCHAR (10)  NULL,
+    [kc_curr_zip]    VARCHAR (10)  NULL,
+    [kc_curr_addr]   VARCHAR (100) NULL,
+    [kc_updt_user]   VARCHAR (20)  NULL,
+    [kc_updt_date]   SMALLDATETIME NULL,
+    [kc_sms_user]    VARCHAR (20)  NULL,
+    [kc_sms_date]    SMALLDATETIME NULL,
+    [kc_letter_user] VARCHAR (20)  NULL,
+    [kc_letter_date] SMALLDATETIME NULL,
+    [kc_file_type]   VARCHAR (1)   NULL,
+    [CarrierType]    VARCHAR (10)  NULL,
+    [CarrierId1]     VARCHAR (20)  NULL,
+    CONSTRAINT [PK_ConvertWinningList] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

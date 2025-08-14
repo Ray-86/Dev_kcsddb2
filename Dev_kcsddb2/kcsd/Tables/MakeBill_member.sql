@@ -1,0 +1,26 @@
+﻿CREATE TABLE [kcsd].[MakeBill_member] (
+    [kc_list_no]       VARCHAR (12) NULL,
+    [kc_item_no]       INT          NULL,
+    [kc_member_no]     VARCHAR (11) NULL,
+    [kc_expt_date]     DATETIME     NULL,
+    [kc_pay_date]      DATETIME     NULL,
+    [kc_pay_fee]       INT          NULL,
+    [kc_break_fee]     INT          NULL,
+    [kc_break_fee2]    INT          NULL,
+    [kc_dudupoint_fee] INT          NULL,
+    [kc_acct_bar1]     VARCHAR (20) NULL,
+    [kc_acct_bar2]     VARCHAR (20) NULL,
+    [kc_acct_bar3]     VARCHAR (20) NULL,
+    [kc_export_flag]   VARCHAR (1)  NULL,
+    [kc_short_code]    VARCHAR (8)  NULL,
+    [CreatePerson]     VARCHAR (20) NULL,
+    [CreateDate]       DATETIME     NULL,
+    [kc_updt_user]     VARCHAR (20) NULL,
+    [kc_updt_date]     DATETIME     NULL,
+    [kc_ATM_codeC]     VARCHAR (20) NULL,
+    [kc_ATM_codeD]     VARCHAR (20) NULL,
+    [kc_discount_fee]  INT          NULL,
+    [kc_discount_fee2] INT          NULL,
+    [kc_ATM_codeB]     VARCHAR (20) NULL
+);
+

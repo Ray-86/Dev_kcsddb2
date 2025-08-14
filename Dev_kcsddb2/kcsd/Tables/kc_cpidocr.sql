@@ -1,0 +1,26 @@
+﻿CREATE TABLE [kcsd].[kc_cpidocr] (
+    [kc_cp_no]      VARCHAR (10)  NOT NULL,
+    [kc_item_no]    INT           NOT NULL,
+    [kc_ocr_stat]   VARCHAR (1)   NOT NULL,
+    [kc_id_type]    SMALLINT      NOT NULL,
+    [kc_cust_type]  SMALLINT      NOT NULL,
+    [kc_file_name]  VARCHAR (200) NOT NULL,
+    [kc_dest_name]  VARCHAR (200) NULL,
+    [kc_cust_nameu] NVARCHAR (60) NULL,
+    [kc_id_no]      VARCHAR (10)  NULL,
+    [kc_birth_date] VARCHAR (30)  NULL,
+    [kc_issue_date] VARCHAR (50)  NULL,
+    [kc_papa_nameu] NVARCHAR (60) NULL,
+    [kc_mama_nameu] NVARCHAR (60) NULL,
+    [kc_mate_nameu] NVARCHAR (60) NULL,
+    [kc_perm_addr]  VARCHAR (100) NULL,
+    [kc_run_time]   INT           NULL,
+    [kc_ip_addr]    VARCHAR (20)  NULL,
+    [CreatePerson]  VARCHAR (20)  NULL,
+    [CreateDate]    DATETIME      NULL,
+    [kc_updt_user]  VARCHAR (20)  NULL,
+    [kc_updt_date]  DATETIME      NULL,
+    [kc_cpidocr_no] VARCHAR (10)  NULL,
+    CONSTRAINT [PK_kc_cpidocr] PRIMARY KEY CLUSTERED ([kc_cp_no] ASC, [kc_item_no] ASC)
+);
+

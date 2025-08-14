@@ -1,0 +1,3 @@
+﻿CREATE ROLE [MGRS]
+    AUTHORIZATION [dbo];
+

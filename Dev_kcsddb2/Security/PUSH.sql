@@ -1,0 +1,35 @@
+﻿CREATE ROLE [PUSH]
+    AUTHORIZATION [dbo];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [chhung];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [ylchen];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [clchou];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [yelin];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [hjchou];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [yjlin1];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [invoice];
+
+
+GO
+ALTER ROLE [PUSH] ADD MEMBER [super];
+

@@ -1,0 +1,26 @@
+﻿CREATE TABLE [kcsd].[SalesBonus] (
+    [kc_case_no]     VARCHAR (10) NOT NULL,
+    [kc_item_no]     INT          NOT NULL,
+    [kc_area_code]   VARCHAR (2)  NOT NULL,
+    [kc_input_date]  DATETIME     NOT NULL,
+    [kc_pay_date]    DATETIME     NOT NULL,
+    [kc_pay_amt]     INT          NOT NULL,
+    [kc_law_amt]     INT          NULL,
+    [kc_break_amt]   INT          NULL,
+    [kc_bonus_amt]   INT          NULL,
+    [kc_pusher_code] VARCHAR (6)  NULL,
+    [kc_emp_code]    VARCHAR (20) NULL,
+    [kc_memo]        VARCHAR (50) NULL,
+    [kc_apply_user]  VARCHAR (20) NULL,
+    [kc_apply_date]  DATETIME     NULL,
+    [kc_crdt_user]   VARCHAR (20) NULL,
+    [kc_crdt_date]   DATETIME     NULL,
+    [CreatePerson]   VARCHAR (20) NULL,
+    [CreateDate]     DATETIME     NULL,
+    [kc_updt_user]   VARCHAR (20) NULL,
+    [kc_updt_date]   DATETIME     NULL,
+    [kc_cfm_user]    VARCHAR (20) NULL,
+    [kc_cfm_date]    DATETIME     NULL,
+    CONSTRAINT [PK_SalesBonus] PRIMARY KEY CLUSTERED ([kc_case_no] ASC, [kc_item_no] ASC)
+);
+

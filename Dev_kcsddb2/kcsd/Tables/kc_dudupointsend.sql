@@ -1,0 +1,27 @@
+﻿CREATE TABLE [kcsd].[kc_dudupointsend] (
+    [kc_list_no]           VARCHAR (10)   NOT NULL,
+    [kc_list_name]         VARCHAR (100)  NULL,
+    [kc_list_type]         VARCHAR (1)    NULL,
+    [kc_listsend_type]     VARCHAR (1)    NULL,
+    [kc_customernote_memo] VARCHAR (100)  NULL,
+    [kc_internalnote_memo] VARCHAR (100)  NULL,
+    [kc_list_memo]         VARCHAR (100)  NULL,
+    [CreatePerson]         VARCHAR (10)   NULL,
+    [CreateDate]           DATETIME       NULL,
+    [kc_updt_user]         VARCHAR (10)   NULL,
+    [kc_updt_date]         DATETIME       NULL,
+    [kc_apply_user]        VARCHAR (4)    NULL,
+    [kc_apply_date]        DATETIME       NULL,
+    [kc_approve_user]      VARCHAR (4)    NULL,
+    [kc_approve_date]      DATETIME       NULL,
+    [kc_memberno_list]     VARCHAR (1200) NULL,
+    [kc_dudupoint_fee]     INT            NULL,
+    [kc_sendat_type]       VARCHAR (1)    NULL,
+    [kc_sendat_date]       DATETIME       NULL,
+    [kc_taskstrt_date]     DATETIME       NULL,
+    [kc_taskstop_date]     DATETIME       NULL,
+    [kc_limit_count]       INT            NULL,
+    [kc_list_stat]         VARCHAR (1)    NULL,
+    CONSTRAINT [PK_kc_dudupointsend] PRIMARY KEY CLUSTERED ([kc_list_no] ASC)
+);
+

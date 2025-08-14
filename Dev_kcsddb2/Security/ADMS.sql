@@ -1,0 +1,23 @@
+﻿CREATE ROLE [ADMS]
+    AUTHORIZATION [dbo];
+
+
+GO
+ALTER ROLE [ADMS] ADD MEMBER [chhung];
+
+
+GO
+ALTER ROLE [ADMS] ADD MEMBER [ylchen];
+
+
+GO
+ALTER ROLE [ADMS] ADD MEMBER [clchou];
+
+
+GO
+ALTER ROLE [ADMS] ADD MEMBER [yelin];
+
+
+GO
+ALTER ROLE [ADMS] ADD MEMBER [hjchou];
+
