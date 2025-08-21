@@ -1,9 +1,9 @@
-﻿-- 報表 - 稅務類 : 預估每約分期營收表
+﻿-- 報表 - 稅務類 : 預估每月分期營收表
 DECLARE @wk_strt_date Date = '2025-08-01',     --應繳日期起始
                    @wk_stop_date Date = '2025-08-31',                  --結束
 				   @wk_strt_date2 Date = '',   --建檔日期起始
                    @wk_stop_date2 Date = '',                 --結束
-				   @wk_issue_code varchar(5)='01' --公司別
+				   @wk_issue_code varchar(5)='06' --公司別
 DECLARE @Result TABLE 
 ( 
 	--kc_prod_type nvarchar(20), --產品別
