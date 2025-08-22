@@ -1,6 +1,6 @@
 ﻿-- 報表 - 稅務類 : 預估年度分期營收表
-DECLARE @wk_year_no int = '2025',  --年度
-				   @wk_issue_code varchar(2)='06' --公司別
+DECLARE @wk_year_no int = '2027',  --年度
+				   @wk_issu_code varchar(2)='06' --公司別
 DECLARE @Result TABLE 
 ( 
 	--kc_prod_type nvarchar(20), --產品別
@@ -32,7 +32,7 @@ FOR
 	FROM kcsd.kc_customerloan C 
 	INNER JOIN kcsd.kc_loanpayment P ON C.kc_case_no=P.kc_case_no
 	WHERE YEAR(kc_expt_date) = @wk_year_no
-		 AND  (@wk_issue_code='' OR  kc_issu_code=@wk_issue_code )
+		 AND  (@wk_issu_code='' OR  kc_issu_code=@wk_issu_code )
 
 OPEN Cursor_Cal 
 FETCH NEXT FROM Cursor_Cal INTO @kc_case_no
@@ -103,14 +103,13 @@ WHERE YEAR(kc_expt_date)=@wk_year_no
 GROUP BY MONTH(kc_expt_date)
 */
 
-SELECT ReportItem, [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12]
+SELECT @wk_year_no-1911'year_no', @wk_issu_code'kc_issu_code', Item, ISNULL([1], 0), ISNULL([2], 0), ISNULL([3], 0), ISNULL([4], 0), ISNULL([5], 0), ISNULL([6], 0), ISNULL([7], 0), ISNULL([8], 0), ISNULL([9], 0), ISNULL([10], 0), ISNULL([11], 0), ISNULL([12], 0), ISNULL([1], 0) + ISNULL([2], 0) + ISNULL([3], 0) + ISNULL([4], 0) + ISNULL([5], 0) + ISNULL([6], 0) + ISNULL([7], 0) + ISNULL([8], 0) + ISNULL([9], 0) + ISNULL([10], 0) + ISNULL([11], 0) + ISNULL([12], 0)'Total'
 FROM (
-    -- 先將所有數據轉換成一個可以被 PIVOT 的格式
     SELECT
 	    1 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '預估月付款(買賣)' AS ReportItem,
-        SUM(CASE WHEN C.kc_prod_type = '04' THEN R.kc_expt_fee ELSE 0 END) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '預估月付款(買賣)' AS Item,
+        SUM(CASE WHEN C.kc_prod_type = '04' THEN R.kc_expt_fee ELSE 0 END) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -119,9 +118,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    2 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '預估月付款(應收)' AS ReportItem,
-        SUM(CASE WHEN C.kc_prod_type<>'04' THEN R.kc_expt_fee ELSE 0 END) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '預估月付款(應收)' AS Item,
+        SUM(CASE WHEN C.kc_prod_type<>'04' THEN R.kc_expt_fee ELSE 0 END) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -130,9 +129,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    3 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '預估月付款小計' AS ReportItem,
-        SUM(R.kc_expt_fee) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '預估月付款小計' AS Item,
+        SUM(R.kc_expt_fee) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -141,9 +140,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    4 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '還本數' AS ReportItem,
-        SUM(R.kc_pvpay_amt2) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '還本數' AS Item,
+        SUM(R.kc_pvpay_amt2) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -152,9 +151,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    5 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '利息收入' AS ReportItem,
-        SUM(R.kc_invo_amt2) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '利息收入' AS Item,
+        SUM(R.kc_invo_amt2) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -163,9 +162,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    6 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '手續費收入' AS ReportItem,
-        SUM(R.kc_proc_amt2) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '手續費收入' AS Item,
+        SUM(R.kc_proc_amt2) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -174,9 +173,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    7 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '財務收入小計' AS ReportItem,
-        CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)*1.05,0)) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '財務收入小計' AS Item,
+        CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)*1.05,0)) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -185,9 +184,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    8 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '財務收入小計(未稅)' AS ReportItem,
-        SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '財務收入小計(未稅)' AS Item,
+        SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -196,9 +195,9 @@ FROM (
 	UNION ALL   
     SELECT
 	    9 AS order_no,
-        MONTH(P.kc_expt_date) AS month_no,
-        '已繳金額' AS ReportItem,
-        SUM(ISNULL(P.kc_pay_fee,0)) AS value_to_pivot
+        MONTH(P.kc_expt_date) AS _month,
+        '已繳金額' AS Item,
+        SUM(ISNULL(P.kc_pay_fee,0)) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -206,6 +205,6 @@ FROM (
     GROUP BY MONTH(P.kc_expt_date), C.kc_prod_type
 ) AS SourceTable
 PIVOT (
-    SUM(value_to_pivot) FOR month_no IN ([1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12])
+   SUM(_fee)FOR _month IN ([1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12])
 ) AS PivotTable
 ORDER BY order_no;
