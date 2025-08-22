@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3ppa09cy91iQ/3ExAD2P4JUwaLGXKmkYUr9jWE9dV7RWvPLYln7leJc7YFiJeATxHp1yOcW+w==</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <letter Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>letter</Alias>
+        <Columns isList="true" count="12">
+          <value>kc_case_no,System.String</value>
+          <value>kc_perd_no,System.Int32</value>
+          <value>kc_expt_date,System.DateTime</value>
+          <value>kc_expt_fee,System.Int32</value>
+          <value>kc_pay_date,System.DateTime</value>
+          <value>kc_pay_fee,System.Int32</value>
+          <value>kc_break_fee,System.Int32</value>
+          <value>kc_rema_fee,System.Int32</value>
+          <value>kc_cust_nameu,System.String</value>
+          <value>type,System.String</value>
+          <value>kc_issu_code,System.String</value>
+          <value>國籍,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>b49162dcd6434bc682f0ce1307091b07</Key>
+        <Name>letter</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+        </Parameters>
+        <SqlCommand>CREATE TABLE #tmp_CCU
+	(
+	登記日期	datetime,
+	客戶編號	varchar(100),
+	客戶姓名	varchar(100),
+	催告代碼	varchar(100),
+	催告格式	varchar(100),
+	國籍	varchar(100),
+	本人姓名	varchar(100),
+	本人身分證號	varchar(100),
+	本人生日	datetime,
+	本人性別	varchar(100),
+	本人先生女士	varchar(100),
+	本人未成年	int,
+	本人父親	varchar(100),
+	本人母親	varchar(100),
+	本人配偶	varchar(100),
+	本人法代	varchar(100),
+	本人行動	varchar(100),
+	本人公司名稱		varchar(100),
+	本人職稱	varchar(100),
+	本人戶籍地址郵遞區號	varchar(100),
+	本人戶籍地址		varchar(100),
+	本人聯絡地址郵遞區號	varchar(100),
+	本人聯絡地址	varchar(100),
+	本人公司地址郵遞區號		varchar(100),
+	本人公司地址		varchar(100),
+	保一姓名	varchar(100),
+	保一身分證號	varchar(100),
+	保一生日	datetime,
+	保一性別	varchar(100),
+	保一先生女士	varchar(100),
+	保一未成年	int,
+	保一父親	varchar(100),
+	保一母親	varchar(100),
+	保一配偶	varchar(100),
+	保一法代	varchar(100),
+	保一行動	varchar(100),
+	保一公司名稱		varchar(100),
+	保一職稱	varchar(100),
+	保一戶籍地址郵遞區號	varchar(100),
+	保一戶籍地址		varchar(100),
+	保一聯絡地址郵遞區號	varchar(100),
+	保一聯絡地址	varchar(100),
+	保一公司地址郵遞區號		varchar(100),
+	保一公司地址		varchar(100),
+	保二姓名	varchar(100),
+	保二身分證號	varchar(100),
+	保二生日	datetime,
+	保二性別	varchar(100),
+	保二先生女士	varchar(100),
+	保二未成年	int,
+	保二父親	varchar(100),
+	保二母親	varchar(100),
+	保二配偶	varchar(100),
+	保二法代	varchar(100),
+	保二行動	varchar(100),
+	保二公司名稱		varchar(100),
+	保二職稱	varchar(100),
+	保二戶籍地址郵遞區號	varchar(100),
+	保二戶籍地址		varchar(100),
+	保二聯絡地址郵遞區號	varchar(100),
+	保二聯絡地址	varchar(100),
+	保二公司地址郵遞區號		varchar(100),
+	保二公司地址		varchar(100),
+	催告日期	varchar(100),
+	建檔日期	datetime,
+	契約日期	datetime,
+	發照日期	datetime,
+	廠牌代碼	varchar(100),
+	機型	varchar(100),
+	牌照號碼	varchar(100),
+	引擎號碼	varchar(100),
+	期數	int,
+	起始日期	datetime,
+	每月繳款日	int,
+	本票金額	int,
+	期付金額	int,
+	登記日後5天	datetime,
+	法院代號	varchar(100),
+	法院案號	varchar(100),
+	法院股別	varchar(100),
+	前案法院代號	varchar(100),
+	前案法院案號	varchar(100),
+	前案法院股別	varchar(100),
+	債權金額	int,
+	起息日	datetime,
+	利率	float,
+	債權計算	float,
+	ATM帳號	varchar(100),
+	委派人員	varchar(100),
+	承辦人員	varchar(100),
+	承辦電話	varchar(100),
+	承辦電話2	varchar(100),	
+	分公司代號	varchar(100),
+	分公司名稱	varchar(100),
+	公司別代號	varchar(100),
+	債權人	varchar(100),	
+	地址	varchar(100),	
+	法定代理人	varchar(100),
+	統一編號	varchar(100),
+	金額	int,
+	程序費	int,
+	執行費	int,
+	利息	int,
+	第一期	datetime,
+	前案號法院代號	varchar(100),
+	前案號法院案號	varchar(100),
+	同意書	varchar(100),
+	代查受償	varchar(100),
+	前所清名單	varchar(100),	
+	本人法定代理人	varchar(100),	
+	保一法定代理人	varchar(100),	
+	保二法定代理人	varchar(100),	
+	法院名稱 varchar(100),	
+	前案法院名稱 varchar(100),	
+	前案號法院名稱 varchar(100),		
+	代查受償2	varchar(100)
+)
+
+Insert into #tmp_CCU EXEC kcsd.p_kc_courtdocument_new @wk_strt_date,@wk_stop_date,'C','CU'
+
+
+
+
+
+
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'1' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 1 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'2' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 2 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'3' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 3 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'4' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 4 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'5' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 5 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'6' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and EXISTS (select 1 from #tmp_CCU U  left join [Zephyr.Sys].[dbo].[sys_code] C   on U.法院代號 = C.Value  where C.CodeType = 'CourtCode'  and 6 &lt;= C.Text2 and l.kc_case_no = U.客戶編號)
+
+union all
+select l.kc_case_no, kc_perd_no, convert(varchar, kc_expt_date, 111) as kc_expt_date, kc_expt_fee, convert(varchar, kc_pay_date, 111) as kc_pay_date, kc_pay_fee,  kc_break_fee, 
+	kc_expt_fee-kc_pay_fee AS kc_rema_fee,c.kc_cust_nameu,'7' as type,kc_issu_code
+	from [kcsd].[kc_loanpayment] l
+left join kcsd.kc_customerloan c on l.kc_case_no = c.kc_case_no
+where l.kc_case_no in (select 客戶編號 from #tmp_CCU)
+and kc_id_no1 is not null
+
+
+
+DROP TABLE #tmp_CCU
+
+</SqlCommand>
+      </letter>
+      <ReportsImage Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>ReportsImage</Alias>
+        <Columns isList="true" count="1">
+          <value>Text,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>9932dd3674d444a7b1d6d0ce85ba4eb7</Key>
+        <Name>ReportsImage</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>
+select Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'ReportsImage' and Value = '0001'
+
+
+        </SqlCommand>
+      </ReportsImage>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>6126f5de27f541e993c05c2e60b1c014</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page2 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <GroupHeaderBand1 Ref="6" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,0.4,19,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Condition>{letter.kc_case_no}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <NewPageBefore>True</NewPageBefore>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <ResetPageNumber>True</ResetPageNumber>
+        </GroupHeaderBand1>
+        <GroupHeaderBand2 Ref="7" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.2,19,5.6</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text17 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,2,9,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6efe9e19746444ddbee92e3945cf804e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>客戶編號：{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text1 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,2.8,9,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>89bc1213a1934b35bbfc7794f5530784</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>客戶姓名：{letter.kc_cust_nameu}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text12 Ref="10" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,5,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>75ac43d9e8224ebdb9a8d9ded595593b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>應繳日</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text16 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,5,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>0d5b68b8064a41aa94ea1b881698ced6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>期數</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text13 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.8,5,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>ad727076b70b44afbd4ef496b5d2376e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>月付</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text29 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.4,5,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>a54700ccc73144d09702c6fed71612e4</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>違約金</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text26 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,5,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>1556f403577549ba9795449152eeb479</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>繳款日</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text27 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,5,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>d7dac302e62349a9a37ded5dfd82b924</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>實繳金額</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text37 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,5,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14,Bold</Font>
+              <Guid>18174a4744d9478a83e4274b2b82db61</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>餘額</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text2 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.6,9,1.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,32</Font>
+              <Guid>3941fcbc161a4734bc0dd644dfc46383</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>繳款紀錄</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text33 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,3.6,18.2,0.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>54cd7b5b181b4a979e0a9ca3442e5d9d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>查詢日期：{Year(Today)-1911}/{Month(Today)}/{Day(Today)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text33>
+            <Image1 Ref="19" type="Image" isKey="true">
+              <AspectRatio>True</AspectRatio>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,0,5.6,3.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <File>C:\inetpub\{ReportsImage.Text}\Content\images\contract\reports\compseal\{letter.kc_issu_code}.PNG</File>
+              <Guid>0fc41c547b9e43a6b2e155bc653ff7d6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Stretch>True</Stretch>
+              <VertAlignment>Bottom</VertAlignment>
+            </Image1>
+          </Components>
+          <Condition>{letter.type}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand2</Name>
+          <NewPageBefore>True</NewPageBefore>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </GroupHeaderBand2>
+        <DataBand1 Ref="20" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,7.6,19,0.9</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text14 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.2,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>bbc134c1550641f3bc560e2778505c64</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_perd_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text14>
+            <Text4 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,0.2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>6a8aabf8241b40ab9c938971202448ce</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_expt_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="23" type="DateFormat" isKey="true" />
+              <Type>DataColumn</Type>
+            </Text4>
+            <Text10 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.8,0.2,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>056540f5bbe34ad08b3f9c5c93f8d4f1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_expt_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text10>
+            <Text24 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,0.2,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>704fa9a7da3f4995b9216cab580596f1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_pay_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text24>
+            <Text25 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,0.2,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>4570ab3e159b45cdaa3c833705a6a986</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_pay_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="27" type="DateFormat" isKey="true" />
+              <Type>DataColumn</Type>
+            </Text25>
+            <Text11 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,0.2,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>509dafe596894f7895267d725e0c6538</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_rema_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text11>
+            <Text23 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.4,0.2,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c52e0edb1f8b41fa88d8872e622b68a9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{letter.kc_break_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text23>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="4">
+            <value>ASC</value>
+            <value>kc_expt_date</value>
+            <value>ASC</value>
+            <value>kc_perd_no</value>
+          </Sort>
+        </DataBand1>
+        <GroupFooterBand1 Ref="30" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,9.3,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <ResetPageNumber>True</ResetPageNumber>
+        </GroupFooterBand1>
+        <GroupFooterBand2 Ref="31" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,10.3,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </GroupFooterBand2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>afe82bf5ab9f4375b45dee44c073d8b8</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page2</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PrintOnPreviousPage>True</PrintOnPreviousPage>
+      <Report isRef="0" />
+    </Page2>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>4/23/2025 5:28:53 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\NewDyWeb\CMS.Web\Areas\Dys\Reports\Form_Letterprint_CCU_15.mrt</ReportFile>
+  <ReportGuid>43d63606314d447eadbb70a9734093b3</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

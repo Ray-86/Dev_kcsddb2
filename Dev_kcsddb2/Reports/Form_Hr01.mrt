@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>5WzLAsVKQ/BvS6Hw6oh1E8NwTytPSHOdRlxNrE1cpCrWyNGhT1CSBUVb7ezpmOsTi1Tb61sJw/n4Ub3MTqAyN9/E2QlLXcNFy0mc2Opc4GONVvsJRhhL7XJfJYDxXGVK31rZw+YDQ91pUXn0y4TgT8Nas0nFTLvxa03t8cNJ4y/FVg==</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <dsUser Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsUser</Alias>
+        <Columns isList="true" count="26">
+          <value>UserCode,System.String</value>
+          <value>UserSeq,System.String</value>
+          <value>UserName,System.String</value>
+          <value>Description,System.String</value>
+          <value>Password,System.String</value>
+          <value>Salt,System.String</value>
+          <value>RoleName,System.String</value>
+          <value>OrganizeName,System.String</value>
+          <value>ConfigJSON,System.String</value>
+          <value>ExtensionNumber,System.String</value>
+          <value>IsEnable,System.Boolean</value>
+          <value>LoginCount,System.Int32</value>
+          <value>LastLoginDate,System.DateTime</value>
+          <value>CreatePerson,System.String</value>
+          <value>CreateDate,System.DateTime</value>
+          <value>UpdatePerson,System.String</value>
+          <value>UpdateDate,System.DateTime</value>
+          <value>AreaCode,System.String</value>
+          <value>UserIdNo,System.String</value>
+          <value>UserPermAddr,System.String</value>
+          <value>JobType,System.String</value>
+          <value>ArrivalDate,System.DateTime</value>
+          <value>LeaveDate,System.DateTime</value>
+          <value>UserLabor,System.String</value>
+          <value>BankCode,System.String</value>
+          <value>AccCode,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>dsUser</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_UserID,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT * FROM sys_user  where UserSeq = @wk_UserID</SqlCommand>
+      </dsUser>
+      <record Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>record</Alias>
+        <Columns isList="true" count="10">
+          <value>kc_clock_date,System.String</value>
+          <value>Weekday,System.String</value>
+          <value>kc_online,System.String</value>
+          <value>kc_onsource,System.String</value>
+          <value>kc_offline,System.String</value>
+          <value>kc_offsource,System.String</value>
+          <value>kc_onname,System.String</value>
+          <value>kc_offname,System.String</value>
+          <value>kc_list_stat,System.String</value>
+          <value>kc_clock_stat,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>record</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>wk_UserID,,23,0</value>
+          <value>wk_clock_date,,4,0</value>
+        </Parameters>
+        <SqlCommand>select 
+	m.*,b.kc_offline,b.kc_offsource,s.Text as kc_onname,x.Text as kc_offname,ISNULL(l.kc_list_stat,'')+ISNULL(o.kc_list_stat,'') as kc_list_stat,z.kc_clock_stat
+                                 FROM   
+(select CONVERT(VARCHAR(10),DATEADD(DAY, number, @wk_clock_date),111) AS kc_clock_date,SUBSTRING(Datename(Weekday, CONVERT(VARCHAR(10),DATEADD(DAY, number, @wk_clock_date),111)),3,1) as Weekday , a.kc_online,a.kc_onsource
+	from
+(select convert(varchar, kc_clock_date, 111) as kc_clock_date ,  CONVERT(varchar(100), CreateDate, 24) as kc_online ,kc_clock_source as kc_onsource from [kcsd].[kc_hrattendance]  where  kc_clock_type = '01' and UserID = @wk_UserID) a
+                                        right JOIN master..spt_values c on  DATEADD(DAY, number, @wk_clock_date) = a.kc_clock_date
+                                        where  type =  'P'and number BETWEEN 0 and  DATEDIFF(DAY,@wk_clock_date, dateadd(ss, -1, dateadd(m, datediff(m, 0, @wk_clock_date) + 1, 0)))) m
+						   left join(select convert(varchar, kc_clock_date, 111) as kc_clock_date  , CONVERT(varchar(100), CreateDate, 24) as kc_offline ,kc_clock_source as kc_offsource  from [kcsd].[kc_hrattendance]  where  kc_clock_type = '02'  and UserID = @wk_UserID) b on m.kc_clock_date = b.kc_clock_date
+--請假單 單況  
+left join
+(select CONVERT(VARCHAR(10), kc_list_date,111) AS kc_clock_date ,c.Text + l.kc_hour_cnt + '小時' as kc_list_stat
+	from [kcsd].[kc_hrleave] l 
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'LeaveType'  ) c ON l.kc_leave_type = c.Value
+                                        where UserID = @wk_UserID and kc_hr_user is not null) l on m.kc_clock_date = l.kc_clock_date
+--加班單 單況								
+left join
+(select CONVERT(VARCHAR(10), kc_list_date,111) AS kc_clock_date ,c.Text + o.kc_hour_cnt + '小時' as kc_list_stat
+	from [kcsd].[kc_hrover] o 
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'OverType'  ) c ON o.kc_over_type = c.Value
+                                        where UserID = @wk_UserID and kc_hr_user is not null) o on m.kc_clock_date = o.kc_clock_date
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'AttendanceSourceType'  ) s ON m.kc_onsource = s.Value
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'AttendanceSourceType'  ) x ON b.kc_offsource = x.Value
+-- 欠勤表 打卡狀況
+left join
+(
+select case when h1.kc_clock_date is null then h2.kc_clock_date else  h1.kc_clock_date end as kc_clock_date,case when kc_onstat is null then ISNULL(kc_offstat,'') else kc_onstat +CHAR(10)+ ISNULL(kc_offstat,'') end  as kc_clock_stat from
+(select CONVERT(VARCHAR(10), h.kc_clock_date,111) AS kc_clock_date,'上班 : '+ x.Text as kc_onstat from [kcsd].[kc_hrowework] h 
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'OweWorkType'  ) x ON h.kc_owe_type = x.Value
+where kc_clock_type = '01' and UserID = @wk_UserID and kc_hr_user is not null) h1
+full join  
+(select CONVERT(VARCHAR(10), h.kc_clock_date,111) AS kc_clock_date, '下班 : '+ x.Text as kc_offstat from [kcsd].[kc_hrowework] h 
+LEFT JOIN (select Value , Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'OweWorkType'  ) x ON h.kc_owe_type = x.Value
+where kc_clock_type = '02'and UserID = @wk_UserID and kc_hr_user is not null) h2 on h1.kc_clock_date = h2.kc_clock_date
+)z on  m.kc_clock_date = z.kc_clock_date
+</SqlCommand>
+      </record>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>d151734babd146aa99c620bee1fb924c</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <PageHeaderBand1 Ref="7" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,20,3.4</ClientRectangle>
+          <Components isList="true" count="13">
+            <Text12 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,3,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>298d6160e5dc4b77956c9ce7ec42aff4</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>星期</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text2 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.2,18.2,0.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>18c6fecd12e445a79179fc9ae3ef28ec</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>出勤紀錄</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text17 Ref="10" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,1.2,2.6,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>11d5285f9f4b47ebb18c2431c2009e18</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>員工姓名：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text33 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,2,2.6,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>d983be62836344468cf66938214f1b1d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>查詢月份：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text33>
+            <Text7 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,2,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6afa8710ed204ea9b5e5e685051cebc2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{record.Parameters["wk_clock_date"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text16 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,3,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>eb04d9b884a54e3fa993f1aeebcdeef0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>日期</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text13 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,3,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>a991eeb0d07549d08ef004e80b1a09b2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>上班時間</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text29 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.8,3,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>3a8d44aab9ab43d1b8ef5b18d67c911d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>出勤狀況</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text26 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,3,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>4ebbd5de22db4477baddca2a6b90ff03</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>上班打卡來源</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text27 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.8,3,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>6212712daa494f29a53e3660ab59ae7a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>下班時間</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text28 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.2,3,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>eb2624197dd64fc8b02707beab0e78ac</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>下班打卡來源
+</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text5 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.2,3,2.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d4fcebe7d66547aa97e77c6f47203c41</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>請假/加班單狀況</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text1 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,1.2,4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6f3dff03354c46fcb49d93620b7bb943</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{dsUser.UserName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </PageHeaderBand1>
+        <Text6 Ref="21" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>12.8,27.8,2.6,0.6</ClientRectangle>
+          <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+          <Conditions isList="true" count="0" />
+          <Font>標楷體,14</Font>
+          <Guid>1284425210df4daaad792a948ece51ec</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text6</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>員工簽核：</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+        </Text6>
+        <Text8 Ref="22" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>15.6,27.8,4,0.6</ClientRectangle>
+          <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+          <Conditions isList="true" count="0" />
+          <Font>標楷體,16</Font>
+          <Guid>d49b231b0e92440d8d675ddbf9a72134</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text8</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{dsUser.UserName}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text8>
+        <DataBand1 Ref="23" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4.6,20,0.7</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text14 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.2,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>b23f154dfe7b4ea988ea1c564aefcfaf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_clock_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text14>
+            <Text4 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0.2,0.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>c214a0448e394dd8af0d11efdc12561a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.Weekday}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text4>
+            <Text10 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0.2,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>daa737ffdab745febf031816949a53d8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_online}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text10>
+            <Text24 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.8,0.2,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>237a464962f6465289ac6b9a4e44610f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_offline}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text24>
+            <Text25 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,0.2,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>22701b8b3ccc484483dcfc8ca5cb0e68</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_onname}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text25>
+            <Text11 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,0.2,2.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>02134023950346689c136668a977b5d6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_offname}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text11>
+            <Text23 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,0.2,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>834857c8e1c24f1392413ff8eb581d16</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_clock_stat}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+            </Text23>
+            <Text3 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.2,0.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,10</Font>
+              <Guid>d17413f938e94154a018d04a3e76a632</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="6" />
+              <Parent isRef="23" />
+              <Text>{record.kc_list_stat}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>record</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_clock_date</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>1</LargeHeightFactor>
+      <Margins>0.5,0.5,0.5,0.5</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="32" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>12/1/2020 5:11:40 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\DY_N\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_Hr01.mrt</ReportFile>
+  <ReportGuid>c1ecd7c509094d9ea8add41eef5b4338</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2019.2.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

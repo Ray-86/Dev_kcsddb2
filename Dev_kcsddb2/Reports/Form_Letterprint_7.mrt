@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <DataSource Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource</Alias>
+        <Columns isList="true" count="17">
+          <value>kc_case_no,System.String</value>
+          <value>kc_item_no,System.Int32</value>
+          <value>kc_law_code,System.String</value>
+          <value>kc_law_date,System.DateTime</value>
+          <value>建檔日期,System.DateTime</value>
+          <value>承辦電話2,System.String</value>
+          <value>收件人,System.String</value>
+          <value>收件人ID,System.String</value>
+          <value>收件地址,System.String</value>
+          <value>收件郵遞區號,System.String</value>
+          <value>期付金額,System.Int32</value>
+          <value>期數,System.Byte</value>
+          <value>未繳餘額,System.Int32</value>
+          <value>機型,System.String</value>
+          <value>每月繳款日,System.Int32</value>
+          <value>起始日期,System.DateTime</value>
+          <value>客戶編號,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>bee97980e88749688dd843c4c538730d</Key>
+        <Name>DataSource</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="5">
+          <value>kc_case_no,,22,20</value>
+          <value>kc_item_no,,22,4</value>
+          <value>wk_letter_date,,4,0</value>
+          <value>wk_stop_date,,22,20</value>
+          <value>wk_strt_date,,22,20</value>
+        </Parameters>
+        <SqlCommand>
+DECLARE	
+@pm_strt_date		datetime,
+@pm_stop_date		datetime,
+@check_the_kc_item_no		smallint
+
+select  @check_the_kc_item_no =  0 
+select  @check_the_kc_item_no =  @kc_item_no 
+
+--select @pm_strt_date = '1900-07-03'  
+--select  @pm_stop_date =  '1900-07-05'
+--select  @check_the_kc_item_no =  0 
+--select  @kc_case_no = '2022027'
+
+
+if(@check_the_kc_item_no &gt; 0)  -- from 客戶資料查詢/催告
+    begin  
+        select A.kc_case_no,A.kc_law_code,A.kc_item_no,A.kc_law_date,B.kc_buy_date AS 建檔日期,B.kc_car_model AS 機型,B.kc_strt_date AS 起始日期,DatePart(DAY,B.kc_strt_date) AS 每月繳款日,B.kc_perd_fee AS 期付金額,
+        B.kc_loan_perd AS 期數,
+        B.kc_rema_amt AS 未繳餘額,L.ContactData2 AS 承辦電話2,CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_curr_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_comp_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_bill_flag = 'Y' THEN B.kc_cust_nameu END AS 收件人,
+        CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_id_no WHEN A.kc_curr_flag = 'Y' THEN B.kc_id_no WHEN A.kc_comp_flag = 'Y' THEN B.kc_id_no WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_id_no END AS 收件人ID,
+        CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_perm_zip WHEN A.kc_curr_flag = 'Y' THEN B.kc_curr_zip WHEN A.kc_comp_flag = 'Y' THEN B.kc_comp_zip WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_perm_zip1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_curr_zip1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_comp_zip1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_perm_zip2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_curr_zip2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_comp_zip2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_zip_code END AS 收件郵遞區號,
+        CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_perm_addr WHEN A.kc_curr_flag = 'Y' THEN B.kc_curr_addr WHEN A.kc_comp_flag = 'Y' THEN B.kc_comp_addr WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_perm_addr1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_curr_addr1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_comp_addr1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_perm_addr2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_curr_addr2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_comp_addr2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_bill_addr END AS 收件地址 from [kcsd].[kc_lawstatus] as A,  
+        [kcsd].[kc_customerloan] as B 
+        LEFT JOIN [kcsd].[Delegate] L ON B.kc_pusher_code = L.DelegateCode 
+        where  
+        A.kc_case_no = @kc_case_no
+        and A.kc_case_no = B.kc_case_no
+        --and kc_item_no=@kc_item_no
+        and kc_law_code = '7' 
+        and kc_item_no=@check_the_kc_item_no
+        --A.kc_case_no = '2022027'
+        --and kc_law_code = 'B' 
+        --and kc_item_no=1
+        order by kc_item_no,kc_law_date desc
+    end
+else 
+	begin	
+EXEC kcsd.p_kc_letterprint @wk_strt_date,@wk_stop_date,'7',''
+
+             /*   -- from 信函列印
+                select @pm_strt_date = @wk_strt_date
+                select @pm_stop_date = @wk_stop_date
+
+		select A.kc_case_no,A.kc_law_code,A.kc_item_no,A.kc_law_date,B.kc_buy_date AS 建檔日期,B.kc_car_model AS 機型,B.kc_strt_date AS 起始日期,DatePart(DAY,B.kc_strt_date) AS 每月繳款日,B.kc_perd_fee AS 期付金額,
+		B.kc_loan_perd AS 期數,
+		B.kc_rema_amt AS 未繳餘額,L.ContactData2 AS 承辦電話2,CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_curr_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_comp_flag = 'Y' THEN B.kc_cust_nameu WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_cust_name1u WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_cust_name2u WHEN A.kc_bill_flag = 'Y' THEN B.kc_cust_nameu END AS 收件人,
+		CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_id_no WHEN A.kc_curr_flag = 'Y' THEN B.kc_id_no WHEN A.kc_comp_flag = 'Y' THEN B.kc_id_no WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_id_no1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_id_no2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_id_no END AS 收件人ID,
+		CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_perm_zip WHEN A.kc_curr_flag = 'Y' THEN B.kc_curr_zip WHEN A.kc_comp_flag = 'Y' THEN B.kc_comp_zip WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_perm_zip1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_curr_zip1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_comp_zip1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_perm_zip2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_curr_zip2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_comp_zip2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_zip_code END AS 收件郵遞區號,
+		CASE WHEN A.kc_perm_flag = 'Y' THEN B.kc_perm_addr WHEN A.kc_curr_flag = 'Y' THEN B.kc_curr_addr WHEN A.kc_comp_flag = 'Y' THEN B.kc_comp_addr WHEN A.kc_perm_flag1 = 'Y' THEN B.kc_perm_addr1 WHEN A.kc_curr_flag1 = 'Y' THEN B.kc_curr_addr1 WHEN A.kc_comp_flag1 = 'Y' THEN B.kc_comp_addr1 WHEN A.kc_perm_flag2 = 'Y' THEN B.kc_perm_addr2 WHEN A.kc_curr_flag2 = 'Y' THEN B.kc_curr_addr2 WHEN A.kc_comp_flag2 = 'Y' THEN B.kc_comp_addr2 WHEN A.kc_bill_flag = 'Y' THEN B.kc_bill_addr END AS 收件地址 from [kcsddb2].[kcsd].[kc_lawstatus] as A,  
+		[kcsddb2].[kcsd].[kc_customerloan] as B 
+		LEFT JOIN [kcsddb2].[kcsd].[Delegate] L ON B.kc_pusher_code = L.DelegateCode 
+		where  
+		A.kc_law_date between @pm_strt_date and @pm_stop_date 
+		--A.kc_case_no = '2022027'
+		and A.kc_case_no = B.kc_case_no
+		and A.kc_law_code = '7' 
+		--and kc_item_no=@kc_item_no
+		--and kc_item_no=1
+		order by A.kc_law_date desc, B.kc_case_no*/
+	end</SqlCommand>
+      </DataSource>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>771c54a8abc84acf96d6908da459ee0c</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 Ref="5" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="19">
+            <Text5 Ref="6" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.5,5.2,8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>e83cd8f9ae5f436e81c32898d5e379f9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource.收件人}    君啟</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text1 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.5,3.7,10,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>07231a596097464986f8ab1f730a5909</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource.收件郵遞區號}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.5,4.4,12,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>be477b66f58549bf91844e7bbafdade6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource.收件地址}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text3 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,11.4,17.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>5dd4094a0cfb4f7eb98a60820b048cc6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>發文字號：東資字第{DataSource.kc_case_no}{DataSource.客戶編號}號</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text4 Ref="10" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,12.1,17.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>2afdfc0a441d4507aa0473b9827ab87f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>發文日期：中華民國{Year(DataSource.kc_law_date)-1911}年{Month(DataSource.kc_law_date)}月{Day(DataSource.kc_law_date)}日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+            <Text6 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.1,10,6.6,1.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,28</Font>
+              <Guid>afb22ea36af54f2baf361c80dd50825c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>預計拜訪函</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text9 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,12.8,1.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>4ad5ca75f8794db3b4f0061ab2d4893c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>主旨：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text9>
+            <Text14 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,12.8,16.4,2.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>0af314e5add840018f68b11c58b28f83</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>台端於中華民國{Year(DataSource.建檔日期)-1911}年{Month(DataSource.建檔日期)}月{Day(DataSource.建檔日期)}日以動產擔保交易方式購買商品{DataSource.機型}向本公司共同辦理分期，經雙方約定自中華民國{Year(DataSource.起始日期)-1911}年{Month(DataSource.起始日期)}月{Day(DataSource.起始日期)}日起，每月{DataSource.每月繳款日}日繳付分期款項，每期應繳金額為新台幣{DataSource.期付金額}元，共分{DataSource.期數}期繳付，契約未繳餘額為新台幣{DataSource.未繳餘額}(不含違約金程序費等)。
+經查，台端並未依約定繳款，本公司依契約相關約定，通知未到期債務視為全部到期，特此函告。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text14>
+            <Text10 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,15.6,1.6,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>70c33c6b448a433fa37a2c749d450693</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>說明：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,15.6,15.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>ab287c8d472a47179c7c216ce1dce97d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>依雙方所簽立契約書相關規定辦理。</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text12 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,16.2,15.2,1.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>090cecb7ee0241f2b6995dc0ef2a909b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>台端未按規定繳款，且多次聯並未繳款且置之不理，本公司將派協調專員至台端戶籍地或通訊地了解台端的困難與問題後提供專案處理逾期款項，若有需求會請當區里長協同去現場了解狀況。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,17.8,15.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>3f0c0ced4c65404da8da1df28729a295</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>如已繳款，請主動來電核對帳務。</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text15 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,18.4,15.2,1.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>642c4c7d9ab54758bce5974c1f57604c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>聯絡人：{DataSource.承辦電話2}
+傳真：(02)8226-1833
+(上班時間上午10點至下午6點)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text15>
+            <Text18 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,22.2,7,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>cff6333b8a1a4fb3bcd01559636068ca</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>副本受文者：本公司法務部</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text18>
+            <Text7 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,15.6,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>7bb9746ac08b4c2e8563ff67155d098d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>一、</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text19 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,16.2,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>19d5907cdede48b2a225f12822728fc3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>二、</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text20 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,17.8,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>91cf029eb69d49479c489c863a4a860a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>三、</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text20>
+            <Text21 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,18.4,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>0873df654bf5412083d13b49d53bb4ba</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>四、</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text21>
+            <Text8 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.5,5.2,4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,12</Font>
+              <Guid>30203d56db9d42f996b9c3b2f3a76188</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>客戶編號{DataSource.kc_case_no}{DataSource.客戶編號}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>DataSource</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="25" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>7/22/2025 12:05:58 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\NewDyWeb\CMS.Web\Areas\Dys\Reports\Form_Letterprint_7.mrt</ReportFile>
+  <ReportGuid>e76db16d025e4617b3f9c59bda9d15f6</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

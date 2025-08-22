@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>5WzLAsVKQ/BvS6Hw6oh1E8NwTytPSHOdRlxNrE1cpCrWyNGhT1CSBUVb7ezpmOsTi1Tb61sJw/n4Ub3MTqAyN9/E2QlLXcNFy0mc2Opc4GONVvsJRhhL7XJfJYDxXGVK31rZw+YDQ91pUXn0y4TgT8Nas0nFTLvxa03t8cNJ4y/FVg==</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <dsMovableStat Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsMovableStat</Alias>
+        <Columns isList="true" count="6">
+          <value>Value,System.String</value>
+          <value>Text,System.String</value>
+          <value>Text1,System.String</value>
+          <value>Text2,System.String</value>
+          <value>Text3,System.String</value>
+          <value>Text4,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>dsMovableStat</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text, Text1, Text2 , Text3 , Text4 FROM sys_code WHERE CodeType = 'MvdisCode' AND IsEnable = 1</SqlCommand>
+      </dsMovableStat>
+      <letter Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>letter</Alias>
+        <Columns isList="true" count="10">
+          <value>kc_boss_name,System.String</value>
+          <value>kc_case_no,System.String</value>
+          <value>kc_cp_no,System.String</value>
+          <value>kc_cust_name,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_insu_date,System.DateTime</value>
+          <value>kc_issu_addr,System.String</value>
+          <value>kc_issu_desc,System.String</value>
+          <value>kc_licn_no,System.String</value>
+          <value>kc_mvdis,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>letter</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+        </Parameters>
+        <SqlCommand>select  mova.kc_licn_no , cust.kc_case_no , cust.kc_id_no , cust.kc_cust_name ,issue.kc_issu_desc,issue.kc_boss_name,issue.kc_issu_addr , cust.kc_cp_no,app.kc_insu_date ,mova.kc_mvdis
+	from  [kcsd].[kc_customerloan] cust
+left join [kcsd].[kc_movable] mova  on  cust.kc_cp_no = mova.kc_cp_no
+inner join [kcsd].[kct_issuecompany] issue on issue.kc_issu_code = cust.kc_issu_code
+LEFT JOIN kcsd.kc_appraiseh app on app.kc_case_no = cust.kc_case_no
+WHERE app.kc_licn_date is null
+and app.kc_insu_date between @wk_strt_date AND @wk_stop_date</SqlCommand>
+      </letter>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <名稱 Ref="6" type="DataRelation" isKey="true">
+        <Alias>名稱</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_mvdis</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Name>名稱</Name>
+        <NameInSource>關係3</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>Value</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </名稱>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>d151734babd146aa99c620bee1fb924c</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="7" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 Ref="8" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="33">
+            <Text2 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,0.8,18.1,0.9</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>bf0b9233ef9547899f5e2516af65808a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>申請書</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text1 Ref="10" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.73,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c0a784c8e1844da58c26a0bbd5e707e0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>受文者：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text29 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,21.3,8.4,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>98c2d0ab2ff34fbeaa50e5bb8c86a998</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text29>
+            <Text30 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,22.1,8.4,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>4964fbd4122941d39ce027479756af42</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.kc_boss_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text30>
+            <Text4 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.1,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c9e57c1da6e9400e82488daf8be8865c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>華</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text34 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>2f0ff66661f84a7faaa1138647c2a15f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>民</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text35 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c491cb95d2dc4544b9b30a60051f922d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>國</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text36 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,25.1,1.8,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>7fe8a6b321154455a91cd66e8e8d963a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{Year(Today)-1911}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text37 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.4,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6e04b9815e914e29bb3ca4a271a20519</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>年</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text38 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.1,25.1,1.8,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>ad398999af874d309475f6f9683c8633</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{Month(Today)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text39 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>46477666c03046788a9a660b88d6a500</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>月</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text40 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.1,25.1,1.8,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>a84264c1ae36481592c27adcde327df7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{Day(Today)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text41 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.4,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>564b0de01524410da6a6a16c03788797</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+            <Text42 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,25.1,1.2,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>833c3f64a21c4c32b489a09748fda3aa</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>中</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <Text5 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,5.4,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>36553feb03454edd87b162cd9eafe4cd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>說  明：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,5.4,0.5,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>eea1ac62fda348318376702592442642</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>1.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.1,5.4,15.5,1.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>a6843ce9e99e40fc9562660921bff3f2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>債務人為供債務擔保，前提供制旨揭機車設定動產抵押權經，鈞站核准登記在案。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,6.7,0.5,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>e0eda6677f9241ada1475b1731e41b3b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>2.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.1,6.7,15.5,2.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>740a95876f184b90a1690fdac9f440c8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>債務人因違反抵押權契約約定，旨揭機車債權人於上開時間逕行取回及催告回贖未果，債權人並依動產擔保交易法第18條及第19條規定，登報自行拍賣並拍定，現檢附相關文件，請准許將旨揭機車，申請人逕行取回前之未結違規，歸責車主。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text9>
+            <Text10 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.9,21.3,3,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>aa9e1e18d95f4a9f823334f3869cc4ed</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>申  請  人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.9,22.1,3,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>22bff5cb86db495fada9dd78dc86dab0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>法定代理人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text12 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,22.9,8.4,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>cd7519ebd4ab4b23bb02a3eee32de0bd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.kc_issu_addr}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text12>
+            <Text13 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.9,22.9,3,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>5cef0325ba75485fa14507ddf4e06b6f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>地      址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text14 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,23.7,8.4,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>3d87c2a1c0c243809baea2125e00c060</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>王宥惠 02-2226-8886 分機 50085</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text14>
+            <Text16 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.9,23.7,3,0.7</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>a8f936edf4394add9cdbf38748187c0c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>聯  絡  人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text16>
+            <Text17 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,2.66,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>9078a4cbb3a84c79b2fbbeffad38ac6a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>地  址：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text19 Ref="35" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,3.7,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>62b64b4cb59e466c84e8c5549678be99</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>主  旨：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text3 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,9.2,0.5,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0ed2102b49604bf48809a4455c203b41</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>3.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text20 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,9.2,15.5,5.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0abf7a27494b46129b11260f4f52a712</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>附件
+存證信函影本。
+公告登報影本。
+債務人戶謄影本。
+拍賣證明影本。
+拍賣紀錄影本。
+鑑價證明影本。
+動產抵押權契約書影本。
+動產擔保線上登記證明影本。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text20>
+            <Text33 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,3.6,16,1.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>d773835fb93140fb9f86207e87ac7326</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>請准許點交車輛車牌號碼{letter.kc_licn_no}前未結違規強制汽車責任保險法罰款，規責車主{letter.kc_cust_name}{letter.kc_id_no}。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text33>
+            <Text21 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0.3,2,0.3</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>562d0fc7ed9e424a9b7e8dfe4fa44658</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text21>
+            <Text15 Ref="40" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,1.8,16,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.名稱.Text3}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text15>
+            <Text18 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,2.6,16,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>{letter.名稱.Text4}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>1</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="42" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>4/18/2023 5:47:30 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\DY_N\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_AppraiseCar_10.mrt</ReportFile>
+  <ReportGuid>9cffd1fc82424437863b2cfbca367054</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2019.2.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

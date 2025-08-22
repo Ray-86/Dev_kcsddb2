@@ -1,0 +1,1138 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3ppa09cy91iQ/3ExAD2P4JUwaLGXKmkYUr9jWE9dV7RWvPLYln7leJc7YFiJeATxHp1yOcW+w==</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <DataSource1 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource1</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_risk_level,System.String</value>
+          <value>占比差異,System.Decimal</value>
+          <value>占比權重,System.Double</value>
+          <value>每個分段的PSI,System.Double</value>
+          <value>模型數占比,System.Decimal</value>
+          <value>模型樣本數,System.Int32</value>
+          <value>線上數占比,System.Decimal</value>
+          <value>線上樣本數,System.Int32</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>DataSource1</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="5">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+          <value>wk_prod_type,,23,0</value>
+          <value>wk_strt_date2,,4,0</value>
+          <value>wk_stop_date2,,4,0</value>
+        </Parameters>
+        <SqlCommand>select a.kc_risk_level,
+	a.t_cnt as 模型樣本數,
+	a.t_cnt * 0.1/a.t_total  as 模型數占比,
+	b.t_cnt as 線上樣本數,
+	b.t_cnt* 0.1/b.t_total as 線上數占比,
+	(b.t_cnt* 0.1/b.t_total) - (a.t_cnt * 0.1/a.t_total) as 占比差異,
+	LOG((b.t_cnt* 0.1/b.t_total) / (a.t_cnt * 0.1/a.t_total)) as 占比權重,
+	(b.t_cnt* 0.1/b.t_total) - (a.t_cnt * 0.1/a.t_total) * LOG((b.t_cnt* 0.1/b.t_total) / (a.t_cnt * 0.1/a.t_total)) as 每個分段的PSI
+	from 
+(select t.kc_risk_level,count(*) as t_cnt,SUM(COUNT(kc_risk_level)) OVER() AS t_total
+	from (
+select (select kc_risk_level from kcsd.kct_riskpsi where kc_prod_type = p.kc_prod_type and kc_risk_lower &lt; p.kc_risk_score and kc_risk_upper &gt;= p.kc_risk_score) as kc_risk_level
+		 from kcsd.kc_cpdata p inner join kcsd.kc_customerloan c on c.kc_cp_no = p.kc_cp_no
+		 where (@wk_prod_type = '' OR c.kc_prod_type = @wk_prod_type) and c.kc_buy_date between @wk_strt_date and @wk_stop_date
+		 )as t
+	group by t.kc_risk_level
+	) as a left join
+(select t.kc_risk_level,count(*) as t_cnt,SUM(COUNT(kc_risk_level)) OVER() AS t_total
+	from (
+select (select kc_risk_level from kcsd.kct_riskpsi where kc_prod_type = p.kc_prod_type and kc_risk_lower &lt; p.kc_risk_score and kc_risk_upper &gt;= p.kc_risk_score) as kc_risk_level
+		 from kcsd.kc_cpdata p inner join kcsd.kc_customerloan c on c.kc_cp_no = p.kc_cp_no
+		 where (@wk_prod_type = '' OR c.kc_prod_type = @wk_prod_type) and c.kc_buy_date between @wk_strt_date2 and @wk_stop_date2
+		 )as t
+	group by t.kc_risk_level
+	) as b on b.kc_risk_level = a.kc_risk_level
+order by a.kc_risk_level</SqlCommand>
+      </DataSource1>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="3">
+      <value>,pm_user_area,pm_user_area,,System.String,,False,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,,System.String,_x0027_super_x0027_,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,TESTNAME,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>76e9f20056684fb7b61824b80862fac9</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,2.4</ClientRectangle>
+          <Components isList="true" count="28">
+            <ReportTitleText Ref="6" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.2,0.6,10,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,12</Font>
+              <Guid>f2c5ae212d674c66953533c349cfea2c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>ReportTitleText</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>群體穩定性指標PSI(Population Stability Index)</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </ReportTitleText>
+            <Text22 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0,6.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>ae8bff5902604f82b1b0987b05ff33ce</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Report ID: INDEXB004(20200609)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0.8,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>c69c4808cf794dceb4c5d669f656c356</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16.6,0,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>457579d321fb4b84b9135e2921cdeafe</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Today}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="10" type="DateFormat" isKey="true" />
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16.6,0.4,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>1d161fdd46f74b54a2b5755ee655fdcc</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Time}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="12" type="TimeFormat" isKey="true" />
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text26 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16.6,0.8,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>bc892810f03545328c21be1ed000b205</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{PageNofMThrough}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text218 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>15.6,1.2,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>294a19d93c8a4194ab936979c7f7c5ae</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text218</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>User:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text218>
+            <Text219 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0.8,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>8ccac3dd583a4d1e81286e82251e1222</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text219</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource1.Parameters["wk_strt_date2"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text219>
+            <Text220 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,0.8,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>b5ae2d3fd39a42998a5ad68af1dcfbf3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text220</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource1.Parameters["wk_stop_date2"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text220>
+            <Text221 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>2.8,0.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>5e8e464fc70b43b897987a79e32166b9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text221</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>~</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text221>
+            <Text20 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0.4,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>2fa66104b46342ad978362218470d67d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text222 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>18b26ca7c2254f64abc87b2fb3ae1ff3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text222</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource1.Parameters["wk_strt_date"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text222>
+            <Text224 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>2.8,0.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>15bc7876a02044a19b57bcf6c56d5666</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text224</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>~</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text224>
+            <Text226 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>15.6,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>ae6e17be65b14b948b0623159c7a586d</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text226</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text226>
+            <Text227 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>15.6,0.4,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>4e1e3843104a4f2896954c6c7c6cb778</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text227</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Time:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text227>
+            <Text228 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>15.6,0.8,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>a1acb93872024432aa7592fe4e3c75fe</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text228</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Page:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text228>
+            <Text229 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16.6,1.2,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>afad25b097b643f091d9927b2f735489</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text229</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{pm_user_name}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text229>
+            <Text223 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>2b4616a9284b482aad0f150461eb78e3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text223</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{DataSource1.Parameters["wk_stop_date"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text223>
+            <Text1 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.9,1.6,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>43c1093b44304a9f853502345a291836</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>模型樣本數</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text2 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>343a2ae7a7034af7807cdc22fe102a3c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Bins</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text5 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,1.2,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>1105ef3f94f04b96aa9431c62cb96899</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>產品別：{IIF(DataSource1.Parameters["wk_prod_type"].ParameterValue =="","全部",DataSource1.Parameters["wk_prod_type"].ParameterValue)} {Switch(Trim(DataSource1.Parameters["wk_prod_type"].ParameterValue) == "01","機車",Trim(DataSource1.Parameters["wk_prod_type"].ParameterValue) == "04","原車買賣",Trim(DataSource1.Parameters["wk_prod_type"].ParameterValue) == "06","精品",Trim(DataSource1.Parameters["wk_prod_type"].ParameterValue) == "07","商品",Trim(DataSource1.Parameters["wk_prod_type"].ParameterValue) == "08","勞務")}</Text>
+              <TextBrush>Blue</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text12 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.9,1.6,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>81646a3193964577a5700bde269727fa</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>模型數占比</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.9,1.6,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>937bc2fd5a4c4a71aec19422cb58c436</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>線上樣本數</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.9,1.6,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>3575f2301dd44e4992151fd6d6e40d98</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>線上數占比</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>e4db15235f26484aa57b7defe257801e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>占比權重</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.9,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>fbb5563350524d51a62c9d9b5e59463c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>占比差異</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text17 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.3,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>fe3848b4527644d288bd758b3dfac6a1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Index</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <HorizontalLinePrimitive1 Ref="35" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,2.2,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="36" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>6e9b1c43a07547058bf9d365b5e0346e</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Size>2</Size>
+              <StartCap Ref="37" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>777af4bd6f8f47c8a2c44707580c08ac</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <DataBand2 Ref="38" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,3.6,19,0.7</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text4 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,0,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>86cc40f9c55046b294ac33f6b6a964f8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.kc_risk_level}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text3 Ref="40" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d1b2846d5b6546d7b4fe46cab90b1e9c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.模型樣本數}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text44 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>296697d7a3a64299b13e6e3a225be776</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.線上樣本數}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text44>
+            <Text6 Ref="42" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>8cf52f1b3f1c472aba5b426b00612990</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.模型數占比}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="43" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="44" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>e1fe6b9f5c124b1f965398459b97b646</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.線上數占比}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="45" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="46" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.9,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>7a6e7a2541d6489fada55ab75cb4d801</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.占比差異}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="47" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="48" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>48f3479d909e4f8593f72b903c8386e2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.占比權重}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="49" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="50" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.3,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d7db8901098549e887dcaa21bd75af26</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="38" />
+              <Text>{DataSource1.每個分段的PSI}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="51" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>DataSource1</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>79fb67ef43074235b9e54b0d2816ce89</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <FooterBand1 Ref="52" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.1,19,16.6</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text11 Ref="53" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.3,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10,Bold</Font>
+              <Guid>07b138ca89e14e5aa66b3bdcf17916ad</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Text>{Sum(DataBand2,DataSource1.每個分段的PSI)}</Text>
+              <TextBrush>[0:112:192]</TextBrush>
+              <TextFormat Ref="54" type="NumberFormat" isKey="true">
+                <DecimalDigits>3</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits</State>
+              </TextFormat>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text18 Ref="55" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10,Bold</Font>
+              <Guid>168506bfb99f41b98528368868de4683</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Text>PSI:</Text>
+              <TextBrush>[0:112:192]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Chart1 Ref="56" type="Stimulsoft.Report.Chart.StiChart" isKey="true">
+              <Area Ref="57" type="Stimulsoft.Report.Chart.StiClusteredColumnArea" isKey="true">
+                <BorderColor>171, 172, 173</BorderColor>
+                <Brush>[255:255:255]</Brush>
+                <Chart isRef="56" />
+                <GridLinesHor Ref="58" type="Stimulsoft.Report.Chart.StiGridLinesHor" isKey="true">
+                  <Area isRef="57" />
+                  <Color>50, 105, 105, 105</Color>
+                  <MinorColor>50, 105, 105, 105</MinorColor>
+                </GridLinesHor>
+                <GridLinesHorRight Ref="59" type="Stimulsoft.Report.Chart.StiGridLinesHor" isKey="true">
+                  <Area isRef="57" />
+                  <Color>Silver</Color>
+                  <MinorColor>Gainsboro</MinorColor>
+                  <Visible>False</Visible>
+                </GridLinesHorRight>
+                <GridLinesVert Ref="60" type="Stimulsoft.Report.Chart.StiGridLinesVert" isKey="true">
+                  <Area isRef="57" />
+                  <Color>50, 105, 105, 105</Color>
+                  <MinorColor>50, 105, 105, 105</MinorColor>
+                </GridLinesVert>
+                <InterlacingHor Ref="61" type="Stimulsoft.Report.Chart.StiInterlacingHor" isKey="true">
+                  <Area isRef="57" />
+                  <InterlacedBrush>[10:155:155:155]</InterlacedBrush>
+                </InterlacingHor>
+                <InterlacingVert Ref="62" type="Stimulsoft.Report.Chart.StiInterlacingVert" isKey="true">
+                  <Area isRef="57" />
+                  <InterlacedBrush>[10:155:155:155]</InterlacedBrush>
+                </InterlacingVert>
+                <XAxis Ref="63" type="Stimulsoft.Report.Chart.StiXBottomAxis" isKey="true">
+                  <Area isRef="57" />
+                  <DateTimeStep Ref="64" type="Stimulsoft.Report.Chart.StiAxisDateTimeStep" isKey="true" />
+                  <Interaction Ref="65" type="Stimulsoft.Report.Chart.StiAxisInteraction" isKey="true" />
+                  <Labels Ref="66" type="Stimulsoft.Report.Chart.StiAxisLabels" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,8</Font>
+                  </Labels>
+                  <LineColor>140, 140, 140</LineColor>
+                  <Range Ref="67" type="Stimulsoft.Report.Chart.StiAxisRange" isKey="true" />
+                  <Ticks Ref="68" type="Stimulsoft.Report.Chart.StiAxisTicks" isKey="true" />
+                  <Title Ref="69" type="Stimulsoft.Report.Chart.StiAxisTitle" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,12,Bold</Font>
+                  </Title>
+                </XAxis>
+                <XTopAxis Ref="70" type="Stimulsoft.Report.Chart.StiXTopAxis" isKey="true">
+                  <Area isRef="57" />
+                  <Interaction Ref="71" type="Stimulsoft.Report.Chart.StiAxisInteraction" isKey="true" />
+                  <Labels Ref="72" type="Stimulsoft.Report.Chart.StiAxisLabels" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,8</Font>
+                  </Labels>
+                  <LineColor>140, 140, 140</LineColor>
+                  <Ticks Ref="73" type="Stimulsoft.Report.Chart.StiAxisTicks" isKey="true" />
+                  <Title Ref="74" type="Stimulsoft.Report.Chart.StiAxisTitle" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,12,Bold</Font>
+                  </Title>
+                </XTopAxis>
+                <YAxis Ref="75" type="Stimulsoft.Report.Chart.StiYLeftAxis" isKey="true">
+                  <Area isRef="57" />
+                  <Interaction Ref="76" type="Stimulsoft.Report.Chart.StiAxisInteraction" isKey="true" />
+                  <Labels Ref="77" type="Stimulsoft.Report.Chart.StiAxisLabels" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,8</Font>
+                  </Labels>
+                  <LineColor>140, 140, 140</LineColor>
+                  <Range Ref="78" type="Stimulsoft.Report.Chart.StiAxisRange" isKey="true" />
+                  <Ticks Ref="79" type="Stimulsoft.Report.Chart.StiAxisTicks" isKey="true" />
+                  <Title Ref="80" type="Stimulsoft.Report.Chart.StiAxisTitle" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Direction>BottomToTop</Direction>
+                    <Font>Tahoma,12,Bold</Font>
+                  </Title>
+                </YAxis>
+                <YRightAxis Ref="81" type="Stimulsoft.Report.Chart.StiYRightAxis" isKey="true">
+                  <Area isRef="57" />
+                  <Interaction Ref="82" type="Stimulsoft.Report.Chart.StiAxisInteraction" isKey="true" />
+                  <Labels Ref="83" type="Stimulsoft.Report.Chart.StiAxisLabels" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Font>Tahoma,8</Font>
+                    <TextAlignment>Left</TextAlignment>
+                  </Labels>
+                  <LineColor>140, 140, 140</LineColor>
+                  <Range Ref="84" type="Stimulsoft.Report.Chart.StiAxisRange" isKey="true" />
+                  <Ticks Ref="85" type="Stimulsoft.Report.Chart.StiAxisTicks" isKey="true" />
+                  <Title Ref="86" type="Stimulsoft.Report.Chart.StiAxisTitle" isKey="true">
+                    <Color>140, 140, 140</Color>
+                    <Direction>TopToBottom</Direction>
+                    <Font>Tahoma,12,Bold</Font>
+                  </Title>
+                </YRightAxis>
+              </Area>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0.2,1.4,18.6,15</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <ConstantLines isList="true" count="0" />
+              <CustomStyleName />
+              <Filters isList="true" count="0" />
+              <Guid>095be9f0288646aebfeb4575299fce05</Guid>
+              <Legend Ref="87" type="Stimulsoft.Report.Chart.StiLegend" isKey="true">
+                <BorderColor>225, 225, 225</BorderColor>
+                <Brush>[255:255:255]</Brush>
+                <Chart isRef="56" />
+                <Font>Arial,8</Font>
+                <LabelsColor>140, 140, 140</LabelsColor>
+                <MarkerSize>10, 10</MarkerSize>
+                <ShowShadow>False</ShowShadow>
+                <TitleColor>DimGray</TitleColor>
+                <TitleFont>Arial,14,Bold</TitleFont>
+              </Legend>
+              <Name>Chart1</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Series isList="true" count="2">
+                <Item46 Ref="88" type="Stimulsoft.Report.Chart.StiClusteredColumnSeries" isKey="true">
+                  <BorderColor>Transparent</BorderColor>
+                  <Brush>[52:152:219]</Brush>
+                  <BrushNegative>Firebrick</BrushNegative>
+                  <Chart isRef="56" />
+                  <Conditions isList="true" count="0" />
+                  <Filters isList="true" count="0" />
+                  <SeriesLabels Ref="89" type="Stimulsoft.Report.Chart.StiCenterAxisLabels" isKey="true">
+                    <BorderColor>Transparent</BorderColor>
+                    <Brush>Transparent</Brush>
+                    <Chart isRef="56" />
+                    <Font>Arial,10</Font>
+                    <LabelColor>50, 58, 69</LabelColor>
+                    <MarkerSize>8, 6</MarkerSize>
+                    <ValueTypeSeparator>-</ValueTypeSeparator>
+                    <Width>0</Width>
+                  </SeriesLabels>
+                  <ShowShadow>False</ShowShadow>
+                  <Title>模型</Title>
+                  <TopN Ref="90" type="Stimulsoft.Report.Chart.StiSeriesTopN" isKey="true" />
+                  <TrendLine Ref="91" type="Stimulsoft.Report.Chart.StiTrendLineNone" isKey="true">
+                    <Font>Arial,7</Font>
+                    <LineColor>DimGray</LineColor>
+                    <Position>LeftBottom</Position>
+                    <ShowShadow>False</ShowShadow>
+                  </TrendLine>
+                  <ValueDataColumn>DataSource1.模型樣本數</ValueDataColumn>
+                </Item46>
+                <Item47 Ref="92" type="Stimulsoft.Report.Chart.StiClusteredColumnSeries" isKey="true">
+                  <BorderColor>Transparent</BorderColor>
+                  <Brush>[239:113:122]</Brush>
+                  <BrushNegative>Firebrick</BrushNegative>
+                  <Chart isRef="56" />
+                  <Conditions isList="true" count="0" />
+                  <Filters isList="true" count="0" />
+                  <SeriesLabels Ref="93" type="Stimulsoft.Report.Chart.StiCenterAxisLabels" isKey="true">
+                    <BorderColor>Transparent</BorderColor>
+                    <Brush>Transparent</Brush>
+                    <Chart isRef="56" />
+                    <Font>Arial,10</Font>
+                    <LabelColor>50, 58, 69</LabelColor>
+                    <MarkerSize>8, 6</MarkerSize>
+                    <ValueTypeSeparator>-</ValueTypeSeparator>
+                    <Width>0</Width>
+                  </SeriesLabels>
+                  <ShowShadow>False</ShowShadow>
+                  <Title>線上</Title>
+                  <TopN Ref="94" type="Stimulsoft.Report.Chart.StiSeriesTopN" isKey="true" />
+                  <TrendLine Ref="95" type="Stimulsoft.Report.Chart.StiTrendLineNone" isKey="true">
+                    <Font>Arial,7</Font>
+                    <LineColor>DimGray</LineColor>
+                    <Position>LeftBottom</Position>
+                    <ShowShadow>False</ShowShadow>
+                  </TrendLine>
+                  <ValueDataColumn>DataSource1.線上樣本數</ValueDataColumn>
+                </Item47>
+              </Series>
+              <SeriesLabels Ref="96" type="Stimulsoft.Report.Chart.StiInsideEndAxisLabels" isKey="true">
+                <BorderColor>Transparent</BorderColor>
+                <Brush>Transparent</Brush>
+                <Chart isRef="56" />
+                <Font>Arial,10</Font>
+                <LabelColor>50, 58, 69</LabelColor>
+                <MarkerSize>8, 6</MarkerSize>
+                <ValueTypeSeparator>-</ValueTypeSeparator>
+                <Width>0</Width>
+              </SeriesLabels>
+              <SeriesLabelsConditions isList="true" count="0" />
+              <Sort isList="true" count="0" />
+              <Strips isList="true" count="0" />
+              <Style Ref="97" type="Stimulsoft.Report.Chart.StiStyle29" isKey="true">
+                <Conditions isList="true" count="0" />
+                <Name />
+              </Style>
+              <Table Ref="98" type="Stimulsoft.Report.Chart.StiChartTable" isKey="true">
+                <DataCells Ref="99" type="Stimulsoft.Report.Chart.StiChartTableDataCells" isKey="true">
+                  <Font>Arial,8</Font>
+                  <ShrinkFontToFit>False</ShrinkFontToFit>
+                  <TextColor>140, 140, 140</TextColor>
+                </DataCells>
+                <GridLineColor>225, 225, 225</GridLineColor>
+                <Header Ref="100" type="Stimulsoft.Report.Chart.StiChartTableHeader" isKey="true">
+                  <Brush>White</Brush>
+                  <Font>Arial,8</Font>
+                  <TextColor>DarkGray</TextColor>
+                </Header>
+              </Table>
+              <Title Ref="101" type="Stimulsoft.Report.Chart.StiChartTitle" isKey="true">
+                <Brush>[140:140:140]</Brush>
+                <Font>Tahoma,12,Bold</Font>
+              </Title>
+            </Chart1>
+            <Text19 Ref="102" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.3,0.7,18.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10,Bold</Font>
+              <Guid>16ad6fdfe6e3443c8738921618edcea4</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Text>PSI &lt; 0.1 模型穩定性高 ; PSI 0.1~0.25 模型穩定性一般 ; PSI &gt; 0.25 模型穩定性差</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text21 Ref="103" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Text>{Sum(DataBand2,DataSource1.模型樣本數)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text27 Ref="104" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.9,0,1.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>0d5a39092e8f4c9bb2c8fff656a70f4e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <Text>{Sum(DataBand2,DataSource1.線上樣本數)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <HorizontalLinePrimitive2 Ref="105" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="106" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="4" />
+              <Parent isRef="52" />
+              <StartCap Ref="107" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9e8919f9244148c1845cd3c6477d4eda</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="108" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>6/10/2020 4:33:07 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\bsmvc\source\DyWeb\CMS.Web\Areas\Dys\Reports\indexB004.mrt</ReportFile>
+  <ReportGuid>ee686ec3d5d0451880c37eed09a6a2c0</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2019.2.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

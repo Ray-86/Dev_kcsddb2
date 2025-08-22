@@ -1,0 +1,755 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <DataSource1 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource1</Alias>
+        <Columns isList="true" count="35">
+          <value>CompanyID,System.String</value>
+          <value>InvoYear,System.String</value>
+          <value>InvoMonth,System.String</value>
+          <value>InvoNo,System.String</value>
+          <value>InvoStatus,System.Int16</value>
+          <value>UploadStatus,System.Int16</value>
+          <value>InvoType,System.String</value>
+          <value>InvoDate,System.DateTime</value>
+          <value>InvoTime,System.String</value>
+          <value>RandomNumber,System.String</value>
+          <value>DonateMark,System.String</value>
+          <value>CarrierType,System.String</value>
+          <value>CarrierId1,System.String</value>
+          <value>CarrierId2,System.String</value>
+          <value>PrintMark,System.String</value>
+          <value>NPOBAN,System.String</value>
+          <value>BarCode,System.String</value>
+          <value>QRcodeL,System.String</value>
+          <value>QRcodeR,System.String</value>
+          <value>CustomerID,System.String</value>
+          <value>TaxType,System.String</value>
+          <value>DeliveryID,System.String</value>
+          <value>SubTotal,System.Decimal</value>
+          <value>Tax,System.Decimal</value>
+          <value>TotalAmount,System.Decimal</value>
+          <value>IsPrint,System.String</value>
+          <value>PrintTimes,System.Decimal</value>
+          <value>CancelDate,System.DateTime</value>
+          <value>CancelTime,System.String</value>
+          <value>CancelReason,System.String</value>
+          <value>ReturnTaxDocumentNumber,System.String</value>
+          <value>kc_updt_user,System.String</value>
+          <value>kc_updt_date,System.DateTime</value>
+          <value>CompanyName,System.String</value>
+          <value>Earno,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>DataSource1</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_case_no,,23,0</value>
+        </Parameters>
+        <SqlCommand>Select A.*,B.CompanyName,B.Earno FROM kcsd.InvoMaster A INNER JOIN kcsd.InvoCompany B ON A.CompanyId = B.CompanyId where A.Invono = @wk_case_no</SqlCommand>
+      </DataSource1>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="44">
+        <BarCode1 Ref="5" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+          <AutoScale>True</AutoScale>
+          <BackColor>White</BackColor>
+          <BarCodeType Ref="6" type="Stimulsoft.Report.BarCodes.StiCode39BarCodeType" isKey="true">
+            <CheckSum>No</CheckSum>
+          </BarCodeType>
+          <ClientRectangle>0.5,4.9,4.7,0.7</ClientRectangle>
+          <Code>{DataSource1.BarCode}</Code>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,8,Bold,Pixel</Font>
+          <ForeColor>Black</ForeColor>
+          <HorAlignment>Center</HorAlignment>
+          <Locked>True</Locked>
+          <Name>BarCode1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ShowLabelText>False</ShowLabelText>
+          <ShowQuietZones>False</ShowQuietZones>
+        </BarCode1>
+        <BarCode2 Ref="7" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+          <AutoScale>True</AutoScale>
+          <BackColor>White</BackColor>
+          <BarCodeType Ref="8" type="Stimulsoft.Report.BarCodes.StiQRCodeBarCodeType" isKey="true">
+            <ErrorCorrectionLevel>Level4</ErrorCorrectionLevel>
+            <MatrixSize>v10</MatrixSize>
+            <Module>57</Module>
+          </BarCodeType>
+          <ClientRectangle>0.7,5.8,1.7,1.7</ClientRectangle>
+          <Code>{DataSource1.QRcodeL}</Code>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,8,Bold,Pixel</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>bb82142c0a8147b2b9edfaa0b4cdd0a0</Guid>
+          <Name>BarCode2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ShowLabelText>False</ShowLabelText>
+          <ShowQuietZones>False</ShowQuietZones>
+        </BarCode2>
+        <BarCode3 Ref="9" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+          <AutoScale>True</AutoScale>
+          <BackColor>White</BackColor>
+          <BarCodeType Ref="10" type="Stimulsoft.Report.BarCodes.StiQRCodeBarCodeType" isKey="true">
+            <ErrorCorrectionLevel>Level4</ErrorCorrectionLevel>
+            <MatrixSize>v10</MatrixSize>
+            <Module>57</Module>
+          </BarCodeType>
+          <ClientRectangle>3.2,5.8,1.7,1.7</ClientRectangle>
+          <Code>{DataSource1.QRcodeR}</Code>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,8,Bold,Pixel</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>12d296ccbd6143fba5e3ea643a53380e</Guid>
+          <Name>BarCode3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ShowLabelText>False</ShowLabelText>
+          <ShowQuietZones>False</ShowQuietZones>
+        </BarCode3>
+        <Text1 Ref="11" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,1.3,5.3,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,20</Font>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>電子發票證明聯</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text1>
+        <Text2 Ref="12" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.15,0.5,5.4,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,15,Bold</Font>
+          <Guid>d4d56fe356c0464aa771258c4ecd749a</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Locked>True</Locked>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.CompanyName}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text2>
+        <Text3 Ref="13" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,2,5.3,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,20,Bold</Font>
+          <Guid>1c18da0410654c5fa72ea5d6bdaab8d8</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.InvoYear}年{Switch(
+DataSource1.InvoMonth=="02", "01-02",
+DataSource1.InvoMonth=="04", "03-04",
+DataSource1.InvoMonth=="06", "05-06",
+DataSource1.InvoMonth=="08", "07-08",
+DataSource1.InvoMonth=="10", "09-10",
+DataSource1.InvoMonth=="12", "11-12"
+)}月</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text3>
+        <Text4 Ref="14" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,2.7,5.3,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,20,Bold</Font>
+          <Guid>4c7024d4405442b19c75257cb6540214</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text4</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{Substring(DataSource1.InvoNo,0,2)}-{Substring(DataSource1.InvoNo,2,8)}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text4>
+        <Text5 Ref="15" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.3,3.6,3.4,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>07c6045af7a14c4b83754f8f0b903d27</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text5</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.InvoDate.ToString("yyyy-MM-dd")} {DataSource1.InvoTime}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text5>
+        <Text6 Ref="16" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.3,4,1.2,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>a07be1b162d04c1ba9cac44c1e027b52</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text6</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>隨機碼:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text6>
+        <Text7 Ref="17" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.3,4.4,0.9,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>fb4d2c9ff3494f6fb651d79d3db3548e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text7</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>賣方:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text7>
+        <Text8 Ref="18" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.5,4,1.6,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>51eeb491b2f946f8bd584d8c2594b679</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text8</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.RandomNumber}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text8>
+        <Text9 Ref="19" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.2,4.4,1.9,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>562dd755cdcf4668a74e220ce8bc2109</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text9</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.Earno}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text9>
+        <Text10 Ref="20" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>4.3,4,1.1,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>60fc6629571c4184bd0731387dcfb55e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text10</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{DataSource1.TotalAmount}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text10>
+        <Text11 Ref="21" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.4,4,0.9,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,10</Font>
+          <Guid>b11f45ba48b045d8888f7befd3dfc7ef</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text11</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>總計:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text11>
+        <Text12 Ref="22" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.15,10,5.4,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,15,Bold</Font>
+          <Guid>deda2bdaf0814e42a4a8579c8d85c859</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Locked>True</Locked>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text12</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>領獎收據</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text12>
+        <Text14 Ref="23" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,8,5.3,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>c981e4b6903b438aa2e292e6bd03933b</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text14</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>發票如需更正，請於當月底前通知
+逾期恕不受理。</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text14>
+        <Text15 Ref="24" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,11.1,1.3,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>c9d64d61974b492b8c370f30f248e578</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text15</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>發票年期:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text15>
+        <Text16 Ref="25" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,11.8,1.8,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>b7e51079b3d04a7ab2c5840bd84b5017</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text16</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>發票字軌號碼:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text16>
+        <Text17 Ref="26" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,12.5,0.8,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>61f376ab1f3949c4b7138045965e7027</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text17</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>金額:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text17>
+        <Text18 Ref="27" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,13.2,1.1,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>41a5dfd6587c4d0eb9e6a70c8889d25e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text18</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>中獎人:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text18>
+        <Text19 Ref="28" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,13.9,1.3,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>41defa64ebf04fac8de38a9559d13392</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text19</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>身份證號:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text19>
+        <Text20 Ref="29" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,14.6,0.8,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>81b82def757a45a2a4761b7a7b523ce0</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text20</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>電話:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text20>
+        <Text21 Ref="30" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,15.3,1.3,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>d95edf51263c40de9455fc76ba2f17da</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text21</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>戶籍地址:</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text21>
+        <Text22 Ref="31" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,17.3,5.3,0.9</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>bd20ce471ac247faa88d104e72b4455b</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text22</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>中獎兌領:請依財務部規定期間內兌領完畢
+財政部電子發票客服中心:0800-521988</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text22>
+        <Text13 Ref="32" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.15,19.1,5.4,0.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,15,Bold</Font>
+          <Guid>42f08f2d063045aea08a418edbd16395</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text13</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>交易明細</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text13>
+        <Text23 Ref="33" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.9,6.4,0.4,2.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>ab495060ff7044f2a9bb1427dbcf46de</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text23</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>請
+沿
+虛
+線
+裁
+切</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text23>
+        <Text25 Ref="34" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.8,13.2,1.6,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微軟正黑體,8</Font>
+          <Guid>04a512d3b83149f0b26f415c4b9d65f8</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text25</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>(簽名或蓋章)</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text25>
+        <RectanglePrimitive1 Ref="35" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0,0,5.7,9</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>e4c2efec8a5f466aa45025c6c62530aa</Guid>
+          <Locked>True</Locked>
+          <Name>RectanglePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Style>Dash</Style>
+        </RectanglePrimitive1>
+        <StartPointPrimitive1 Ref="36" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>0,0,0,0</ClientRectangle>
+          <Name>StartPointPrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>e4c2efec8a5f466aa45025c6c62530aa</ReferenceToGuid>
+        </StartPointPrimitive1>
+        <EndPointPrimitive1 Ref="37" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>5.7,9,0,0</ClientRectangle>
+          <Name>EndPointPrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>e4c2efec8a5f466aa45025c6c62530aa</ReferenceToGuid>
+        </EndPointPrimitive1>
+        <RectanglePrimitive2 Ref="38" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0,9.5,5.7,9</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>6b36cae3ccc8425284b5e931f04832eb</Guid>
+          <Name>RectanglePrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Style>Dash</Style>
+        </RectanglePrimitive2>
+        <StartPointPrimitive2 Ref="39" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>0,9.5,0,0</ClientRectangle>
+          <Name>StartPointPrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>6b36cae3ccc8425284b5e931f04832eb</ReferenceToGuid>
+        </StartPointPrimitive2>
+        <EndPointPrimitive2 Ref="40" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>5.7,18.5,0,0</ClientRectangle>
+          <Name>EndPointPrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>6b36cae3ccc8425284b5e931f04832eb</ReferenceToGuid>
+        </EndPointPrimitive2>
+        <RectanglePrimitive3 Ref="41" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0,18.6,5.7,9</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>0f8ed1c22a474320947c60772a50faba</Guid>
+          <Name>RectanglePrimitive3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Style>Dash</Style>
+        </RectanglePrimitive3>
+        <StartPointPrimitive3 Ref="42" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>0,18.6,0,0</ClientRectangle>
+          <Name>StartPointPrimitive3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>0f8ed1c22a474320947c60772a50faba</ReferenceToGuid>
+        </StartPointPrimitive3>
+        <EndPointPrimitive3 Ref="43" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>5.7,27.6,0,0</ClientRectangle>
+          <Name>EndPointPrimitive3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>0f8ed1c22a474320947c60772a50faba</ReferenceToGuid>
+        </EndPointPrimitive3>
+        <HorizontalLinePrimitive1 Ref="44" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.6,11.5,3.8,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="45" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Name>HorizontalLinePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="46" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive1>
+        <HorizontalLinePrimitive2 Ref="47" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>2.1,12.2,3.3,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="48" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>55710dd3ed834bc58787eb88bce443e4</Guid>
+          <Name>HorizontalLinePrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="49" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive2>
+        <HorizontalLinePrimitive3 Ref="50" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.1,12.9,4.3,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="51" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>69156f2bf8fe48508f75063e3b882a71</Guid>
+          <Name>HorizontalLinePrimitive3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="52" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive3>
+        <HorizontalLinePrimitive4 Ref="53" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.4,13.6,2.4,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="54" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>788ba5edfdb444519f6e78825ff05dc0</Guid>
+          <Name>HorizontalLinePrimitive4</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="55" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive4>
+        <HorizontalLinePrimitive5 Ref="56" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.6,14.3,3.8,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="57" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>1844242e2f8c4bd88df1eff769015312</Guid>
+          <Name>HorizontalLinePrimitive5</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="58" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive5>
+        <HorizontalLinePrimitive7 Ref="59" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>0.2,16.4,5.2,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="60" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>e6902b9a9f6c472bb696b71371d4517c</Guid>
+          <Name>HorizontalLinePrimitive7</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="61" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive7>
+        <HorizontalLinePrimitive8 Ref="62" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.1,15,4.3,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="63" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>6327e64339764018be517577f0f583f7</Guid>
+          <Name>HorizontalLinePrimitive8</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="64" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive8>
+        <HorizontalLinePrimitive6 Ref="65" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>1.6,15.7,3.8,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="66" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>2693b5af19e044c4a3ce309e8ab24177</Guid>
+          <Name>HorizontalLinePrimitive6</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="67" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive6>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9e8919f9244148c1845cd3c6477d4eda</Guid>
+      <Margins>1,1.3,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="68" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="69" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/10/2017 1:39:40 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\bsmvc\source\DyWeb\CMS.Web\Areas\Dys\Reports\Form_Invoice.mrt</ReportFile>
+  <ReportGuid>5a8e982178f842b69001f842e5c281da</ReportGuid>
+  <ReportImage isNull="true" />
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2016.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

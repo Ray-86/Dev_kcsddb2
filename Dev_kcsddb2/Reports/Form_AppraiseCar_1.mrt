@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>5WzLAsVKQ/BvS6Hw6oh1E8NwTytPSHOdRlxNrE1cpCrWyNGhT1CSBUVb7ezpmOsTi1Tb61sJw/n4Ub3MTqAyN9/E2QlLXcNFy0mc2Opc4GONVvsJRhhL7XJfJYDxXGVK31rZw+YDQ91pUXn0y4TgT8Nas0nFTLvxa03t8cNJ4y/FVg==</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="5">
+      <dsCarBrand Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <Columns isList="true" count="2">
+          <value>Text,System.String</value>
+          <value>Value,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>1353b5c247f645c2b586bf008349c355</Key>
+        <Name>dsCarBrand</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text FROM sys_code WHERE CodeType = 'CarBrand' AND IsEnable = 1</SqlCommand>
+      </dsCarBrand>
+      <dsMovableStat Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsMovableStat</Alias>
+        <Columns isList="true" count="4">
+          <value>Text,System.String</value>
+          <value>Text1,System.String</value>
+          <value>Text2,System.String</value>
+          <value>Value,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>552dffef52ca4443ab3f7709300e505d</Key>
+        <Name>dsMovableStat</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text, Text1, Text2 FROM sys_code WHERE CodeType = 'MvdisCode' AND IsEnable = 1</SqlCommand>
+      </dsMovableStat>
+      <kct_issuecompany Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kct_issuecompany</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_acct_no,System.String</value>
+          <value>kc_atm_no,System.String</value>
+          <value>kc_boss_name,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_issu_addr,System.String</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_issu_desc,System.String</value>
+          <value>kc_uniform_no,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>4702ca73706b42e2b3adaeb6527c7c9f</Key>
+        <Name>kct_issuecompany</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from kcsd.kct_issuecompany</SqlCommand>
+      </kct_issuecompany>
+      <letter Ref="7" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>letter</Alias>
+        <Columns isList="true" count="11">
+          <value>ContactData,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>kc_car_brand,System.String</value>
+          <value>kc_case_no,System.String</value>
+          <value>kc_cust_nameu,System.String</value>
+          <value>kc_detain_addr,System.String</value>
+          <value>kc_detain_date,System.DateTime</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_licn_no,System.String</value>
+          <value>kc_perm_addr,System.String</value>
+          <value>kc_perm_zip,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>bcb6e568545648398a17d4c3ad0ac71f</Key>
+        <Name>letter</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="3">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+          <value>wk_case_no,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT c.kc_case_no,c.kc_cust_nameu,c.kc_issu_code,c.kc_perm_zip,c.kc_perm_addr,c.kc_licn_no,c.kc_car_brand,h.kc_detain_date,h.kc_detain_addr,d.ContactName,d.ContactData
+	FROM kcsd.kc_customerloan c
+	LEFT JOIN kcsd.kc_appraiseh h on h.kc_case_no = c.kc_case_no
+	LEFT JOIN kcsd.Delegate d ON c.kc_pusher_code = d.DelegateCode
+WHERE h.kc_licn_date is null
+AND (h.kc_detain_date between @wk_strt_date + '00:00:00' and @wk_stop_date + '23:59:59')
+AND (@wk_case_no = '' OR c.kc_case_no = @wk_case_no)
+union all
+SELECT c.kc_case_no,c.kc_cust_name1u,c.kc_issu_code,c.kc_perm_zip1,c.kc_perm_addr1,c.kc_licn_no,c.kc_car_brand,h.kc_detain_date,h.kc_detain_addr,d.ContactName,d.ContactData
+	FROM kcsd.kc_customerloan c
+	LEFT JOIN kcsd.kc_appraiseh h on h.kc_case_no = c.kc_case_no
+	LEFT JOIN kcsd.Delegate d ON c.kc_pusher_code = d.DelegateCode
+WHERE h.kc_licn_date is null
+AND c.kc_cust_name1u is not null
+AND (h.kc_detain_date between @wk_strt_date + '00:00:00' and @wk_stop_date + '23:59:59')
+AND (@wk_case_no = '' OR c.kc_case_no = @wk_case_no)
+union all
+SELECT c.kc_case_no,c.kc_cust_name2u,c.kc_issu_code,c.kc_perm_zip2,c.kc_perm_addr2,c.kc_licn_no,c.kc_car_brand,h.kc_detain_date,h.kc_detain_addr,d.ContactName,d.ContactData
+	FROM kcsd.kc_customerloan c
+	LEFT JOIN kcsd.kc_appraiseh h on h.kc_case_no = c.kc_case_no
+	LEFT JOIN kcsd.Delegate d ON c.kc_pusher_code = d.DelegateCode
+WHERE h.kc_licn_date is null
+AND c.kc_cust_name2u is not null
+AND (h.kc_detain_date between @wk_strt_date + '00:00:00' and @wk_stop_date + '23:59:59')
+AND (@wk_case_no = '' OR c.kc_case_no = @wk_case_no)</SqlCommand>
+      </letter>
+      <ReportsImage Ref="8" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>ReportsImage</Alias>
+        <Columns isList="true" count="1">
+          <value>Text,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>e785e146d77e4b158b6e429c1fd7b44d</Key>
+        <Name>ReportsImage</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>
+select Text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'ReportsImage' and Value = '0001'
+
+
+</SqlCommand>
+      </ReportsImage>
+    </DataSources>
+    <Relations isList="true" count="2">
+      <dsCarBrand Ref="9" type="DataRelation" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_car_brand</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>dsCarBrand</Name>
+        <NameInSource>dsCarBrand</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>Value</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </dsCarBrand>
+      <名稱 Ref="10" type="DataRelation" isKey="true">
+        <Alias>名稱</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>名稱</Name>
+        <NameInSource>關係</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </名稱>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>81208e81ba1e4beb85481f68665ca3bb</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="11" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 Ref="12" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text3 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0.3,2,0.3</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>5dd4094a0cfb4f7eb98a60820b048cc6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text2 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,3.8,18.5,0.9</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>bf0b9233ef9547899f5e2516af65808a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.名稱.kc_issu_desc} 函</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text1 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,0.8,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c0a784c8e1844da58c26a0bbd5e707e0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>受文者：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text33 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,7.7,15.5,1.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>24627d5cb4eb436ba01b0d7acb604718</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>通知台端限期繳清車款及公告拍賣車輛事宜</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text33>
+            <Text5 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,9,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>36553feb03454edd87b162cd9eafe4cd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>說  明：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text7 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,9,15.5,10</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>a6843ce9e99e40fc9562660921bff3f2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>1.台端前以分期付款買賣方式，向本公司購買並占有{letter.dsCarBrand.Text}廠牌：車牌號碼{letter.kc_licn_no}機車，因已違約，業經本公司，於{letter.kc_detain_date}許自{letter.kc_detain_addr}附近，逕行取回，請於函到後10日內，負擔占有費用並清償全部車款，取回買賣標的，逾期未蒙付款或達成和解，本公司將依 貴我買賣契約約定：
+  1.1.公開拍賣拍賣所得款項，先抵充費用、次充利息再還契約本金，除拍賣所得已超過債權，本公司另行書函通知外，有關拍賣價金、抵充情況及本公司剩餘債權等，請自行聯絡經辦人員了解或協商。
+  1.2.上開剩餘債權，自拍賣日之次一日起算第15天起，除已和解或另有約定外，本公司得就 台端全部財產，聲請強制執行，抵還剩餘債權之一部或全部。 
+  1.3.如進入拍賣程序，本通知函，視為本公司已依民法及 貴我契約規定，履行全部通知義務。 
+2.另副知連帶保證人。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text7>
+            <Text15 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,0.8,10.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>10faf531a7e54084ac7bfd4c4893b909</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.kc_cust_nameu}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text15>
+            <Text17 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>9078a4cbb3a84c79b2fbbeffad38ac6a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>地  址：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text18 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,1.6,10.4,1.2</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>d561972640804064af54c3eab52e498f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.kc_perm_zip} {letter.kc_perm_addr}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text18>
+            <Text19 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,7.7,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>62b64b4cb59e466c84e8c5549678be99</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>主  旨：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text22 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,6.2,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0522bcc777bc4587a0dbd76945854dcd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>發文日期：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text22>
+            <Text23 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,6.2,15.5,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>9e493350e3bf4d96affebbe0d44af8f3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>中華民國{Year(Today)-1911}年{Month(Today)}月{Day(Today)}日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text23>
+            <Text24 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,7,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c442ba6e73f44f30b1c7ff0c74bbab67</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>發文字號：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,7,15.5,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>582fdfcb976a43e4bd47112744ee564a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>東資法扣字  第{letter.kc_case_no}號</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text25>
+            <Text6 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,19.4,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>112702ecd09c426d91f91e76f9fd5080</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>附    註：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text8 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,19.4,15.6,1.8</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>56976f471c64440db0ab481ee7aa41e5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>1、依雙方所簽立買賣契約書之相關規定辦理。
+2、本公司承辦人:{letter.ContactName}、聯絡電話: {letter.ContactData} </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text8>
+            <Image1 Ref="29" type="Image" isKey="true">
+              <AspectRatio>True</AspectRatio>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.8,22.2,8,5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <File>C:\inetpub\{ReportsImage.Text}\Content\images\contract\reports\compseal\{letter.名稱.kc_issu_code}.PNG</File>
+              <Guid>959abca58f6146eb8236c32c1e134d43</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="11" />
+          <Parent isRef="11" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>1</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="30" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/17/2023 5:05:07 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_AppraiseCar_1.mrt</ReportFile>
+  <ReportGuid>9a7a18ff94e84452bd534d8d44660255</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

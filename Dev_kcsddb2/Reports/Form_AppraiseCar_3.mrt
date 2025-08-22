@@ -1,0 +1,2597 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>5WzLAsVKQ/BvS6Hw6oh1E8NwTytPSHOdRlxNrE1cpCrWyNGhT1CSBUVb7ezpmOsTi1Tb61sJw/n4Ub3MTqAyN9/E2QlLXcNFy0mc2Opc4GONVvsJRhhL7XJfJYDxXGVK31rZw+YDQ91pUXn0y4TgT8Nas0nFTLvxa03t8cNJ4y/FVg==</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <dsCarBrand Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <Columns isList="true" count="2">
+          <value>Text,System.String</value>
+          <value>Value,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>4b118d238910498a844683c0020d11e4</Key>
+        <Name>dsCarBrand</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text FROM sys_code WHERE CodeType = 'CarBrand' AND IsEnable = 1</SqlCommand>
+      </dsCarBrand>
+      <dsGuildCode Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsGuildCode</Alias>
+        <Columns isList="true" count="5">
+          <value>Text,System.String</value>
+          <value>Text1,System.String</value>
+          <value>Text2,System.String</value>
+          <value>Text3,System.String</value>
+          <value>Value,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>03885255cbe14c4da81f82fdbef49188</Key>
+        <Name>dsGuildCode</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text,Text1,Text2,Text3 FROM sys_code WHERE CodeType = 'GuildCode' AND IsEnable = 1</SqlCommand>
+      </dsGuildCode>
+      <kct_issuecompany Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kct_issuecompany</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_acct_no,System.String</value>
+          <value>kc_atm_no,System.String</value>
+          <value>kc_boss_name,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_issu_addr,System.String</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_issu_desc,System.String</value>
+          <value>kc_uniform_no,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>fa694da8b56b4a85a710e124bafbd6df</Key>
+        <Name>kct_issuecompany</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from kcsd.kct_issuecompany</SqlCommand>
+      </kct_issuecompany>
+      <letter Ref="7" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>letter</Alias>
+        <Columns isList="true" count="20">
+          <value>ContactData,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>kc_appraise_fee,System.Int32</value>
+          <value>kc_auction_addr,System.String</value>
+          <value>kc_auction_date,System.DateTime</value>
+          <value>kc_bidder_id,System.String</value>
+          <value>kc_bidder_name,System.String</value>
+          <value>kc_car_brand,System.String</value>
+          <value>kc_car_model,System.String</value>
+          <value>kc_case_no,System.String</value>
+          <value>kc_certificate_date,System.DateTime</value>
+          <value>kc_cust_nameu,System.String</value>
+          <value>kc_detain_addr,System.String</value>
+          <value>kc_detain_date,System.DateTime</value>
+          <value>kc_eng_no,System.String</value>
+          <value>kc_guild_code,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_licn_no,System.String</value>
+          <value>kc_mfg_date,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>b98808d5e3254945ba4f205f4d046653</Key>
+        <Name>letter</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+        </Parameters>
+        <SqlCommand>SELECT c.kc_case_no,c.kc_issu_code,c.kc_id_no,c.kc_cust_nameu,f.ContactName,f.ContactData,h.kc_detain_date,h.kc_detain_addr,h.kc_auction_date,h.kc_auction_addr,h.kc_guild_code,h.kc_bidder_name,h.kc_bidder_id,h.kc_certificate_date
+,d.kc_appraise_fee,m.kc_licn_no,m.kc_car_brand,m.kc_car_model,m.kc_eng_no,m.kc_mfg_date
+from kcsd.kc_customerloan c
+	LEFT JOIN kcsd.kc_appraiseh h on h.kc_case_no = c.kc_case_no
+	LEFT JOIN kcsd.kc_appraised d on d.kc_case_no = c.kc_case_no
+	LEFT JOIN kcsd.Delegate f ON c.kc_pusher_code = f.DelegateCode
+	LEFT JOIN kcsd.kc_movable m ON m.kc_cp_no = c.kc_cp_no
+WHERE h.kc_licn_date is null
+and d.kc_confirm_fig1 = 'P'
+AND h.kc_certificate_date between @wk_strt_date and @wk_stop_date</SqlCommand>
+      </letter>
+    </DataSources>
+    <Relations isList="true" count="3">
+      <dsCarBrand Ref="8" type="DataRelation" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_car_brand</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>dsCarBrand</Name>
+        <NameInSource>dsCarBrand</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>Value</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </dsCarBrand>
+      <dsGuildCode Ref="9" type="DataRelation" isKey="true">
+        <Alias>dsGuildCode</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_guild_code</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>dsGuildCode</Name>
+        <NameInSource>dsGuildCode</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>Value</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </dsGuildCode>
+      <名稱 Ref="10" type="DataRelation" isKey="true">
+        <Alias>名稱</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>名稱</Name>
+        <NameInSource>關係</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </名稱>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>6a68d59073b94e168721b482a3d1d9d0</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="5">
+    <Page1 Ref="11" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 Ref="12" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="26">
+            <Text3 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.5,0.8,2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>5dd4094a0cfb4f7eb98a60820b048cc6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text2 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,18,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>bf0b9233ef9547899f5e2516af65808a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>申請書</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text1 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,4.1,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c0a784c8e1844da58c26a0bbd5e707e0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>受文者：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text29 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,21.9,8.4,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>98c2d0ab2ff34fbeaa50e5bb8c86a998</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text30 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,22.7,8.4,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>4964fbd4122941d39ce027479756af42</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.名稱.kc_boss_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text30>
+            <Text33 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,4.8,18.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>24627d5cb4eb436ba01b0d7acb604718</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>主  旨：如說明</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text33>
+            <Text4 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.1,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c9e57c1da6e9400e82488daf8be8865c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>華</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text34 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>2f0ff66661f84a7faaa1138647c2a15f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>民</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text35 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c491cb95d2dc4544b9b30a60051f922d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>國</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text36 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,25.1,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>7fe8a6b321154455a91cd66e8e8d963a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{Year(letter.kc_auction_date)-1911}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text37 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.4,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6e04b9815e914e29bb3ca4a271a20519</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>年</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text38 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.1,25.1,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>ad398999af874d309475f6f9683c8633</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{Month(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text39 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>46477666c03046788a9a660b88d6a500</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>月</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text40 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.1,25.1,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>a84264c1ae36481592c27adcde327df7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{Day(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text41 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.4,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>564b0de01524410da6a6a16c03788797</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+            <Text42 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,25.1,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>833c3f64a21c4c32b489a09748fda3aa</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>中</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <Text5 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,5.5,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>36553feb03454edd87b162cd9eafe4cd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>說  明：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.4,5.5,0.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>eea1ac62fda348318376702592442642</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>1.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3,5.5,15.6,1.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>a6843ce9e99e40fc9562660921bff3f2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>債務人因買賣原因，占有{letter.dsCarBrand.Text}廠牌；車牌號碼{letter.kc_licn_no}之機車，因違反契約約定，經申請人取回占有，合先說明。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.4,7.3,0.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>e0eda6677f9241ada1475b1731e41b3b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>2.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,7.3,15.6,1.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>740a95876f184b90a1690fdac9f440c8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>茲為立證並進行拍賣需要，檢附相關資料(如附件)，請惠予提供上開機車之鑑定價格，俾利申請人依動產擔保交易法第18條規定拍賣。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text9>
+            <Text10 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.3,21.9,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>aa9e1e18d95f4a9f823334f3869cc4ed</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>申  請  人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="35" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.3,22.7,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>22bff5cb86db495fada9dd78dc86dab0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>法定代理人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text12 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,23.5,8.4,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>cd7519ebd4ab4b23bb02a3eee32de0bd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.名稱.kc_issu_addr}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.3,23.5,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>5cef0325ba75485fa14507ddf4e06b6f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>地      址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text120 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.5,4.1,16.1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>cbd75410559d4d7dba02082d07448e3f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text120</Name>
+              <Page isRef="11" />
+              <Parent isRef="12" />
+              <Text>{letter.dsGuildCode.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text120>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="11" />
+          <Parent isRef="11" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>2</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="39" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <Page2 Ref="40" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand2 Ref="41" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="20">
+            <Text43 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.5,0.8,2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>944cf384ad054186bf51ec3eb99dd967</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text43>
+            <Text44 Ref="43" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,18,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>ef451b4f57c941e7b067982338d8998d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>拍賣證明</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text44>
+            <Text45 Ref="44" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.4,4.3,18.2,4.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0bdcc906e1c247209fe3c64ecd43ef07</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>查  債權人{letter.名稱.kc_issu_desc} 債務人{letter.kc_cust_nameu} {letter.kc_id_no} 廠牌{letter.dsCarBrand.Text}，引擎{letter.kc_eng_no}，形式{letter.kc_car_model}，出廠年月{Year(letter.kc_mfg_date)}{Format("{0:D2}", Month(letter.kc_mfg_date))}，車牌號碼{letter.kc_licn_no}之普通重機，業於民國{Year(letter.kc_auction_date)-1911}年{Month(letter.kc_auction_date)}月{Day(letter.kc_auction_date)}日下午14時於{letter.kc_auction_addr}公開拍賣，由{letter.kc_bidder_name} ID {letter.kc_bidder_id}拍定，拍定金額新台幣{letter.kc_appraise_fee}元，特此證明。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text45>
+            <Text46 Ref="45" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,21.1,13.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>bda91ee8747843edb975b859f6372405</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{letter.dsGuildCode.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text46>
+            <Text47 Ref="46" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.7,22,10.9,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>8f1ce11533644f5fbf49dc1c9f6846c1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{letter.dsGuildCode.Text1}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text47>
+            <Text51 Ref="47" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.1,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>5b8cc2607eb44fc996af8da214df5def</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>華</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text51>
+            <Text52 Ref="48" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>ed7fed83657c45378695f55d784cb1fe</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>民</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+            <Text53 Ref="49" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>6eb62d31226543cb930e81a3fc595ec9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>國</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text53>
+            <Text54 Ref="50" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.2,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>54c38a5b48ce424692fe96fd2537fd47</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{Year(letter.kc_auction_date)-1911}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text54>
+            <Text55 Ref="51" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.4,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>5ffc5a345c964b3a8ada5861522ca1ba</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>年</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text55>
+            <Text56 Ref="52" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.1,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>de98977fbcd5481c922c1c40cc1f085d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{Month(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text56>
+            <Text57 Ref="53" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>d411baf2ab7a42f290a0f988236a2f5a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>月</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text57>
+            <Text58 Ref="54" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.1,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>f277717543c04a0d82329399ee080770</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{Day(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text58>
+            <Text59 Ref="55" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.4,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>d5cac8e0fe2c4d3d858d4e12f4c1dd25</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text59>
+            <Text60 Ref="56" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>e048242f4a3646d6a073a0049159ef1f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>中</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text60>
+            <Text61 Ref="57" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,22,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>dc454fd92b7941b4b9346fa7f523aadc</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>理事長</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text61>
+            <Text62 Ref="58" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.7,22.8,10.9,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>934b14466bbd4339bba8d1e5cb39510e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{letter.dsGuildCode.Text2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text62>
+            <Text63 Ref="59" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,22.8,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>077496020c5d4c3b9bc85353210d2da7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>會  址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text63>
+            <Text64 Ref="60" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.7,23.6,10.9,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>e1b2e89a84524648877de237f9bd748e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>{letter.dsGuildCode.Text3}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text64>
+            <Text65 Ref="61" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,23.6,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>db3f2e0fcd474972be4b2379123ffd8d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="40" />
+              <Parent isRef="41" />
+              <Text>電  話</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text65>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>a703c0d44c934b80bda4a81145fe891a</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="40" />
+          <Parent isRef="40" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>1abe2ca1fde141929ed259b432aa40ae</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>2</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page2</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page2>
+    <Page3 Ref="62" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand3 Ref="63" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="43">
+            <Text14 Ref="64" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.5,0.8,2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>ab5be304bbb74c1d948e5d6af886699e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="65" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,18,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>df508598490a49af9a267d1deea393e8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣紀錄</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text17 Ref="66" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,17.9,13.1,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>83c593d8e818461892669df18dbb27ec</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.dsGuildCode.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text18 Ref="67" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,18.73,10.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>69b86ac25f6d425082f7263c3944dc29</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.dsGuildCode.Text1}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text31 Ref="68" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,18.73,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>62a5f5008b24465288a63b8b2d46ffaa</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>理事長</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text32 Ref="69" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,19.56,10.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>a60cd446a1334833935947269420bcc8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.dsGuildCode.Text2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text48 Ref="70" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,19.56,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>747b8fc751eb407ca339d9621a929421</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>會  址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text49 Ref="71" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,20.4,10.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>f786ae489d784f809b847238db7ed886</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.dsGuildCode.Text3}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text49>
+            <Text50 Ref="72" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,20.4,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>d50a0eee89d143cc9c95db65b454e7fa</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>電  話</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text66 Ref="73" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,3.2,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>030ebd19bd36408285f57118e2e46818</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍 賣 人：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text66>
+            <Text67 Ref="74" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,3.2,15.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>02f94dfca2b043f49ba0328cef400f17</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text67>
+            <Text68 Ref="75" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,4.8,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>2bed096a43904408a56f1184af5a3ef4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣標的：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text68>
+            <Text69 Ref="76" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,4.8,13.1,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>26cb717c0f2f45bf8b1e9357f6f0159d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.dsCarBrand.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text69>
+            <Text70 Ref="77" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,4.8,2.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>a1418cf56b61495e977644044f91bd85</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>廠    牌</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text70>
+            <Text71 Ref="78" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,5.6,2.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>f780f09277854f34ab3cc46007df9f03</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text71</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>車牌號碼</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text71>
+            <Text72 Ref="79" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,5.6,13.1,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>518406cdea3f4e1a92a67af9e647cf88</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_licn_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text72>
+            <Text73 Ref="80" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,8,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>50d1306ab88849c98d061581e05f2ecb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text73</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣日期：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text73>
+            <Text74 Ref="81" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,8,15.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>5fe1cad0c3cd492d9b75c72ef0ed6b3c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text74</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>民國{Year(letter.kc_auction_date)-1911}年{Month(letter.kc_auction_date)}月{Day(letter.kc_auction_date)}日下午14時</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text74>
+            <Text75 Ref="82" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,8.8,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>92b1116e2dfb4c10b9110d9b838c0c58</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text75</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣底價：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text75>
+            <Text76 Ref="83" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,8.8,15.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>08fbc7d8a9224695bf69bd4ba25734ad</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text76</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_appraise_fee}元</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text76>
+            <Text77 Ref="84" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,9.6,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>f3bb78e671c4423bbbcc0568226ec09e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text77</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍 定 人：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text77>
+            <Text78 Ref="85" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,9.6,6.5,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0d1a023f00fc4f48bfca4fe66d85ba8d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text78</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_bidder_name} ID {letter.kc_bidder_id}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text78>
+            <Text79 Ref="86" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,10.4,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>9bd32c6151fe494ea92551dcee9a2735</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text79</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍定金額：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text79>
+            <Text80 Ref="87" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,10.4,15.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>5d229a4e3c254887ab7654b1fd710b1c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text80</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_appraise_fee}元</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text80>
+            <Text81 Ref="88" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,11.2,2.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>ad3401a2b3a3450e927c9f14390a38e2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text81</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>紀 錄 人：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text81>
+            <Text82 Ref="89" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,11.2,15.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>f919606806744a729569b043ede12b18</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text82</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>王宥惠</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text82>
+            <Text83 Ref="90" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,13.9,17.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>40cdb184e09a41bc8a15a64f489f5cb9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text83</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>中華民國{Year(letter.kc_auction_date)-1911}年{Month(letter.kc_auction_date)}月{Day(letter.kc_auction_date)}日下午14時</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text83>
+            <Text16 Ref="91" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,22.2,17.8,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>c6d9e04810dd43a4a798da3b374ec823</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣規則：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text16>
+            <Text19 Ref="92" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,22.7,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>3d97096e969e4b65942a4ef4258ef769</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>1.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text20 Ref="93" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.1,22.7,17.3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>f6292f24616047c0b767c2a561303d6a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>依機車現況出價。</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text20>
+            <Text21 Ref="94" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,23.2,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>f94d89ec28744b2f8b649835b2678f3f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>2.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text21>
+            <Text22 Ref="95" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.1,23.2,17.3,1.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>3d150511fa4949c882ca7a6110024e00</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍定人應自行負擔拍賣車輛各年度之燃料費、牌照稅（含違反牌照稅法之罰倍）、積欠交通違規罰款、強制意外險..等其他費用，故參拍人應自行查明相關費用。車籍是否現為吊扣，亦須自行查明。</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text22>
+            <Text23 Ref="96" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,24.8,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>f862be6a60434f79b4958d19673b3cd9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>3.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text23>
+            <Text24 Ref="97" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.1,24.8,17.3,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>3adb3aa4e62441b8b8e4dede83458fad</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣前，公開底價，參拍人出價高於底價者，為拍定，如有一個以上參拍人高底價，以出價最高者為拍定人</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="98" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,25.8,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>0625fe7f244a4f538d81478b899e3f6b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>4.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text25>
+            <Text26 Ref="99" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.1,25.8,17.3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,12</Font>
+              <Guid>746290e218e84078bf10f1d2ffa0a883</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>拍賣人不負物之瑕疵擔保責任。</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text26>
+            <Text115 Ref="100" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,9.6,8.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>74c7b95fd8e64a6e887493166074d5f3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text115</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>簽章：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text115>
+            <Text121 Ref="101" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,4,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>4f0a78ef065b4345a32b6d567619a197</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text121</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>債 務 人：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text121>
+            <Text122 Ref="102" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,4,15.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>c388930fa16340a8a1098fa7d7fc9979</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text122</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_cust_nameu} {letter.kc_id_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text122>
+            <Text123 Ref="103" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,6.4,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>bc14f461bd7f4bc989c5435620b8e457</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text123</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>引擎號碼</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text123>
+            <Text124 Ref="104" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,6.4,13.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>ea7ca21734bc471dbcefbd6fb9e19845</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text124</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{letter.kc_eng_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text124>
+            <Text125 Ref="105" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,7.2,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>81dec30705e34a2f899196f48b068637</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text125</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>出廠年月</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text125>
+            <Text126 Ref="106" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,7.2,13.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>013111ca7af64a76ae982667442e3b15</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text126</Name>
+              <Page isRef="62" />
+              <Parent isRef="63" />
+              <Text>{Year(letter.kc_mfg_date)}{Format("{0:D2}", Month(letter.kc_mfg_date))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text126>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>1dc577f7ef414ab0b3e8533aed6dee33</Guid>
+          <Name>DataBand3</Name>
+          <Page isRef="62" />
+          <Parent isRef="62" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand3>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>cd06dbb1da54444a97091f633ec1389e</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>2</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page3</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page3>
+    <Page4 Ref="107" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand4 Ref="108" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,26.9</ClientRectangle>
+          <Components isList="true" count="32">
+            <Text27 Ref="109" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.5,0.8,2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>650ab4aef6404536a82d736b28b97ff4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text27>
+            <Text28 Ref="110" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,18,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>4528849be7c94e818c249b00d018b256</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>鑑價證明</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text84 Ref="111" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,4.2,18.2,1.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>f091148974524523b684a634f4e950b3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text84</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>本商業同業公會，前受理{letter.名稱.kc_issu_desc}機車鑑價申請已鑑價完成，特給予證明
+如下</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text84>
+            <Text85 Ref="112" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,21.2,12.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>e891dce9e9494f2594095a7843990309</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text85</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.dsGuildCode.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text85>
+            <Text86 Ref="113" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,22.1,10.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>98bcebeee36e413096bbe41b6d078f49</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text86</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.dsGuildCode.Text1}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text86>
+            <Text87 Ref="114" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.9,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>39399099b99a495bbb160f8fd97b9df5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text87</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>華</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text87>
+            <Text88 Ref="115" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.6,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>3b3c6c8485034e8eb0acd73f3e445c94</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text88</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>民</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text88>
+            <Text89 Ref="116" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.3,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>2513221a504743e88dfdacb65561c80d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text89</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>國</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text89>
+            <Text90 Ref="117" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>9186be7ae37147d5974a042d49a443ba</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text90</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{Year(letter.kc_auction_date)-1911}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text90>
+            <Text91 Ref="118" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.2,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>d17b75858d634fbca3c0955e25ead796</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text91</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>年</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text91>
+            <Text92 Ref="119" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.9,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c5a9972a4c7c49dca9cd8e325b2bc91f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text92</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{Month(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text92>
+            <Text93 Ref="120" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.2,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>98d6585d17274f598a24d23f0300f59f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text93</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>月</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text93>
+            <Text94 Ref="121" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.9,25.3,1.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>068a38bfeb384f35940175cc074fef75</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text94</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{Day(letter.kc_auction_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text94>
+            <Text95 Ref="122" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.2,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>57e76b3a6574478e947f46b9c44b1999</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text95</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>日</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text95>
+            <Text96 Ref="123" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,25.3,1.2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>41cc71816ba74ee0b6ccdd9afc790e7a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text96</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>中</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text96>
+            <Text97 Ref="124" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,22.1,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>94472fba3bb14c71955dc97dec3ee41d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text97</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>理事長</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text97>
+            <Text98 Ref="125" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,22.9,10.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>1b6aac340a244953a21167a95050c5c8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text98</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.dsGuildCode.Text2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text98>
+            <Text99 Ref="126" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,22.9,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>703496d4097e4d0e89982015d7d6676f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text99</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>會  址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text99>
+            <Text100 Ref="127" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,23.7,10.6,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>79a065d6147242b59ddda8f040826ebf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text100</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.dsGuildCode.Text3}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text100>
+            <Text101 Ref="128" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,23.7,2,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>86d768eecf6a45179a160d8cc74721c6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text101</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>電  話</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text101>
+            <Text103 Ref="129" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,6.2,0.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>50a9b71fffd94c4e852b51dce647c00c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text103</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>1.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text103>
+            <Text104 Ref="130" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,6.2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>4be1672387d846558ea27bda1e933836</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text104</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>鑑價標的：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text104>
+            <Text105 Ref="131" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6,6.2,12.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>0bd4376e3b8440d3a3abdc7135918439</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text105</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.dsCarBrand.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text105>
+            <Text107 Ref="132" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6,6.9,12.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>62660586ffe24257972903d11c1168c5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text107</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.kc_licn_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text107>
+            <Text108 Ref="133" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.3,6.2,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>377c123cef8f4813a1f19bd630268e85</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text108</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>廠    牌：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text108>
+            <Text109 Ref="134" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.3,6.9,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>cecef2ba31e543e998dd82805b276216</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text109</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>車牌號碼：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text109>
+            <Text106 Ref="135" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,7.6,0.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>ab52f608672a4fe0be51576cf8887c0e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text106</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>2.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text106>
+            <Text110 Ref="136" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,7.6,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>2fe7b7e1c5d041f9a30d638c75d7a5a8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text110</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>鑑價金額：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text110>
+            <Text111 Ref="137" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.3,7.6,15.1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>78bd687245514fde9606259909616456</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text111</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.kc_appraise_fee}  元</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text111>
+            <Text114 Ref="138" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,8.7,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>01e6b7a380f64f138934a7b5c708f39d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text114</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>特此證明</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text114>
+            <Text112 Ref="139" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.2,9.9,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>1676a3ba1d9b496ebbd281090880c009</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text112</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>此  致</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text112>
+            <Text113 Ref="140" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.4,10.8,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>5dcbaa5784d14ceaaf3cb890ecfdd939</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text113</Name>
+              <Page isRef="107" />
+              <Parent isRef="108" />
+              <Text>{letter.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text113>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>a667a636618d4356a017ad24c4085721</Guid>
+          <Name>DataBand4</Name>
+          <Page isRef="107" />
+          <Parent isRef="107" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand4>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>5bddb834567648449aa3d78e5abe8159</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>2</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page4</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page4>
+    <Page5 Ref="141" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand5 Ref="142" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,26.9</ClientRectangle>
+          <Components isList="true" count="18">
+            <Text102 Ref="143" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.5,0.8,2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8</Font>
+              <Guid>7fad130e01734d60b0a2286acebef10e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text102</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text102>
+            <Text116 Ref="144" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,1.6,18,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,22</Font>
+              <Guid>aae9e3a7107643669d2c195947510b23</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text116</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>車輛取回證明書</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text116>
+            <Text117 Ref="145" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,4.2,18.2,1.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>855b12b533d54f6794209bdc9bf86d18</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text117</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>茲證明{letter.名稱.kc_issu_desc}為車號{letter.kc_licn_no}機車之動產抵押債權人，因債務人{letter.kc_cust_nameu} {letter.kc_id_no}未履行契約，該機車業經{letter.名稱.kc_issu_desc}於{letter.kc_detain_date}逕行佔有取回。
+
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text117>
+            <Text118 Ref="146" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,21.2,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>d1e4f94f5dbb4cb9a98751be74b50e98</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text118</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.dsGuildCode.Text}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text118>
+            <Text119 Ref="147" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,22.03,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>7aee96a6e9c04e47a9100f6c7b1a485f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text119</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.dsGuildCode.Text1}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text119>
+            <Text130 Ref="148" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,22.03,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>cc4db73e20204244b26e95888555a5ec</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text130</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>理  事  長</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text130>
+            <Text131 Ref="149" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,22.86,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>7d12d34d8e2e4921a265f948d70b8542</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text131</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.dsGuildCode.Text2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text131>
+            <Text132 Ref="150" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,22.86,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>4bb62f43b3c14df380d5a6edaf0763c7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text132</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>會      址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text132>
+            <Text133 Ref="151" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,23.7,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>32a4be6ad9e548479cd2423c248871d4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text133</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.dsGuildCode.Text3}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text133>
+            <Text134 Ref="152" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,23.7,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>e52f9d573ed643188b632387ac16b160</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text134</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>電      話</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text134>
+            <Text144 Ref="153" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,8.7,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,14</Font>
+              <Guid>b640857db27a4a459503b96bee32a036</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text144</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>特此證明</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text144>
+            <Text140 Ref="154" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,21.2,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>bce3aef5f6c949b489d415d5977733c3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text140</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>見  證  人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text140>
+            <Text141 Ref="155" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,17.6,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>7246d34282e548cc972681900280775e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text141</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text141>
+            <Text142 Ref="156" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,18.4,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>fa3c3ea0db12406ba67211966d83acd6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text142</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.名稱.kc_boss_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text142>
+            <Text143 Ref="157" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,18.4,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>c1da914f2eb94222ae8e5928e16a04f1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text143</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>法定代理人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text143>
+            <Text145 Ref="158" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.7,19.3,9.7,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>05ded428062e4ad8aab21fe91f15b441</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text145</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>{letter.名稱.kc_issu_addr}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text145>
+            <Text146 Ref="159" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,19.3,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>49031abf197246d682421c08b1b99ce3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text146</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>地      址</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text146>
+            <Text147 Ref="160" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,17.6,3,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,16</Font>
+              <Guid>f8a37215eaed4f0194749a9f0279552e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text147</Name>
+              <Page isRef="141" />
+              <Parent isRef="142" />
+              <Text>申  請  人</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text147>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>letter</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>2d5a9bc2d8494dcf90ab4668f3c33781</Guid>
+          <Name>DataBand5</Name>
+          <Page isRef="141" />
+          <Parent isRef="141" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_case_no</value>
+          </Sort>
+        </DataBand5>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>6a32828b5ed048029fad28707c52787c</Guid>
+      <LargeHeight>True</LargeHeight>
+      <LargeHeightFactor>2</LargeHeightFactor>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page5</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+    </Page5>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>6/1/2023 10:26:29 AM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\DY_N\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_AppraiseCar_3.mrt</ReportFile>
+  <ReportGuid>f8da0e81b45849f3ac612484aad9b0a5</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2019.2.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

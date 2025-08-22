@@ -1,0 +1,1324 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="6">
+      <kc_receipts Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kc_receipts</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_receipts_catalog,System.String</value>
+          <value>kc_receipts_date,System.DateTime</value>
+          <value>kc_area_code,System.String</value>
+          <value>kc_receipts_user,System.String</value>
+          <value>kc_cashier_user,System.String</value>
+          <value>kc_cashier_date,System.DateTime</value>
+          <value>kc_treasurer_user,System.String</value>
+          <value>kc_treasurer_date,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>kc_receipts</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_receipts_catalog,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT kc_receipts.*
+FROM kc_receipts 
+WHERE kc_receipts.kc_receipts_catalog = @wk_receipts_catalog</SqlCommand>
+      </kc_receipts>
+      <kc_receipts_detail_cash Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kc_receipts_detail_cash</Alias>
+        <Columns isList="true" count="12">
+          <value>kc_receipts_catalog,System.String</value>
+          <value>kc_receipts_id,System.Int32</value>
+          <value>kc_area_code,System.String</value>
+          <value>kc_case_no,System.String</value>
+          <value>kc_receipt_type,System.String</value>
+          <value>kc_receipt_no,System.String</value>
+          <value>kc_receipt_fee,System.Int32</value>
+          <value>kc_receipt_memo,System.String</value>
+          <value>kc_receipt_breakamt,System.Int32</value>
+          <value>kc_receipt_advancetype,System.String</value>
+          <value>rowguid,System.Guid</value>
+          <value>kc_cust_nameu,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>kc_receipts_detail_cash</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_receipts_catalog,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT kc_receipts_detail_cash.*, kc_customerloan.kc_cust_nameu
+FROM kc_receipts_detail_cash 
+INNER JOIN  kc_customerloan ON kc_receipts_detail_cash.kc_case_no =    kc_customerloan.kc_case_no
+WHERE kc_receipts_detail_cash.kc_receipts_catalog = @wk_receipts_catalog</SqlCommand>
+      </kc_receipts_detail_cash>
+      <kc_receipts_detail_check Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kc_receipts_detail_check</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_receipts_catalog,System.String</value>
+          <value>kc_receipts_id,System.Int32</value>
+          <value>kc_area_code,System.String</value>
+          <value>kc_check_user,System.String</value>
+          <value>kc_check_date,System.DateTime</value>
+          <value>kc_check_no,System.String</value>
+          <value>kc_check_fee,System.Int32</value>
+          <value>rowguid,System.Guid</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>kc_receipts_detail_check</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_receipts_catalog,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT kc_receipts_detail_check.*
+FROM kc_receipts_detail_check
+WHERE kc_receipts_catalog = @wk_receipts_catalog</SqlCommand>
+      </kc_receipts_detail_check>
+      <Employee Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Employee</Alias>
+        <Columns isList="true" count="10">
+          <value>UserCode,System.String</value>
+          <value>EmpCode,System.String</value>
+          <value>EmpName,System.String</value>
+          <value>IsEnable,System.Boolean</value>
+          <value>AreaCode,System.String</value>
+          <value>UserIdNo,System.String</value>
+          <value>UserPermAddr,System.String</value>
+          <value>JobType,System.String</value>
+          <value>ArrivalDate,System.DateTime</value>
+          <value>LeaveDate,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>Employee</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT *
+	FROM kcsd.v_Employee</SqlCommand>
+      </Employee>
+      <Delegate Ref="7" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Delegate</Alias>
+        <Columns isList="true" count="10">
+          <value>DelegateCode,System.String</value>
+          <value>DelegateName,System.String</value>
+          <value>AreaCode,System.String</value>
+          <value>DelegateUser,System.String</value>
+          <value>ExtensionNumber,System.String</value>
+          <value>IsEnable,System.Boolean</value>
+          <value>ContactName,System.String</value>
+          <value>ContactData,System.String</value>
+          <value>ContactData2,System.String</value>
+          <value>ContactData3,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>Delegate</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT *
+	FROM kcsd.Delegate</SqlCommand>
+      </Delegate>
+      <kct_area Ref="8" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kct_area</Alias>
+        <Columns isList="true" count="5">
+          <value>kc_area_code,System.String</value>
+          <value>kc_area_desc,System.String</value>
+          <value>kc_host_name,System.String</value>
+          <value>kc_area_addr,System.String</value>
+          <value>kc_area_phone,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>kct_area</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT * FROM kct_area</SqlCommand>
+      </kct_area>
+    </DataSources>
+    <Relations isList="true" count="4">
+      <dskc_area_code Ref="9" type="DataRelation" isKey="true">
+        <Alias>dskc_area_code</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_area_code</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>dskc_area_code</Name>
+        <NameInSource>dskc_area_code</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_area_code</value>
+        </ParentColumns>
+        <ParentSource isRef="8" />
+      </dskc_area_code>
+      <dskc_receipts_user Ref="10" type="DataRelation" isKey="true">
+        <Alias>dskc_receipts_user</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_receipts_user</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>dskc_receipts_user</Name>
+        <NameInSource>dskc_receipts_user</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>EmpCode</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </dskc_receipts_user>
+      <dskc_cashier_user Ref="11" type="DataRelation" isKey="true">
+        <Alias>dskc_cashier_user</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_cashier_user</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>dskc_cashier_user</Name>
+        <NameInSource>dskc_cashier_user</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>UserCode</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </dskc_cashier_user>
+      <dskc_treasure_user Ref="12" type="DataRelation" isKey="true">
+        <Alias>dskc_treasure_user</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_treasurer_user</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>dskc_treasure_user</Name>
+        <NameInSource>dskc_treasure_user</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>UserCode</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </dskc_treasure_user>
+    </Relations>
+    <Report isRef="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_name,pm_user_name,System.String,,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,System.String,super,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="13" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="6">
+        <ReportTitleBand1 Ref="14" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,1.6</ClientRectangle>
+          <Components isList="true" count="10">
+            <ReportTitleText Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1,19,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>ReportTitleText</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>業務收款明細表</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </ReportTitleText>
+            <Text22 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0,6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>e1e12556ee6b49e3a60eb8494e0bc85d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>Report ID: KCP_RECE04(20160919)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text24 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>17,0,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>eb66b5375b2c4b8e944eb6973b2cc596</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>{Today}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="18" type="DateFormat" isKey="true" />
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>17,0.4,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>e8b2cb55d4944f669e6e1937c43fbab5</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>{Time}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="20" type="TimeFormat" isKey="true" />
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text26 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>17,0.8,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>2e24dc0fe0b848c58375c99d32f79c00</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>{PageNofMThrough}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text218 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>16,1.2,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>9fecea00f52f4e6d957d6329d350bc28</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text218</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>User:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text218>
+            <Text226 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>16,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>f6ef3a6bdac548e9aba8ac3d4f22ab45</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text226</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>Date: </Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text226>
+            <Text227 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>16,0.4,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>1eee33c7a90a43eb94c31c376c55d1e0</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text227</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>Time: </Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text227>
+            <Text228 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>16,0.8,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>211f2cec977a4dd78cf0f052b9e19f3d</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text228</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>Page:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text228>
+            <Text20 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>17,1.2,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>{pm_user_name}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportTitleBand1</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+        </ReportTitleBand1>
+        <Datakc_receipts Ref="27" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2.8,19,2.8</ClientRectangle>
+          <Components isList="true" count="16">
+            <Datakc_receipts_kc_receipts_catalog Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,0.2,4.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_kc_receipts_catalog</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_receipts_catalog}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_kc_receipts_catalog>
+            <Datakc_receipts_kc_cashier_date Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.8,0.8,5.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_kc_cashier_date</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_cashier_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="30" type="DateFormat" isKey="true">
+                <StringFormat>F</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_kc_cashier_date>
+            <Datakc_receipts_kc_treasurer_date Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.8,2,5.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_kc_treasurer_date</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_treasurer_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="32" type="DateFormat" isKey="true">
+                <StringFormat>F</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_kc_treasurer_date>
+            <Datakc_receipts_kc_receipts_date Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,0.8,4.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_kc_receipts_date</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_receipts_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="34" type="DateFormat" isKey="true">
+                <StringFormat>D</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_kc_receipts_date>
+            <Text1 Ref="35" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>單號：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text2 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.8,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>5079c06851144cef9b191674080209c7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>製單日期：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text3 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.4,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>0cce494c6a194a40a8219bdc0bf9fa0e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>分公司：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text4 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>b791a2c0cf244a509a6e44cbd371e78d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>製單人員：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+            <Text5 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,0.2,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>e83cd8f9ae5f436e81c32898d5e379f9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>出納人員：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="40" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,0.8,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>02b96d03551343678e5def49790a9dcf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>出納日期：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="41" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,1.4,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>fc3c4dde2c2549819c8978363f152e5b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>登帳人員：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,2,2.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>58c2bdf063ea40ac8d027825266d92cf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>登帳日期：</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="43" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,2,4.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>acc08a02fa09424194abe89dc13b11ff</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_receipts_user}{kc_receipts.dskc_receipts_user.EmpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="44" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,1.4,4.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>0a01ff16070e4f27917004ec85cba477</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_area_code}{kc_receipts.dskc_area_code.kc_area_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="45" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.8,0.2,5.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>c4c83cc9a7ff43feb1d5655b65d447e4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_cashier_user}{kc_receipts.dskc_cashier_user.EmpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="46" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.8,1.4,5.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>4a1ec9e38d3240e4b00d3a9c7a0c4e42</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="13" />
+              <Parent isRef="27" />
+              <Text>{kc_receipts.kc_treasurer_user}{kc_receipts.dskc_treasure_user.EmpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>kc_receipts</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>Datakc_receipts</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+          <Sort isList="true" count="0" />
+        </Datakc_receipts>
+        <GroupHeaderBand1 Ref="47" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,6.4,19,0.6</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text13 Ref="48" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,1,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>7d8ffe80923249ef9182227194c76819</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>序號</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text15 Ref="49" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,0.2,1.6,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>e37566c8006a49dfa8811874c6211846</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>客戶編號</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text15>
+            <Text16 Ref="50" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0.2,1.8,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>f7e97fb90b93404ba8c5ce352912bf76</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>客戶姓名</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text16>
+            <Text17 Ref="51" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0.2,1.6,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>f907071c284d4908a8febdc76d089deb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>類別</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text18 Ref="52" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,0.2,1.8,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>fdcc872da89f434ebbd19de987f7b1c2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>單號</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text18>
+            <Text19 Ref="53" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.8,0.2,1.4,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>77f8dcbcd7404b0d8c45b30fe631f0b5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>金額</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text21 Ref="54" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,0.2,1.4,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>a06254738e8044b4ab44c9e9ba6ca29d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>違約金</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text21>
+            <Text23 Ref="55" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12,0.2,1.6,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>dee0b4f387bd4087825559ea00e85d2e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <Text>備註</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text23>
+            <HorizontalLinePrimitive2 Ref="56" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="57" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>e1be9870abd448779d524fab4a792b93</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="13" />
+              <Parent isRef="47" />
+              <StartCap Ref="58" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+        </GroupHeaderBand1>
+        <Datakc_receipts_detail_cash Ref="59" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,7.8,19,0.6</ClientRectangle>
+          <Components isList="true" count="9">
+            <Datakc_receipts_detail_cash_kc_receipt_no Ref="60" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.8,0,1.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipt_no</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipt_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_cash_kc_receipt_no>
+            <Datakc_receipts_detail_cash_kc_receipt_fee Ref="61" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8.8,0,1.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipt_fee</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipt_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+            </Datakc_receipts_detail_cash_kc_receipt_fee>
+            <Datakc_receipts_detail_cash_kc_receipt_memo Ref="62" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12,0,7,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipt_memo</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipt_memo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+            </Datakc_receipts_detail_cash_kc_receipt_memo>
+            <Datakc_receipts_detail_cash_kc_receipt_breakamt Ref="63" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10.4,0,1.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipt_breakamt</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipt_breakamt}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+            </Datakc_receipts_detail_cash_kc_receipt_breakamt>
+            <Datakc_receipts_detail_cash_kc_receipts_id Ref="64" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipts_id</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipts_id}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_cash_kc_receipts_id>
+            <Datakc_receipts_detail_cash_kc_case_no Ref="65" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.2,0,1.6,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_case_no</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_cash_kc_case_no>
+            <Datakc_receipts_detail_cash_kc_receipt_type Ref="66" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5,0,0.2,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_cash_kc_receipt_type</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_receipt_type}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_cash_kc_receipt_type>
+            <Text14 Ref="67" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3,0,1.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>60ed32a123614e3c82a3376f1fb65658</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{kc_receipts_detail_cash.kc_cust_nameu}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text31 Ref="68" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.2,0,1.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>cfcfc63b5cfa4d7fa2379e5a2974d110</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="13" />
+              <Parent isRef="59" />
+              <Text>{IIF(kc_receipts_detail_cash.kc_receipt_type == "A","分期款",IIF(kc_receipts_detail_cash.kc_receipt_type == "B","強制險",IIF(kc_receipts_detail_cash.kc_receipt_type == "C","燃料稅",IIF(kc_receipts_detail_cash.kc_receipt_type == "D","牌照稅",IIF(kc_receipts_detail_cash.kc_receipt_type == "E","歸責費",IIF(kc_receipts_detail_cash.kc_receipt_type == "F","設定費","錯誤!!"))))))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>kc_receipts_detail_cash</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>Datakc_receipts_detail_cash</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_receipts_id</value>
+          </Sort>
+        </Datakc_receipts_detail_cash>
+        <GroupHeaderBand2 Ref="69" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.2,19,0.6</ClientRectangle>
+          <Components isList="true" count="6">
+            <Text27 Ref="70" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,1,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>b985a9144f714ea89f82cb7971098d58</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <Text>序號</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text27>
+            <Text28 Ref="71" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,0.2,1.6,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>b8266c06a6a64bcfbc26a86d3aab082c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <Text>發票人</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text28>
+            <Text29 Ref="72" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0.2,1.8,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>372ca27f517b4e148e5b61e09f835270</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <Text>到期日</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text30 Ref="73" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0.2,2.4,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1f9f1f9a6986424ea92e405b47820c39</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <Text>票據號碼</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text30>
+            <Text32 Ref="74" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,0.2,1.8,0.4</ClientRectangle>
+              <ComponentStyle>Blue Steel_Report_Title2</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>5cb5744dbc794a6092d1ff9af2f38e96</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <Text>金額</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+            </Text32>
+            <HorizontalLinePrimitive3 Ref="75" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="76" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>d4c138c1ca3d441ba1253a3905f0edf7</Guid>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="13" />
+              <Parent isRef="69" />
+              <StartCap Ref="77" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>b92f1d8813f945538b334e2de5489d33</Guid>
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+        </GroupHeaderBand2>
+        <Datakc_receipts_detail_check Ref="78" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,10.6,19,0.6</ClientRectangle>
+          <Components isList="true" count="5">
+            <Datakc_receipts_detail_check_kc_receipts_id Ref="79" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,1,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_check_kc_receipts_id</Name>
+              <Page isRef="13" />
+              <Parent isRef="78" />
+              <Text>{kc_receipts_detail_check.kc_receipts_id}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_check_kc_receipts_id>
+            <Datakc_receipts_detail_check_kc_check_user Ref="80" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.2,0,1.6,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_check_kc_check_user</Name>
+              <Page isRef="13" />
+              <Parent isRef="78" />
+              <Text>{kc_receipts_detail_check.kc_check_user}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_check_kc_check_user>
+            <Datakc_receipts_detail_check_kc_check_date Ref="81" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3,0,1.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_check_kc_check_date</Name>
+              <Page isRef="13" />
+              <Parent isRef="78" />
+              <Text>{kc_receipts_detail_check.kc_check_date}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="82" type="DateFormat" isKey="true" />
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_check_kc_check_date>
+            <Datakc_receipts_detail_check_kc_check_no Ref="83" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5,0,2.4,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_check_kc_check_no</Name>
+              <Page isRef="13" />
+              <Parent isRef="78" />
+              <Text>{kc_receipts_detail_check.kc_check_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_check_kc_check_no>
+            <Datakc_receipts_detail_check_kc_check_fee Ref="84" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.6,0,1.8,0.6</ClientRectangle>
+              <ComponentStyle>Blue Steel_Page_Header</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datakc_receipts_detail_check_kc_check_fee</Name>
+              <Page isRef="13" />
+              <Parent isRef="78" />
+              <Text>{kc_receipts_detail_check.kc_check_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datakc_receipts_detail_check_kc_check_fee>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>kc_receipts_detail_check</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>Datakc_receipts_detail_check</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>kc_receipts_id</value>
+          </Sort>
+        </Datakc_receipts_detail_check>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="85" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="86" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/22/2017 10:18:51 AM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\DyWeb\CMS.Web\Areas\Dys\Reports\Form_Receipts.mrt</ReportFile>
+  <ReportGuid>4aae84fb2e894c798abb895cff78f027</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2014.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

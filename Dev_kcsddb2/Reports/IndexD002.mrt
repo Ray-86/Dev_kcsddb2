@@ -1,0 +1,1670 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3ppa09cy91iQ/3ExAD2P4JUwaLGXKmkYUr9jWE9dV7RWvPLYln7leJc7YFiJeATxHp1yOcW+w==</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <DataSource1 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource1</Alias>
+        <Columns isList="true" count="24">
+          <value>data_type,System.String</value>
+          <value>kc_over_count,System.Int32</value>
+          <value>kc_over_amt,System.Int32</value>
+          <value>kc_loan_perd,System.Byte</value>
+          <value>kc_perd_fee,System.Int32</value>
+          <value>kc_pay_fee,System.Int32</value>
+          <value>kc_cfm_user,System.String</value>
+          <value>kc_give_amt,System.Int32</value>
+          <value>kc_level_no,System.String</value>
+          <value>wk_expt_allsum,System.Int32</value>
+          <value>wk_credit_fee,System.Int32</value>
+          <value>wk_insu_fee,System.Int32</value>
+          <value>wk_totm_fee,System.Int32</value>
+          <value>wk_aux_fee,System.Int32</value>
+          <value>wk_give_amt,System.Int32</value>
+          <value>wk_pay_sum,System.Int32</value>
+          <value>wk_intr_sum,System.Int32</value>
+          <value>wk_date_sum,System.Int32</value>
+          <value>wk_expt_sum,System.Int32</value>
+          <value>wk_pay_amt,System.Int32</value>
+          <value>a,System.Int32</value>
+          <value>b,System.Int32</value>
+          <value>avg_ans,System.Decimal</value>
+          <value>kc_prod_type,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>bdeba31211ca4098bcbfa6d806b15095</Key>
+        <Name>DataSource1</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="8">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+          <value>wk_stop_date2,,4,0</value>
+          <value>wk_strt_date2,,4,0</value>
+          <value>wk_prod_type,,22,50</value>
+          <value>wk_new_flag,,23,0</value>
+          <value>wk_area_code,,23,0</value>
+          <value>wk_prod_type_desc,,22,50</value>
+        </Parameters>
+        <SqlCommand>SELECT
+	'01'as data_type,f.kc_over_count,f.kc_over_amt,A.kc_loan_perd,A.kc_perd_fee,(SELECT ISNULL(SUM(kc_pay_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = A.kc_case_no and kc_pay_date &lt;= @wk_stop_date2) as kc_pay_fee,
+p.kc_cfm_user,p.kc_give_amt,
+CASE WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.08 THEN 'A 8%以下' 
+WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &gt;= 0.08 and (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.15 THEN 'B 8%-15%' 
+WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &gt;= 0.15 and (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.20 THEN 'C 15-20%' 
+	 ELSE 'D 20%以上' END as kc_level_no,A.kc_prod_type,
+SUM(A.kc_perd_fee * A.kc_loan_perd) AS wk_expt_allsum,
+SUM(CASE WHEN A.kc_cred_chk = 0 THEN 0 ELSE A.kc_cred_fee END) AS wk_credit_fee,
+SUM(ISNULL(A.kc_insu_sum,0)) AS wk_insu_fee,
+SUM(ISNULL(A.kc_totm_fee,0)) AS wk_totm_fee,
+SUM(ISNULL(A.kc_aux_amt,0)*180) AS wk_aux_fee,
+SUM(CASE WHEN A.kc_give_amt IS NULL THEN CASE WHEN A.kc_coll_amt IS NULL THEN A.kc_loan_fee ELSE 0 END ELSE A.kc_give_amt END) AS wk_give_amt,
+SUM(ISNULL(c.wk_pay_sum,0)) AS wk_pay_sum,
+SUM(ISNULL(c.wk_intr_sum,0)) AS wk_intr_sum,
+SUM(DATEDIFF(day,A.kc_buy_date,A.kc_strt_date)) AS wk_date_sum,
+SUM(ISNULL(e.wk_expt_sum,0)) AS wk_expt_sum,
+SUM(ISNULL(d.wk_pay_amt,0)) AS wk_pay_amt,
+sum((((A.kc_loan_perd * A.kc_perd_fee)-(A.kc_give_amt + isnull(l.wk_insu_fee,0)))*12)) as a, sum((A.kc_loan_perd*(A.kc_give_amt+isnull(l.wk_insu_fee,0)))) as b,
+(sum((((A.kc_loan_perd * A.kc_perd_fee)-(A.kc_give_amt + isnull(l.wk_insu_fee,0)))*12)))*1.0 / sum((A.kc_loan_perd*(A.kc_give_amt+isnull(l.wk_insu_fee,0)))) as avg_ans
+FROM kcsd.kc_customerloan A left join kcsd.kc_cpdata p on p.kc_cp_no = A.kc_cp_no
+left join [Zephyr.Sys].[dbo].[sys_user] u on p.kc_cfm_user = u.UserCode  
+LEFT JOIN(select isnull(sum(kc_insu_fee),0) as wk_insu_fee , kc_case_no from kcsd.kc_insurance_list_insu GROUP BY kc_case_no)l on A.kc_case_no = l.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no, Sum(kc_pay_fee) AS wk_pay_sum, Sum(kc_intr_fee) AS wk_intr_sum
+	FROM kcsd.kc_loanpayment
+	WHERE kc_pay_date Between @wk_strt_date2 And @wk_stop_date2
+	--WHERE kc_pay_date Between '2019-10-01' And '2019-10-31'
+GROUP BY kc_case_no
+) c ON A.kc_case_no = c.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no, Sum(kc_pay_fee) - Sum(kc_intr_fee) as wk_pay_amt
+	FROM kcsd.kc_loanpayment
+	WHERE kc_pay_date &lt;= @wk_stop_date2 and kc_expt_date &lt;= @wk_stop_date2
+	--WHERE kc_pay_date &lt;='2019-10-31' and kc_expt_date &lt;='2019-10-31'
+	GROUP BY kc_case_no
+	) d ON A.kc_case_no = d.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no, Sum(kc_expt_fee) AS wk_expt_sum
+	FROM kcsd.kc_loanpayment
+	WHERE kc_expt_date &lt;= @wk_stop_date2
+	--WHERE kc_expt_date &lt;= '2019-10-31'
+	and kc_perd_no &lt; 50
+	GROUP BY kc_case_no
+	) e ON A.kc_case_no = e.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no,
+	ISNULL((SELECT	DATEDIFF(day,MIN(kc_expt_date),DATEADD(day,1,@wk_stop_date2))/30 FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND (kc_pay_date &gt;= DATEADD(day,1,@wk_stop_date2) OR kc_pay_date IS NULL)),0) AS kc_over_count,
+(SELECT ISNULL(SUM(kc_expt_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND kc_expt_date &lt; DATEADD(day, 1, @wk_stop_date2 ) AND kc_perd_no &lt; 50)-(SELECT ISNULL(SUM(kc_pay_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND kc_pay_date &lt;DATEADD(day, 1, @wk_stop_date2 ))  AS kc_over_amt
+FROM	kcsd.kc_customerloan c
+WHERE kc_buy_date BETWEEN @wk_strt_date  AND @wk_stop_date
+and kc_loan_stat Not In ('Y','Z')
+AND (@wk_prod_type = '' OR kc_prod_type = @wk_prod_type)
+AND (@wk_new_flag = '' OR kc_new_flag = @wk_new_flag)
+	) f ON A.kc_case_no = f.kc_case_no
+WHERE kc_loan_stat Not In ('Y','Z') 
+--AND A.kc_buy_date Between '2019-10-01' And '2019-10-31'
+AND A.kc_buy_date Between @wk_strt_date And @wk_stop_date
+AND (@wk_prod_type = '' OR A.kc_prod_type = @wk_prod_type)
+AND (@wk_new_flag = '' OR A.kc_new_flag = @wk_new_flag)
+AND p.kc_cfm_user is not null and p.kc_cfm_stat in ('P','D')
+AND   (@wk_area_code = '' OR u.AreaCode = @wk_area_code)
+
+GROUP BY A.kc_cp_no,p.kc_cfm_user,f.kc_over_count,f.kc_over_amt,A.kc_loan_perd,A.kc_perd_fee,A.kc_case_no ,p.kc_give_amt,A.kc_prod_type
+
+UNION all
+
+SELECT
+	'00'as data_type,f.kc_over_count,f.kc_over_amt,A.kc_loan_perd,A.kc_perd_fee,(SELECT ISNULL(SUM(kc_pay_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = A.kc_case_no and kc_pay_date &lt;= dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2) ) as kc_pay_fee,
+p.kc_cfm_user,p.kc_give_amt,
+CASE WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.08 THEN 'A 8%以下' 
+WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &gt;= 0.08 and (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.15 THEN 'B 8%-15%' 
+WHEN (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &gt;= 0.15 and (select kc_cons_rate from kcsd.kc_cpdata where kc_cp_no = A.kc_cp_no) &lt; 0.20 THEN 'C 15-20%' 
+	 ELSE 'D 20%以上' END as kc_level_no,A.kc_prod_type,
+SUM(A.kc_perd_fee * A.kc_loan_perd) AS wk_expt_allsum,
+'' AS wk_credit_fee,
+'' AS wk_insu_fee,
+'' AS wk_totm_fee,
+'' AS wk_aux_fee,
+'' AS wk_give_amt,
+'' AS wk_pay_sum,
+'' AS wk_intr_sum,
+'' AS wk_date_sum,
+SUM(ISNULL(e.wk_expt_sum,0)) AS wk_expt_sum,
+SUM(ISNULL(d.wk_pay_amt,0)) AS wk_pay_amt,
+'' as a,'' as b,
+0 as avg_ans
+FROM kcsd.kc_customerloan A left join kcsd.kc_cpdata p on p.kc_cp_no = A.kc_cp_no
+left join [Zephyr.Sys].[dbo].[sys_user] u on p.kc_cfm_user = u.UserCode  
+LEFT JOIN (
+SELECT kc_case_no, Sum(kc_pay_fee) - Sum(kc_intr_fee) as wk_pay_amt
+	FROM kcsd.kc_loanpayment
+	WHERE kc_pay_date &lt;= dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2)  and kc_expt_date &lt;= dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2) 
+	--WHERE kc_pay_date &lt;='2019-10-31' and kc_expt_date &lt;='2019-10-31'
+	GROUP BY kc_case_no
+	) d ON A.kc_case_no = d.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no, Sum(kc_expt_fee) AS wk_expt_sum
+	FROM kcsd.kc_loanpayment
+	WHERE kc_expt_date &lt;= dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2) 
+	--WHERE kc_expt_date &lt;= '2019-10-31'
+	and kc_perd_no &lt; 50
+	GROUP BY kc_case_no
+	) e ON A.kc_case_no = e.kc_case_no
+LEFT JOIN (
+SELECT kc_case_no,
+	ISNULL((SELECT	DATEDIFF(day,MIN(kc_expt_date),DATEADD(day,1,dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2) ))/30 FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND (kc_pay_date &gt;= DATEADD(day,1,dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2) ) OR kc_pay_date IS NULL)),0) AS kc_over_count,
+(SELECT ISNULL(SUM(kc_expt_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND kc_expt_date &lt; DATEADD(day, 1, dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2)  ) AND kc_perd_no &lt; 50)-(SELECT ISNULL(SUM(kc_pay_fee), 0) FROM kcsd.kc_loanpayment WHERE kc_case_no = c.kc_case_no AND kc_pay_date &lt;DATEADD(day, 1, dateadd(dd,-day(@wk_stop_date2),@wk_stop_date2)  ))  AS kc_over_amt
+FROM	kcsd.kc_customerloan c
+WHERE kc_buy_date BETWEEN dateadd(dd,-day(dateadd(month,-1,@wk_strt_date))+1,dateadd(month,-1,@wk_strt_date)) AND dateadd(dd,-day(@wk_stop_date),@wk_stop_date) 
+and kc_loan_stat Not In ('Y','Z')
+AND (@wk_prod_type = '' OR kc_prod_type IN (SELECT value FROM STRING_SPLIT(@wk_prod_type, ',')))
+AND (@wk_new_flag = '' OR kc_new_flag = @wk_new_flag)
+	) f ON A.kc_case_no = f.kc_case_no
+WHERE kc_loan_stat Not In ('Y','Z') 
+--AND A.kc_buy_date Between '2019-10-01' And '2019-10-31'
+AND A.kc_buy_date Between dateadd(dd,-day(dateadd(month,-1,@wk_strt_date))+1,dateadd(month,-1,@wk_strt_date)) AND dateadd(dd,-day(@wk_stop_date),@wk_stop_date) 
+AND (@wk_prod_type = '' OR A.kc_prod_type IN (SELECT value FROM STRING_SPLIT(@wk_prod_type, ',')))
+AND (@wk_new_flag = '' OR A.kc_new_flag = @wk_new_flag)
+AND p.kc_cfm_user is not null and p.kc_cfm_stat in ('P','D')
+AND   (@wk_area_code = '' OR u.AreaCode = @wk_area_code)
+GROUP BY A.kc_cp_no,p.kc_cfm_user,f.kc_over_count,f.kc_over_amt,A.kc_loan_perd,A.kc_perd_fee,A.kc_case_no,p.kc_give_amt,A.kc_prod_type
+
+
+
+
+</SqlCommand>
+      </DataSource1>
+      <Employee Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Employee</Alias>
+        <Columns isList="true" count="11">
+          <value>AreaCode,System.String</value>
+          <value>ArrivalDate,System.DateTime</value>
+          <value>EmpCode,System.String</value>
+          <value>EmpName,System.String</value>
+          <value>IsEnable,System.Boolean</value>
+          <value>JobType,System.String</value>
+          <value>LeaveDate,System.DateTime</value>
+          <value>UserCode,System.String</value>
+          <value>UserIdNo,System.String</value>
+          <value>UserPermAddr,System.String</value>
+          <value>leave_desc,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>e1a244c9e615489cb0e3088e2eee4f7a</Key>
+        <Name>Employee</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT *,case when LeaveDate is not null then '已離職' else '' end as leave_desc
+	FROM kcsd.v_Employee
+	
+
+</SqlCommand>
+      </Employee>
+      <kct_area Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kct_area</Alias>
+        <Columns isList="true" count="5">
+          <value>kc_area_addr,System.String</value>
+          <value>kc_area_code,System.String</value>
+          <value>kc_area_desc,System.String</value>
+          <value>kc_area_phone,System.String</value>
+          <value>kc_host_name,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>89f5bceaf5d64fc5883992b20f5b82ed</Key>
+        <Name>kct_area</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT *
+	FROM kcsd.kct_area</SqlCommand>
+      </kct_area>
+      <ProductType Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>ProductType</Alias>
+        <Columns isList="true" count="2">
+          <value>value,System.String</value>
+          <value>text,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>661ee49e5801477a9c60ea8cf70f1315</Key>
+        <Name>ProductType</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_prod_type,,23,0</value>
+        </Parameters>
+        <SqlCommand>select value,text from [Zephyr.Sys].[dbo].[sys_code] where CodeType = 'ProductType' AND (@wk_prod_type = '' OR value = @wk_prod_type)</SqlCommand>
+      </ProductType>
+    </DataSources>
+    <Relations isList="true" count="2">
+      <名稱 Ref="7" type="DataRelation" isKey="true">
+        <Alias>名稱</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_cfm_user</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>名稱</Name>
+        <NameInSource>關係</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>UserCode</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </名稱>
+      <名稱2 Ref="8" type="DataRelation" isKey="true">
+        <Alias>名稱2</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_prod_type</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>名稱2</Name>
+        <NameInSource>關係2</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>value</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </名稱2>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="3">
+      <value>,pm_user_area,pm_user_area,,System.String,,False,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,,System.String,_x0027_super_x0027_,False,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,TESTNAME,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>76e9f20056684fb7b61824b80862fac9</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="9" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="7">
+        <PageHeaderBand1 Ref="10" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,2.4</ClientRectangle>
+          <Components isList="true" count="31">
+            <ReportTitleText Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.1,0.6,10,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,14</Font>
+              <Guid>f2c5ae212d674c66953533c349cfea2c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>ReportTitleText</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>徵審分期統計表</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </ReportTitleText>
+            <Text22 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>ae8bff5902604f82b1b0987b05ff33ce</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Report ID: INDEXD002(20200710)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0.8,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>c69c4808cf794dceb4c5d669f656c356</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>25.2,0,2.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>457579d321fb4b84b9135e2921cdeafe</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{Today}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="15" type="DateFormat" isKey="true" />
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>25.2,0.4,2.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>1d161fdd46f74b54a2b5755ee655fdcc</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{Time}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="17" type="TimeFormat" isKey="true" />
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text26 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>25.2,0.8,2.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>bc892810f03545328c21be1ed000b205</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{PageNofMThrough}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text15 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.6,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>2e20e13bd74848c3a645ce180a2d3694</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>確認人</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.2,1.6,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>a02e30b9e7ce4d6d8dfa57c3c41ecc69</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>筆數</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text218 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>24.2,1.2,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>294a19d93c8a4194ab936979c7f7c5ae</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text218</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>User:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text218>
+            <Text219 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0.8,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>8ccac3dd583a4d1e81286e82251e1222</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text219</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource1.Parameters["wk_strt_date2"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text219>
+            <Text220 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,0.8,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>b5ae2d3fd39a42998a5ad68af1dcfbf3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text220</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource1.Parameters["wk_stop_date2"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text220>
+            <Text221 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>2.8,0.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>5e8e464fc70b43b897987a79e32166b9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text221</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>~</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text221>
+            <Text20 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,0.4,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>2fa66104b46342ad978362218470d67d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text222 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>18b26ca7c2254f64abc87b2fb3ae1ff3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text222</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource1.Parameters["wk_strt_date"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text222>
+            <Text224 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>2.8,0.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>15bc7876a02044a19b57bcf6c56d5666</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text224</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>~</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text224>
+            <Text226 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>24.2,0,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>ae6e17be65b14b948b0623159c7a586d</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text226</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Date:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text226>
+            <Text227 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>24.2,0.4,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>4e1e3843104a4f2896954c6c7c6cb778</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text227</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Time:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text227>
+            <Text228 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>24.2,0.8,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>a1acb93872024432aa7592fe4e3c75fe</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text228</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>Page:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text228>
+            <Text229 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>25.2,1.2,2.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>afad25b097b643f091d9927b2f735489</Guid>
+              <HorAlignment>Width</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text229</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{pm_user_name}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text229>
+            <Text223 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>2b4616a9284b482aad0f150461eb78e3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text223</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource1.Parameters["wk_stop_date"].ParameterValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text223>
+            <Text13 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,1.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>ce685d6c11d34909aab5defdae6d3f91</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>到期回收率</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text2 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0,1.2,1.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>766f1cd1be2c4663834dbdd3563364d7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>產品別:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text70 Ref="35" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,1.2,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>15df5ddf60394d0b9b1847022a7705c8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{IIF(ProductType.Parameters["wk_prod_type"].ParameterValue == "","全部",ProductType.text )}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text70>
+            <Text9 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.6,1.6,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>c04fbf75e6bf48c590e7c27bb19662b6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>利率</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text7 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.2,1.2,2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>c3c9c13e9f834412b40b25aa0a7b9790</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>到期回收率
+(上個月)</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text18 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>21.4,1.6,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>353b45a9a83a469493e6c8d329f93e7f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>回收率</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text64 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>d9e0f20c68624024be52fa4bf5ca4f45</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>逾3件數比</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text64>
+            <Text65 Ref="40" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.6,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>ade11e86a3f34b89a1355178c931b76d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>逾3金額比</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text65>
+            <Text12 Ref="41" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.2,1.6,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,8</Font>
+              <Guid>3949461f41524d3aba7ed3113214fccd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>逾3金額比
+(上個月)</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text27 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.8,1.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>bd50f3a7f9344079b4958f403e646196</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>撥款金額</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <HorizontalLinePrimitive1 Ref="43" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,2.2,27.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="44" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>6e9b1c43a07547058bf9d365b5e0346e</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Size>2</Size>
+              <StartCap Ref="45" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>777af4bd6f8f47c8a2c44707580c08ac</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </PageHeaderBand1>
+        <GroupHeaderBand2 Ref="46" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.6,27.7,0.6</ClientRectangle>
+          <Components isList="true" count="10">
+            <Text225 Ref="47" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0,4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1e68d6d1b6b6431792c735384863650d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text225</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{DataSource1.名稱.EmpCode} {DataSource1.名稱.EmpName} {DataSource1.名稱.leave_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text225>
+            <Text52 Ref="48" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d5943f36a13d41d6abf70679743f36e1</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf(GroupHeaderBand2,DataSource1.wk_pay_amt,DataSource1.data_type=="01")/SumIf(GroupHeaderBand2,DataSource1.wk_expt_sum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="49" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+            <Text56 Ref="50" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.2,0,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1e541dfadad543d48643eb8f9a83cd60</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{CountIf(GroupHeaderBand2, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text56>
+            <Text1 Ref="51" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.6,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>7f3835de7c7c405ba50e542a49ef87f1</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf(GroupHeaderBand2,DataSource1.a,DataSource1.data_type=="01")/SumIf(GroupHeaderBand2,DataSource1.b,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="52" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <State>DecimalDigits</State>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text11 Ref="53" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.2,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>8863d8d755f34f3b8d5d4a23e3be5029</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf(GroupHeaderBand2,DataSource1.wk_pay_amt,DataSource1.data_type=="00")/SumIf(GroupHeaderBand2,DataSource1.wk_expt_sum,DataSource1.data_type=="00")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="54" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text55 Ref="55" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>21.4,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d9f9edb46637424895bb7572e55e5a16</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{(SumIf(GroupHeaderBand2,DataSource1.wk_pay_sum,DataSource1.data_type=="01")-SumIf(GroupHeaderBand2,DataSource1.wk_intr_sum,DataSource1.data_type=="01")-(SumIf(GroupHeaderBand2,DataSource1.wk_credit_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand2,DataSource1.wk_insu_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand2,DataSource1.wk_totm_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand2,DataSource1.wk_aux_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand2,DataSource1.wk_give_amt,DataSource1.data_type=="01")))/SumIf(GroupHeaderBand2,DataSource1.wk_expt_allsum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="56" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text55>
+            <Text60 Ref="57" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>53aaa778842848ecb5bdb4724328e96a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{CountIf(GroupHeaderBand2, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01" ))* 1.0/CountIf(GroupHeaderBand2, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="58" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text60>
+            <Text63 Ref="59" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.6,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>a066429c6fbd4d458cc3832376dd3751</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01"))/SumIf(GroupHeaderBand2,DataSource1.wk_expt_allsum, DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="60" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text63>
+            <Text19 Ref="61" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.2,0,1.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>dd5acbecd2e348ae845b9af6d3e67801</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="00"))/SumIf(GroupHeaderBand2,DataSource1.wk_expt_allsum, DataSource1.data_type=="00")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="62" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text28 Ref="63" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.8,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>0a09a134e1334a4896e34668554b7886</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="9" />
+              <Parent isRef="46" />
+              <Text>{SumIf(GroupHeaderBand2,DataSource1.kc_give_amt,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="64" type="CurrencyFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>0</PositivePattern>
+                <Symbol />
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+          </Components>
+          <Condition>{DataSource1.kc_cfm_user}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </GroupHeaderBand2>
+        <GroupHeaderBand3 Ref="65" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5,27.7,0.6</ClientRectangle>
+          <Components isList="true" count="10">
+            <Text4 Ref="66" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d56554c253f94ee3b184094232f922cf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{DataSource1.kc_level_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text21 Ref="67" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>839c811a454b40cebc42e5d9d087170a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf(GroupHeaderBand3,DataSource1.wk_pay_amt,DataSource1.data_type=="01")/SumIf(GroupHeaderBand3,DataSource1.wk_expt_sum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="68" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text3 Ref="69" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.2,0,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>08eedee8d39d4df9a258ea59b4334b84</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{CountIf(GroupHeaderBand3, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text5 Ref="70" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.6,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d9dce99199bd490b9b6ee66a10cf4ef9</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf(GroupHeaderBand3,DataSource1.a,DataSource1.data_type=="01")/SumIf(GroupHeaderBand3,DataSource1.b,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="71" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <State>DecimalDigits</State>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text8 Ref="72" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.2,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>3f88658e5cc0495db2e77638cca1cf44</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf(GroupHeaderBand3,DataSource1.wk_pay_amt,DataSource1.data_type=="00")/SumIf(GroupHeaderBand3,DataSource1.wk_expt_sum,DataSource1.data_type=="00")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="73" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text29 Ref="74" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>21.4,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>e9093063c7624849b06dd085e48b9dd5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{(SumIf(GroupHeaderBand3,DataSource1.wk_pay_sum,DataSource1.data_type=="01")-SumIf(GroupHeaderBand3,DataSource1.wk_intr_sum,DataSource1.data_type=="01")-(SumIf(GroupHeaderBand3,DataSource1.wk_credit_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand3,DataSource1.wk_insu_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand3,DataSource1.wk_totm_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand3,DataSource1.wk_aux_fee,DataSource1.data_type=="01") + SumIf(GroupHeaderBand3,DataSource1.wk_give_amt,DataSource1.data_type=="01")))/SumIf(GroupHeaderBand3,DataSource1.wk_expt_allsum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="75" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text61 Ref="76" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>6e69daf7fdbb40a89a2f0cd9d8718ed6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{CountIf(GroupHeaderBand3, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01" ))* 1.0/CountIf(GroupHeaderBand3, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="77" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text61>
+            <Text62 Ref="78" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.6,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>6a061ea9920e416ea0d3e7a823cb5ae3</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01"))/SumIf(GroupHeaderBand3,DataSource1.wk_expt_allsum, DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="79" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text62>
+            <Text14 Ref="80" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.2,0,1.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>6c44e0d07fc840fb95f5217fa975fd6c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="00"))/SumIf(GroupHeaderBand3,DataSource1.wk_expt_allsum, DataSource1.data_type=="00")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="81" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text31 Ref="82" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.8,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>77d3703c85104393931ba2d5bafc1b2e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="9" />
+              <Parent isRef="65" />
+              <Text>{SumIf(GroupHeaderBand3,DataSource1.kc_give_amt,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="83" type="CurrencyFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>0</PositivePattern>
+                <Symbol />
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+          </Components>
+          <Condition>{DataSource1.kc_level_no}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand3</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </GroupHeaderBand3>
+        <DataBand2 Ref="84" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,6.4,27.7,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>DataSource1</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>79fb67ef43074235b9e54b0d2816ce89</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <GroupFooterBand3 Ref="85" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,7.2,27.7,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand3</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </GroupFooterBand3>
+        <GroupFooterBand2 Ref="86" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,8,27.7,0.1</ClientRectangle>
+          <Components isList="true" count="1">
+            <HorizontalLinePrimitive2 Ref="87" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,27.7,0.0254</ClientRectangle>
+              <Color>0, 0, 39</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="88" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>59f437f2ef974edbb451fcd1d081a104</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="9" />
+              <Parent isRef="86" />
+              <StartCap Ref="89" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand2</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </GroupFooterBand2>
+        <FooterBand1 Ref="90" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,8.9,27.7,0.6</ClientRectangle>
+          <Components isList="true" count="11">
+            <Text47 Ref="91" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1d9b3574794549a1b00b6313b6c148c5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf(DataBand2,DataSource1.wk_pay_amt,DataSource1.data_type=="01")/SumIf(DataBand2,DataSource1.wk_expt_sum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="92" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text47>
+            <Text6 Ref="93" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.2,0,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>a4e8337f759e4a699212767faafb91e5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{CountIf(DataBand2, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text30 Ref="94" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.7,0,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>b1c9c03d02f2498da17e90eade6b81c8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>合計:</Text>
+              <TextBrush>[79:129:189]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <Text72 Ref="95" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.6,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>8be2a4c3267f4244943adb91a9d60d99</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf(DataBand2,DataSource1.a,(DataSource1.data_type=="01")) / SumIf(DataBand2,DataSource1.b,(DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="96" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <State>DecimalDigits</State>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text72>
+            <Text10 Ref="97" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19.2,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>782b53c4b40245ba86e49d8dc3b765a4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf(DataBand2,DataSource1.wk_pay_amt,DataSource1.data_type=="00")/SumIf(DataBand2,DataSource1.wk_expt_sum,DataSource1.data_type=="00")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="98" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text50 Ref="99" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>21.4,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1720fd1f0bc842dbaa110a3656fd0b8b</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{(SumIf(DataBand2,DataSource1.wk_pay_sum,DataSource1.data_type=="01")-SumIf(DataBand2,DataSource1.wk_intr_sum,DataSource1.data_type=="01")-(SumIf(DataBand2,DataSource1.wk_credit_fee,DataSource1.data_type=="01") + SumIf(DataBand2,DataSource1.wk_insu_fee,DataSource1.data_type=="01") + SumIf(DataBand2,DataSource1.wk_totm_fee,DataSource1.data_type=="01") + SumIf(DataBand2,DataSource1.wk_aux_fee,DataSource1.data_type=="01") + SumIf(DataBand2,DataSource1.wk_give_amt,DataSource1.data_type=="01")))/SumIf(DataBand2,DataSource1.wk_expt_allsum,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="100" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text69 Ref="101" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.6,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>1002528b8dc04d1689a25351ab732bd3</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01"))/SumIf(DataBand2,DataSource1.wk_expt_allsum, DataSource1.data_type=="01")}
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="102" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text69>
+            <Text57 Ref="103" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>cd0663d4575b46109b12246ec6cb21fd</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{CountIf(DataBand2, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="01"))* 1.0/CountIf(DataBand2, (DataSource1.data_type=="01"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="104" type="PercentageFormat" isKey="true">
+                <DecimalDigits>1</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>1</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text57>
+            <Text17 Ref="105" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.2,0,1.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>5c00c2d5ac134eb5a146daa41f119aef</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf((DataSource1.kc_loan_perd*DataSource1.kc_perd_fee)-DataSource1.kc_pay_fee, (DataSource1.kc_over_amt&gt;0 &amp;&amp; DataSource1.kc_over_count&gt;=3 &amp;&amp; DataSource1.data_type=="00"))/SumIf(DataBand2,DataSource1.wk_expt_allsum, DataSource1.data_type=="00")}
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="106" type="PercentageFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>1</PositivePattern>
+                <Symbol>%</Symbol>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text32 Ref="107" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.8,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>d537f816d08246cb8025988d3040e555</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Text>{SumIf(DataBand2,DataSource1.kc_give_amt,DataSource1.data_type=="01")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="108" type="CurrencyFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>0</PositivePattern>
+                <Symbol />
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <HorizontalLinePrimitive3 Ref="109" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,27.7,0.0254</ClientRectangle>
+              <Color>0, 0, 39</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="110" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>476bdbf306a14226934fb0c3ed7ad9d8</Guid>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="9" />
+              <Parent isRef="90" />
+              <Size>2</Size>
+              <StartCap Ref="111" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9e8919f9244148c1845cd3c6477d4eda</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="112" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>3/1/2024 6:09:52 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\kpwang\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\IndexD002.mrt</ReportFile>
+  <ReportGuid>a9d094d94b8f4027a660e9d2cbf7c093</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>w+77a2FdQ832Tf2lxEz2P8NSwWBDWQGd41r9iWg9d17CeHXrzV1LjGsbyfFvKaATxHbbz8UK04U=</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="3">
+      <dsCarBrand Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <Columns isList="true" count="2">
+          <value>Text,System.String</value>
+          <value>value,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>dsCarBrand</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select value,Text from sys_code where CodeType = 'CarBrand'</SqlCommand>
+      </dsCarBrand>
+      <dskct_issuecompany Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dskct_issuecompany</Alias>
+        <Columns isList="true" count="3">
+          <value>kc_issu_code,System.String</value>
+          <value>kc_issu_desc,System.String</value>
+          <value>kc_uniform_no,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>dskct_issuecompany</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT kc_issu_code,kc_issu_desc,kc_uniform_no FROM kcsd.kct_issuecompany </SqlCommand>
+      </dskct_issuecompany>
+      <insubook Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>insubook</Alias>
+        <Columns isList="true" count="73">
+          <value>kc_area_code,System.String</value>
+          <value>kc_birth_date,System.DateTime</value>
+          <value>kc_car_brand,System.String</value>
+          <value>kc_car_model,System.String</value>
+          <value>kc_case_no,System.String</value>
+          <value>kc_comp_code,System.String</value>
+          <value>kc_cont_date,System.DateTime</value>
+          <value>kc_cust_name,System.String</value>
+          <value>kc_cust_name1,System.String</value>
+          <value>kc_cust_name2,System.String</value>
+          <value>kc_cust_nameu,System.String</value>
+          <value>kc_dism_date,System.DateTime</value>
+          <value>kc_eng_no,System.String</value>
+          <value>kc_fax_date,System.DateTime</value>
+          <value>kc_find_date,System.DateTime</value>
+          <value>kc_icard_no,System.String</value>
+          <value>kc_icard_type,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_info_date,System.DateTime</value>
+          <value>kc_info_datec,System.DateTime</value>
+          <value>kc_info_datep,System.DateTime</value>
+          <value>kc_insu_amt,System.Int32</value>
+          <value>kc_insu_amt2,System.Int32</value>
+          <value>kc_insu_fee,System.Int32</value>
+          <value>kc_insu_fee2,System.Int32</value>
+          <value>kc_insu_memo,System.String</value>
+          <value>kc_insu_no,System.String</value>
+          <value>kc_insu_src,System.String</value>
+          <value>kc_insu_type,System.String</value>
+          <value>kc_insuend_date,System.DateTime</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_item_no,System.Int32</value>
+          <value>kc_licn_date,System.DateTime</value>
+          <value>kc_licn_date2,System.DateTime</value>
+          <value>kc_licn_no,System.String</value>
+          <value>kc_loan_type,System.String</value>
+          <value>kc_lock_amt,System.Byte</value>
+          <value>kc_lock_amt2,System.Byte</value>
+          <value>kc_lock_amt3,System.Byte</value>
+          <value>kc_lock_date,System.DateTime</value>
+          <value>kc_new_flag,System.String</value>
+          <value>kc_oper_code,System.String</value>
+          <value>kc_oper_type,System.String</value>
+          <value>kc_other_fee,System.Int32</value>
+          <value>kc_pay_date,System.DateTime</value>
+          <value>kc_pay_type,System.String</value>
+          <value>kc_perm_addr,System.String</value>
+          <value>kc_ppay_fee,System.Int32</value>
+          <value>kc_proc_fee,System.Int32</value>
+          <value>kc_real_fee,System.Int32</value>
+          <value>kc_rema_date,System.DateTime</value>
+          <value>kc_reprot_date,System.DateTime</value>
+          <value>kc_rewd_amt,System.Int32</value>
+          <value>kc_rewd_amtc,System.Int32</value>
+          <value>kc_rewd_date,System.DateTime</value>
+          <value>kc_rewd_datec,System.DateTime</value>
+          <value>kc_rewd_name,System.String</value>
+          <value>kc_rewd_no,System.String</value>
+          <value>kc_rewd_officer,System.String</value>
+          <value>kc_rewd_type,System.String</value>
+          <value>kc_sales_code,System.String</value>
+          <value>kc_station_area,System.String</value>
+          <value>kc_station_name,System.String</value>
+          <value>kc_take_date,System.DateTime</value>
+          <value>kc_theft_addr,System.String</value>
+          <value>kc_theft_date,System.DateTime</value>
+          <value>kc_totm_date,System.DateTime</value>
+          <value>kc_totm_fee,System.Int32</value>
+          <value>kc_totm_tick,System.String</value>
+          <value>kc_updt_date,System.DateTime</value>
+          <value>kc_updt_user,System.String</value>
+          <value>kc_wddt_user,System.String</value>
+          <value>kc_wtdt_user,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>insubook</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>wk_case_no,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT i.*
+	FROM kcsd.kc_customerloan c
+LEFT JOIN kcsd.kc_customerloan1 c1 ON c.kc_case_no = c1.kc_case_no
+LEFT JOIN kcsd.kc_insurance i ON c.kc_case_no = i.kc_case_no
+WHERE c.kc_case_no = @wk_case_no</SqlCommand>
+      </insubook>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <名稱 Ref="7" type="DataRelation" isKey="true">
+        <Alias>名稱</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Name>名稱</Name>
+        <NameInSource>關係</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </名稱>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="6">
+      <value>,pm_black_path1,pm_black_path1,,System.String,_x005C__x005C_10.2.8.4_x005C_share-2_x005C_16_資訊_x005C_保險理賠需求單_x005C_富邦申請書.jpg,False,False,False,False</value>
+      <value>,pm_black_path2,pm_black_path2,,System.String,_x005C__x005C_10.2.8.4_x005C_share-2_x005C_16_資訊_x005C_保險理賠需求單_x005C_3電匯同意書.jpg,False,False,False,False</value>
+      <value>,pm_black_path3,pm_black_path3,,System.String,_x005C__x005C_10.2.8.4_x005C_share-2_x005C_16_資訊_x005C_保險理賠需求單_x005C_3電匯同意書.jpg,False,False,False,False</value>
+      <value>,pm_passbook_path,pm_passbook_path,,System.String,_x005C__x005C_10.2.8.4_x005C_share-2_x005C_16_資訊_x005C_保險理賠需求單_x005C_3電匯同意書.jpg,False,False,False,False</value>
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,False</value>
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="3">
+    <Page1 Ref="8" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <Image1 Ref="9" type="Image" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>-1,-1,21,29.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <File>{pm_black_path1}</File>
+          <Locked>True</Locked>
+          <Margins>0,0,0,0</Margins>
+          <Name>Image1</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Stretch>True</Stretch>
+        </Image1>
+        <DataBand1 Ref="10" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="7">
+            <P1_kc_cust_nameu Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.3,2.1,4.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>cff6333b8a1a4fb3bcd01559636068ca</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_cust_nameu</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{insubook.kc_cust_nameu}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_cust_nameu>
+            <P1_kc_licn_no Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>11.1,2.1,2.3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>768969c9acef4e439257509683c31a9f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_licn_no</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{insubook.kc_licn_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_licn_no>
+            <P1_kc_theft_date Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.2,9.5,4.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,9</Font>
+              <Guid>e54ca8be59d845ada980763fb74fd30a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_theft_date</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{Year(insubook.kc_theft_date)} 年 {Month(insubook.kc_theft_date)} 月 {Day(insubook.kc_theft_date)} 日 {Hour(insubook.kc_theft_date)} 時 {Minute(insubook.kc_theft_date)}分</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_theft_date>
+            <P1_kc_theft_addr Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.3,10.8,8.8,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,12</Font>
+              <Guid>734d2b18d48e49caadbd3490dfc0c7f1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_theft_addr</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{insubook.kc_theft_addr}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_theft_addr>
+            <P1_kc_station_area Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.3,11.7,1.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,12</Font>
+              <Guid>48980f9bd27c4a358c814731d312e600</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_station_area</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{insubook.kc_station_area}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_station_area>
+            <P1_kc_station_name Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>5.3,11.7,1.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,12</Font>
+              <Guid>b35bcbf50cbd49dd8095959bfd40ae46</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_station_name</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{insubook.kc_station_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_station_name>
+            <P1_kc_reprot_date Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>7.3,9.5,4.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,9</Font>
+              <Guid>8c19a5abeba7452a8d187e800078c646</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P1_kc_reprot_date</Name>
+              <Page isRef="8" />
+              <Parent isRef="10" />
+              <Text>{Year(insubook.kc_reprot_date)} 年 {Month(insubook.kc_reprot_date)} 月 {Day(insubook.kc_reprot_date)} 日 {Hour(insubook.kc_reprot_date)} 時 {Minute(insubook.kc_reprot_date)}分</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P1_kc_reprot_date>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>insubook</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="18" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <Page2 Ref="19" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <Image2 Ref="20" type="Image" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>-1,-1,21,29.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <File>{pm_black_path2}</File>
+          <Guid>1fa9e874b3614f1cb1c972ab3e10085a</Guid>
+          <Locked>True</Locked>
+          <Margins>0,0,0,0</Margins>
+          <Name>Image2</Name>
+          <Page isRef="19" />
+          <Parent isRef="19" />
+          <Stretch>True</Stretch>
+        </Image2>
+        <DataBand2 Ref="21" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="5">
+            <P2_kc_cust_nameu Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.1,2.8,2.4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>7c6301b72e04430e96121fe1157c33c7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P2_kc_cust_nameu</Name>
+              <Page isRef="19" />
+              <Parent isRef="21" />
+              <Text>{insubook.kc_cust_nameu}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P2_kc_cust_nameu>
+            <Text2 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.3,4.1,2,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>565b5fe0fbda4ae2bedca15b774820be</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="19" />
+              <Parent isRef="21" />
+              <Text>{insubook.kc_licn_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text2>
+            <Text7 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.9,12.4,5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>dda9259d59b64ff9a11082580ee1c2f4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="19" />
+              <Parent isRef="21" />
+              <Text>{insubook.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,16.8,2,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>272815c50ff448de9a29950a5bce3138</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="19" />
+              <Parent isRef="21" />
+              <Text>{insubook.kc_licn_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,18.6,5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>6a7b934e677740788f1a50ab9aa46dea</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="19" />
+              <Parent isRef="21" />
+              <Text>{insubook.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>insubook</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>7f364aa720a84f6bbd455f97ba561d11</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="19" />
+          <Parent isRef="19" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>1b141c77ab634f61a5c69ac55ad5f387</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page2</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="27" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page2>
+    <Page3 Ref="28" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <Image3 Ref="29" type="Image" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>-1,-1,21,29.7</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <File>{pm_black_path3}</File>
+          <Guid>213616313b4445b9968281530d58efea</Guid>
+          <Locked>True</Locked>
+          <Margins>0,0,0,0</Margins>
+          <Name>Image3</Name>
+          <Page isRef="28" />
+          <Parent isRef="28" />
+          <Stretch>True</Stretch>
+        </Image3>
+        <DataBand3 Ref="30" type="DataBand" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="5">
+            <P3_kc_cust_nameu Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.3,3.2,5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>1a24f88a16c7407f939ef0598ce09e8e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>P3_kc_cust_nameu</Name>
+              <Page isRef="28" />
+              <Parent isRef="30" />
+              <Text>{insubook.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </P3_kc_cust_nameu>
+            <Image4 Ref="32" type="Image" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.5,14,16,9.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <File>{pm_passbook_path}</File>
+              <Guid>d846ba266be841ce87ba82949094bcc1</Guid>
+              <Locked>True</Locked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image4</Name>
+              <Page isRef="28" />
+              <Parent isRef="30" />
+              <Stretch>True</Stretch>
+            </Image4>
+            <Text10 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.5,4.2,3,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>6cb7323dcb4249adb7819635a98a6755</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="28" />
+              <Parent isRef="30" />
+              <Text>{insubook.名稱.kc_uniform_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text10>
+            <Text11 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.3,7.9,5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,13</Font>
+              <Guid>ddbff688e9434e0e98fabd65621bef74</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="28" />
+              <Parent isRef="30" />
+              <Text>{insubook.名稱.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text24 Ref="35" type="Text" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,9.5,10.5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,18</Font>
+              <Guid>b64e06d62835414c8a51d672ec7b992b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="28" />
+              <Parent isRef="30" />
+              <Text>&lt;letter-spacing="0.78"&gt;
+{Switch(
+insubook.kc_issu_code=="01","036107001020",
+insubook.kc_issu_code=="02","036107002999",
+insubook.kc_issu_code=="03","036100016391",
+insubook.kc_issu_code=="05","036107003995"
+)}
+&lt;/letter-spacing&gt;</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text24>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>insubook</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>39d47d0bda1841bab602181be7adf12e</Guid>
+          <Name>DataBand3</Name>
+          <Page isRef="28" />
+          <Parent isRef="28" />
+          <Sort isList="true" count="0" />
+        </DataBand3>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>13762cecffdf40719cb6f327ce2ce14b</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page3</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="36" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page3>
+  </Pages>
+  <PrinterSettings Ref="37" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/5/2018 5:00:39 PM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\bsmvc\source\DyWeb\CMS.Web\Areas\Dys\Reports\Form_InsuranceClaims.mrt</ReportFile>
+  <ReportGuid>4dc71612d0a541b39f0fe50baea6a4db</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2018.1.6.0</ReportVersion>
+  <Script>
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using System.Data;
+    using Stimulsoft.Controls;
+    using Stimulsoft.Base.Drawing;
+    using Stimulsoft.Report;
+    using Stimulsoft.Report.Dialogs;
+    using Stimulsoft.Report.Components;
+
+    namespace Reports
+    {
+    public class Report : Stimulsoft.Report.StiReport
+    {
+    public Report()        {
+    this.InitializeComponent();
+    }
+
+    #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

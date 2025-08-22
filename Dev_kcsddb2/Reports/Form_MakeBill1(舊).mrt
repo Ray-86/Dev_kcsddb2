@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="2">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+      <Sys Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Sys</Alias>
+        <ConnectionStringEncrypted>w+7Za2FWQ93iTQHYykxjP8PE22BDSEHta0n9iWg95GvCemmJZ0tLrekT0KV6GOALiFZ1CcVaqZlFSw==</ConnectionStringEncrypted>
+        <Name>Sys</Name>
+      </Sys>
+    </Databases>
+    <DataSources isList="true" count="3">
+      <DataSource Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource</Alias>
+        <Columns isList="true" count="11">
+          <value>kc_case_no,System.String</value>
+          <value>kc_expt_date,System.DateTime</value>
+          <value>kc_pay_fee,System.Int32</value>
+          <value>kc_break_fee,System.Int32</value>
+          <value>kc_acct_bar1,System.String</value>
+          <value>kc_acct_bar2,System.String</value>
+          <value>kc_acct_bar3,System.String</value>
+          <value>kc_cust_nameu,System.String</value>
+          <value>kc_issu_code,System.String</value>
+          <value>kc_car_model,System.String</value>
+          <value>kc_car_brand,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>DataSource</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>wk_case_no,,23,0</value>
+          <value>wk_item_no,,8,0</value>
+        </Parameters>
+        <SqlCommand>SELECT MakeBill.kc_case_no, MakeBill.kc_expt_date, MakeBill.kc_pay_fee, MakeBill.kc_break_fee, MakeBill.kc_acct_bar1, MakeBill.kc_acct_bar2, MakeBill.kc_acct_bar3, 
+	kc_customerloan.kc_cust_nameu, kc_customerloan.kc_issu_code, kc_car_model, kc_customerloan.kc_car_brand
+FROM kcsd.MakeBill
+INNER JOIN kcsd.kc_customerloan ON MakeBill.kc_case_no = kc_customerloan.kc_case_no
+WHERE MakeBill.kc_case_no = @wk_case_no AND MakeBill.kc_item_no = @wk_item_no</SqlCommand>
+      </DataSource>
+      <kct_issuecompany Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>kct_issuecompany</Alias>
+        <Columns isList="true" count="8">
+          <value>kc_issu_code,System.String</value>
+          <value>kc_issu_desc,System.String</value>
+          <value>kc_boss_name,System.String</value>
+          <value>kc_uniform_no,System.String</value>
+          <value>kc_acct_no,System.String</value>
+          <value>kc_id_no,System.String</value>
+          <value>kc_atm_no,System.String</value>
+          <value>kc_issu_addr,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>kct_issuecompany</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT * FROM kcsd.kct_issuecompany</SqlCommand>
+      </kct_issuecompany>
+      <dsCarBrand Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dsCarBrand</Alias>
+        <Columns isList="true" count="2">
+          <value>Value,System.String</value>
+          <value>Text,System.String</value>
+        </Columns>
+        <CommandTimeout>180</CommandTimeout>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>dsCarBrand</Name>
+        <NameInSource>Sys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT Value, Text
+	FROM sys_code
+	WHERE CodeType = 'CarBrand'</SqlCommand>
+      </dsCarBrand>
+    </DataSources>
+    <Relations isList="true" count="2">
+      <dskc_issu_code Ref="7" type="DataRelation" isKey="true">
+        <Alias>dskc_issu_code</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Name>dskc_issu_code</Name>
+        <NameInSource>dskc_issu_code</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_issu_code</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </dskc_issu_code>
+      <dskc_car_brand Ref="8" type="DataRelation" isKey="true">
+        <Alias>dskc_car_brand</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>kc_car_brand</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Name>dskc_car_brand</Name>
+        <NameInSource>dskc_car_brand</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>Value</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </dskc_car_brand>
+    </Relations>
+    <Report isRef="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_name,pm_user_name,System.String,,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,System.String,super,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="9" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <DataBand1 Ref="10" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,27.3</ClientRectangle>
+          <Components isList="true" count="23">
+            <Text10 Ref="11" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,2.9,8.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20,Bold</Font>
+              <Guid>7599c15da07545d8b219011fb55565c5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>應繳金額：{DataSource.kc_pay_fee + DataSource.kc_break_fee}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="12" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,2.9,10.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20</Font>
+              <Guid>bb6ef18e57c64a358ddcd5b2fd91c15a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>購買機種：{DataSource.dskc_car_brand.Text} {DataSource.kc_car_model}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text13 Ref="13" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,4.1,8.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20</Font>
+              <Guid>558e4b81a2c54e2faf2fd8b8f17c719e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>應繳日期：{Year(DataSource.kc_expt_date)- 1911 }-{Format("{0:MM-dd}", DataSource.kc_expt_date)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="14" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,4.1,10.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20</Font>
+              <Guid>b0c14a5d65f84ff08330e155104f1a44</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>帳單編號：{DataSource.kc_acct_bar2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <BarCode1 Ref="15" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <AutoScale>True</AutoScale>
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="16" type="Stimulsoft.Report.BarCodes.StiCode39BarCodeType" isKey="true">
+                <CheckSum>No</CheckSum>
+              </BarCodeType>
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <ClientRectangle>1,8.8,17,5</ClientRectangle>
+              <Code>{DataSource.kc_acct_bar1}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>76b5214021f24aa5bcc75f8800f13f6c</Guid>
+              <Name>BarCode1</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ShowQuietZones>False</ShowQuietZones>
+            </BarCode1>
+            <BarCode2 Ref="17" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <AutoScale>True</AutoScale>
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="18" type="Stimulsoft.Report.BarCodes.StiCode39BarCodeType" isKey="true">
+                <CheckSum>No</CheckSum>
+              </BarCodeType>
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <ClientRectangle>1,14.9,17,5</ClientRectangle>
+              <Code>{DataSource.kc_acct_bar2}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>4cc4e5390cc64123925dfd9cc23b6601</Guid>
+              <Name>BarCode2</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ShowQuietZones>False</ShowQuietZones>
+            </BarCode2>
+            <Text1 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.1,0.5,8,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,18</Font>
+              <Guid>ef3fb22935a340c996b38e0808051455</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource.dskc_issu_code.kc_issu_desc}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text4 Ref="20" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.1,0.5,4.6,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,18</Font>
+              <Guid>17d8e44141924b74b2306c51de2ed87c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>分期付款繳款書</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="21" type="CustomFormat" isKey="true">
+                <StringFormat>yy</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <BarCode3 Ref="22" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <AutoScale>True</AutoScale>
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="23" type="Stimulsoft.Report.BarCodes.StiCode39BarCodeType" isKey="true">
+                <CheckSum>No</CheckSum>
+              </BarCodeType>
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <ClientRectangle>1,21,17,5</ClientRectangle>
+              <Code>{DataSource.kc_acct_bar3}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>標楷體,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>f40f7382b664433293b7e32c11648fd9</Guid>
+              <Name>BarCode3</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ShiftMode>OnlyInWidthOfComponent</ShiftMode>
+              <ShowQuietZones>False</ShowQuietZones>
+            </BarCode3>
+            <Image2 Ref="24" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.5,0.8,1.4,1.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>13cec9b806d9468b84699ea516a0deb5</Guid>
+              <Image>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</Image>
+              <MultipleFactor>0.5</MultipleFactor>
+              <Name>Image2</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+            </Image2>
+            <Text8 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.1,1.5,8,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,18</Font>
+              <Guid>2b2d41b05ee540c6bdda0e13a0c4f210</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource.kc_cust_nameu}　先生/小姐</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text20 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,5.7,18.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20</Font>
+              <Guid>00f321641db549a78835b7db1b434d20</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>便利商店代收專用區</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,6.7,18.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,20</Font>
+              <Guid>f6156f7106574f088217bf33aef06ffd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>7-11統一、全家、萊爾富、OK</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.5,1,2.4,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,10</Font>
+              <Guid>361f868cea0241f2bb2a0ab5420b20ca</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>{DataSource.kc_case_no}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text22>
+            <HorizontalLinePrimitive5 Ref="29" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0.2,5.5,18.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="30" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>e5ee5202125c4a1ba08a969524ab6e36</Guid>
+              <Name>HorizontalLinePrimitive5</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <StartCap Ref="31" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Dash</Style>
+            </HorizontalLinePrimitive5>
+            <HorizontalLinePrimitive10 Ref="32" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0.2,6.7,18.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="33" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>f7af6d19f5534bf4afe2bdfba9db287b</Guid>
+              <Name>HorizontalLinePrimitive10</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <StartCap Ref="34" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive10>
+            <HorizontalLinePrimitive12 Ref="35" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0.2,7.7,18.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="36" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>99295a1773b04a7eb58c34136cedbe68</Guid>
+              <Name>HorizontalLinePrimitive12</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <StartCap Ref="37" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive12>
+            <StartPointPrimitive5 Ref="38" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>18.8,5.7,0,0</ClientRectangle>
+              <Name>StartPointPrimitive5</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ReferenceToGuid>979717aecc9346a1a3be9825a3a88846</ReferenceToGuid>
+            </StartPointPrimitive5>
+            <EndPointPrimitive5 Ref="39" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>18.8,27,0,0</ClientRectangle>
+              <Name>EndPointPrimitive5</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ReferenceToGuid>979717aecc9346a1a3be9825a3a88846</ReferenceToGuid>
+            </EndPointPrimitive5>
+            <StartPointPrimitive7 Ref="40" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0.2,5.7,0,0</ClientRectangle>
+              <Name>StartPointPrimitive7</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ReferenceToGuid>e0c29f910a914f54bd74dd0df74235b0</ReferenceToGuid>
+            </StartPointPrimitive7>
+            <EndPointPrimitive7 Ref="41" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>0.2,27.1,0,0</ClientRectangle>
+              <Name>EndPointPrimitive7</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <ReferenceToGuid>e0c29f910a914f54bd74dd0df74235b0</ReferenceToGuid>
+            </EndPointPrimitive7>
+            <HorizontalLinePrimitive1 Ref="42" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0.2,5.7,18.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="43" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>10997bda11b445159e80c186f790707d</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <StartCap Ref="44" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <HorizontalLinePrimitive2 Ref="45" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0.2,27.1,18.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="46" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>e73b2d466c08448f82d740a65f706a98</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <StartCap Ref="47" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>DataSource</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <VerticalLinePrimitive5 Ref="48" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>18.8,6.1,0.0254,21.3</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="49" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>979717aecc9346a1a3be9825a3a88846</Guid>
+          <Name>VerticalLinePrimitive5</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+          <StartCap Ref="50" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive5>
+        <VerticalLinePrimitive7 Ref="51" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>0.2,6.1,0.0254,21.4</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="52" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>e0c29f910a914f54bd74dd0df74235b0</Guid>
+          <Name>VerticalLinePrimitive7</Name>
+          <Page isRef="9" />
+          <Parent isRef="9" />
+          <StartCap Ref="53" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive7>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="54" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="55" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/28/2017 9:52:40 AM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\ProjectFiles\DyWeb\CMS.Web\Areas\Dys\Reports\Form_MakeBill.mrt</ReportFile>
+  <ReportGuid>58390fed5d3f47a68fed5d176778fb0d</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2014.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

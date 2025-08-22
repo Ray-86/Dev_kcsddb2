@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Dys Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Dys</Alias>
+        <ConnectionStringEncrypted>w3rPa08Fy5liQ/3ExAD2P4JUwaLGXKmdaUr9jWEAd2vRenXLYVn7leFcqMzhJXc/nnp3Akpb</ConnectionStringEncrypted>
+        <Name>Dys</Name>
+      </Dys>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <dataSource Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>dataSource</Alias>
+        <Columns isList="true" count="4">
+          <value>姓名,System.String</value>
+          <value>身分證號,System.String</value>
+          <value>客戶編號,System.String</value>
+          <value>查調年度,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>2fc835293ebc45f89b53ba7dba055340</Key>
+        <Name>dataSource</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="6">
+          <value>wk_strt_date,,4,0</value>
+          <value>wk_stop_date,,4,0</value>
+          <value>wk_letter_date,,4,0</value>
+          <value>wk_print_cnt1,,8,0</value>
+          <value>wk_print_cnt2,,8,0</value>
+          <value>kc_issu_code,,23,0</value>
+        </Parameters>
+        <SqlCommand>SELECT S.*,
+--查調年度 01/01~04/30 前年 05/01~12/31 去年
+CASE WHEN @wk_letter_date &gt; CAST(YEAR(GETDATE()) as varchar) + '-04-30' 
+THEN CAST(YEAR(GETDATE())-1912 as varchar) ELSE CAST(YEAR(GETDATE())-1913 as varchar) END AS 查調年度 
+FROM
+(
+	SELECT
+	A.kc_law_date AS 登記日期, A.kc_case_no AS 客戶編號,
+	A.kc_law_code AS 催告代碼, A.kc_law_fmt AS 催告格式,
+	CASE WHEN A.kc_perm_flag = 'Y' OR A.kc_curr_flag = 'Y' OR A.kc_comp_flag = 'Y' THEN B.kc_cust_nameu ELSE '' END AS 姓名,
+	CASE WHEN A.kc_perm_flag = 'Y' OR A.kc_curr_flag = 'Y' OR A.kc_comp_flag = 'Y' THEN B.kc_id_no ELSE '' END AS 身分證號
+	FROM kcsd.kc_lawstatus A
+	LEFT JOIN kcsd.kc_customerloan B ON A.kc_case_no = B.kc_case_no
+	WHERE A.kc_law_date BETWEEN	@wk_strt_date AND @wk_stop_date 
+	AND A.kc_law_code = 'G' AND A.kc_law_fmt = 'A7'
+	AND (A.kc_perm_flag = 'Y' OR A.kc_curr_flag = 'Y' OR A.kc_comp_flag = 'Y')
+	AND (B.kc_issu_code = @kc_issu_code OR @kc_issu_code = '')
+	UNION
+	SELECT
+	A.kc_law_date AS 登記日期, A.kc_case_no AS 客戶編號,
+	A.kc_law_code AS 催告代碼, A.kc_law_fmt AS 催告格式,
+	CASE WHEN A.kc_perm_flag1 = 'Y' OR A.kc_curr_flag1 = 'Y' OR A.kc_comp_flag1 = 'Y' THEN B.kc_cust_name1u ELSE '' END AS 姓名,
+	CASE WHEN A.kc_perm_flag1 = 'Y' OR A.kc_curr_flag1 = 'Y' OR A.kc_comp_flag1 = 'Y' THEN B.kc_id_no1 ELSE '' END AS 身分證號
+	FROM kcsd.kc_lawstatus A
+	LEFT JOIN kcsd.kc_customerloan B ON A.kc_case_no = B.kc_case_no
+	WHERE A.kc_law_date BETWEEN	@wk_strt_date AND @wk_stop_date 
+	AND A.kc_law_code = 'G' AND A.kc_law_fmt = 'A7'
+	AND (A.kc_perm_flag1 = 'Y' OR A.kc_curr_flag1 = 'Y' OR A.kc_comp_flag1 = 'Y')
+	AND (B.kc_issu_code = @kc_issu_code OR @kc_issu_code = '')
+	UNION
+	SELECT
+	A.kc_law_date AS 登記日期, A.kc_case_no AS 客戶編號,
+	A.kc_law_code AS 催告代碼, A.kc_law_fmt AS 催告格式,
+	CASE WHEN A.kc_perm_flag2 = 'Y' OR A.kc_curr_flag2 = 'Y' OR A.kc_comp_flag2 = 'Y' THEN B.kc_cust_name2u ELSE '' END AS 姓名,
+	CASE WHEN A.kc_perm_flag2 = 'Y' OR A.kc_curr_flag2 = 'Y' OR A.kc_comp_flag2 = 'Y' THEN B.kc_id_no2 ELSE '' END AS 身分證號
+	FROM kcsd.kc_lawstatus A
+	LEFT JOIN kcsd.kc_customerloan B ON A.kc_case_no = B.kc_case_no
+	WHERE A.kc_law_date BETWEEN	@wk_strt_date AND @wk_stop_date 
+	AND A.kc_law_code = 'G' AND A.kc_law_fmt = 'A7'
+	AND (A.kc_perm_flag2 = 'Y' OR A.kc_curr_flag2 = 'Y' OR A.kc_comp_flag2 = 'Y')
+	AND (B.kc_issu_code = @kc_issu_code OR @kc_issu_code = '')
+) AS S
+ORDER BY S.客戶編號
+OFFSET (@wk_print_cnt1-1) ROWS
+FETCH NEXT (@wk_print_cnt2-@wk_print_cnt1+1) ROWS ONLY
+</SqlCommand>
+      </dataSource>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,pm_user_name,pm_user_name,,System.String,,False,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>ac0d704a884245fbaf1477b15c257a5f</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageFooterBand1 Ref="5" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,26.3,19,1.4</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageFooterBand1>
+        <HeaderBand1 Ref="6" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,0.9</ClientRectangle>
+          <Components isList="true" count="4">
+            <Text4 Ref="7" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.1,0,5.9,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>5c3b63485bfd422ebafc638797435eb5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>債務人身分證統一編號</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text8 Ref="8" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.3,0,5.8,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>803a61df3f4145d4939b0b190e2eb103</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>債務人姓名</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text3 Ref="9" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,0,6,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>36b2907024d7479c829ec11470ff10ca</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>申請事項</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text12 Ref="10" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.3,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>f8fd1a8841ce4e52aea3063c1ab67f73</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>編號</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </HeaderBand1>
+        <DataBand1 Ref="11" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <CanGrow>False</CanGrow>
+          <ClientRectangle>0,2.1,19,0.9</ClientRectangle>
+          <Components isList="true" count="4">
+            <Text9 Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.3,0,5.8,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>315e9adc79ab45bd82b3e03699bc8f2c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="11" />
+              <Text>{dataSource.姓名}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text9>
+            <Text14 Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.1,0,5.9,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>e7a3149dc02d48cf9fa26d3ce78933d6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="11" />
+              <Text>{dataSource.身分證號}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text14>
+            <Text5 Ref="14" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,0,6,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>e889c841b4284ee1b5df126a71cc23f6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="11" />
+              <Text>查調{dataSource.查調年度}年度所得清單</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text5>
+            <Text13 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.3,0.9</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>細明體,16</Font>
+              <Guid>cad89666c56d40069ea1a8ffeee8c8e2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="11" />
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text13>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>dataSource</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>95af2a930472481ea37da2598f58bce4</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="16" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>標楷體,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>3/8/2021 11:00:20 AM</ReportChanged>
+  <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
+  <ReportFile>C:\Users\ChingJui\Desktop\DY_N\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_Letterprint_GA7_list.mrt</ReportFile>
+  <ReportGuid>8eb20d514c7a4ce4a08049b00304e6f3</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>
