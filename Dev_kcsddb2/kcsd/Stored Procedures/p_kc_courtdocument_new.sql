@@ -1,4 +1,4 @@
-﻿
+﻿--1) 25.08.27 Ray : 調整帶入前案語法, 本保Y為NULL或''都略過
 
 
 CREATE PROCEDURE [kcsd].[p_kc_courtdocument_new] @wk_strt_date datetime,@wk_stop_date datetime,@wk_law_code VARCHAR(1),@wk_law_fmt VARCHAR(2),@wk_print_type VARCHAR(1) = NULL,@wk_case_no VARCHAR(10) = NULL
@@ -96,9 +96,9 @@ FROM
 	A.kc_court_code AS 法院代號,
 	A.kc_doc_no AS 法院案號,
 	A.kc_doc_type AS 法院股別,
-	(SELECT TOP 1 kc_court_code FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院代號,
-	(SELECT TOP 1 kc_doc_no FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院案號,
-	(SELECT TOP 1 kc_doc_type FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院股別,
+	(SELECT TOP 1 kc_court_code FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR A.kc_perm_flag = '' OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR A.kc_perm_flag1 = '' OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR A.kc_perm_flag2 = '' OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院代號, --1
+	(SELECT TOP 1 kc_doc_no        FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR A.kc_perm_flag = '' OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR A.kc_perm_flag1 = '' OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR A.kc_perm_flag2 = '' OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院案號,  
+	(SELECT TOP 1 kc_doc_type     FROM kcsd.kc_lawstatus WHERE kc_case_no = A.kc_case_no AND kc_doc_no IS NOT NULL AND kc_court_code IS NOT NULL AND ((A.kc_perm_flag IS NULL OR A.kc_perm_flag = '' OR kc_perm_flag = A.kc_perm_flag) AND (A.kc_perm_flag1 IS NULL OR A.kc_perm_flag1 = '' OR kc_perm_flag1 = A.kc_perm_flag1) AND (A.kc_perm_flag2 IS NULL OR A.kc_perm_flag2 = '' OR kc_perm_flag2 = A.kc_perm_flag2)) AND kc_law_fmt IN ('C6','X2','XA','XC','XF') ORDER BY kc_law_date DESC) AS 前案法院股別,
 	A.kc_claims_amt AS 債權金額,
 	A.kc_value_date AS 起息日,
 	A.kc_rate_fee AS 利率,
