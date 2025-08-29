@@ -64,6 +64,7 @@ FOR
 			AND kc_law_code='D'
 			AND kc_law_fmt='T1'
 		 )
+		 AND C.kc_case_no IN ('2131823','2141997','2144176','2147683','2181612')
 	ORDER BY c.kc_case_no
 
 	
@@ -75,7 +76,7 @@ BEGIN
 	IF (SELECT COUNT(*) FROM kcsd.kc_customerloan WHERE kc_case_no=@kc_case_no AND kc_id_no IS NOT NULL) >0 SET @FlagCounts+=1 
 	IF (SELECT COUNT(*) FROM kcsd.kc_customerloan WHERE kc_case_no=@kc_case_no AND kc_id_no1 IS NOT NULL) >0 SET @FlagCounts+=1 
 	IF (SELECT COUNT(*) FROM kcsd.kc_customerloan WHERE kc_case_no=@kc_case_no AND kc_id_no2 IS NOT NULL) >0 SET @FlagCounts+=1 
-
+	
 	INSERT INTO kcsd.kc_lawstatus (
 				   kc_case_no, kc_item_no,  
 				   kc_law_date, kc_law_code, kc_law_fmt, kc_area_code, 
@@ -83,7 +84,7 @@ BEGIN
 				   kc_perm_flag, kc_perm_flag1, kc_perm_flag2, 
 				   kc_law_amt ) 
 	SELECT @kc_case_no, (SELECT MAX(kc_item_no)+1 FROM kcsd.kc_lawstatus WHERE kc_case_no=@kc_case_no),
-				   GETDATE(), 'D', 'T1', kc_area_code, 
+				    CONVERT(Date, GETDATE()), 'D', 'T1', kc_area_code, 
 				   'mswang', GETDATE(),
 	               CASE WHEN kc_id_no IS NOT NULL  THEN 'Y' ELSE NULL END,
 	               CASE WHEN kc_id_no1 IS NOT NULL  THEN 'Y' ELSE NULL END,
@@ -99,7 +100,7 @@ BEGIN
 				   kc_perm_flag, kc_perm_flag1, kc_perm_flag2, 
 				   kc_law_amt ) 
 	SELECT @kc_case_no, (SELECT MAX(kc_item_no)+1 FROM kcsd.kc_lawstatus WHERE kc_case_no=@kc_case_no),
-				   GETDATE(), 'E', 'A0', kc_area_code, 
+				   CONVERT(Date, GETDATE()), 'E', 'A0', kc_area_code, 
 				   'mswang', GETDATE(),
 	               CASE WHEN kc_id_no IS NOT NULL  THEN 'Y' ELSE NULL END,
 	               CASE WHEN kc_id_no1 IS NOT NULL  THEN 'Y' ELSE NULL END,
