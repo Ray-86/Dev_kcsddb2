@@ -3,6 +3,7 @@
 --25.08.18 修正語法 - 移除手續費結案條件, 且提供v3(2025.05.01~2025.07.31)   C:\Users\Ray\Documents\Ray\臨時報表\財管1140815-機車部全產品別有佣金之案件 v3.xls 
 --                 調整語法 - 刪除佣金篩選條件, 新增欄位 現價差額, 提供另一報表 (2025.05.01~2025.07.31)  C:\Users\Ray\Documents\Ray\臨時報表\財管1140815-機車部全產品別案件.xls
 --25.09.01 調整語法 - 回復佣金篩選條件, 新增欄位 利率專案, 提供報表 (2025.05.01~2025.07.31)  C:\Users\Ray\Documents\Ray\臨時報表\財管1140901-機車部全產品別有佣金之案件.xls
+--                 調整語法 - 新增欄位 現價差額, 提供報表 (2025.05.01~2025.07.31)  C:\Users\Ray\Documents\Ray\臨時報表\財管1140901-機車部全產品別有佣金之案件 v1.xls
 
 DECLARE @wk_strt_date Date ='2025-05-01',
                    @wk_stop_date Date ='2025-07-31'
@@ -11,7 +12,7 @@ SELECT C.kc_area_code + ' ' + A.kc_area_desc'分公司', CONVERT(Date, C.kc_buy_
 			   CP.kc_comp_code'經銷', AG.kc_agent_name'經銷名稱', CP.kc_sales_code + ' ' + U.UserName'承辦業務', 
 			   C.kc_car_model'形式', ISNULL(C.kc_licn_no,'')'牌照號碼', C.kc_give_amt'撥款金額', 
 			   C.kc_brok_fee2'佣金', C.kc_loan_perd'期數', C.kc_perd_fee'月付款', kc_cons_rate'CP利率',
-			   --C.kc_perd_fee * C.kc_loan_perd - (C.kc_give_amt - C.kc_brok_fee2) '現價差額'
+			   C.kc_perd_fee * C.kc_loan_perd - (C.kc_give_amt - C.kc_brok_fee2) '現價差額',
 			   CP.kc_loan_type+' '+L.kc_type_desc'利率專案'
 FROM kcsd.kc_customerloan C
 INNER JOIN kcsd.kc_cpdata CP ON C.kc_cp_no=CP.kc_cp_no
