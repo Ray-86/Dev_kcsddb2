@@ -32,7 +32,7 @@
         </Columns>
         <CommandTimeout>180</CommandTimeout>
         <Dictionary isRef="1" />
-        <IsCloud>False</IsCloud>
+        <Key>356af2e8bd114b4abc1b85d51a09043a</Key>
         <Name>DataSource1</Name>
         <NameInSource>Dys</NameInSource>
         <Parameters isList="true" count="4">
@@ -41,14 +41,15 @@
           <value>wk_law_code,,23,0</value>
           <value>wk_law_fmt,,23,0</value>
         </Parameters>
-        <SqlCommand>SELECT kc_lawstatus.kc_case_no, kc_lawstatus.kc_doc_date, kc_lawstatus.kc_law_code, kc_lawstatus.kc_law_fmt, kc_lawstatus.kc_court_code, kc_lawstatus.kc_law_amt, kc_customerloan.kc_area_code, 
-kc_customerloan.kc_cust_nameu, kc_customerloan.kc_cust_name1u, kc_customerloan.kc_cust_name2u, kct_area.kc_area_desc
-	FROM kcsd.kc_lawstatus
-	LEFT JOIN kcsd.kc_customerloan ON kc_lawstatus.kc_case_no = kc_customerloan.kc_case_no
-	LEFT JOIN kcsd.kct_area ON kc_customerloan.kc_area_code = kct_area.kc_area_code
-WHERE kc_lawstatus.kc_doc_date BETWEEN @wk_strt_date AND @wk_stop_date
-AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_law_fmt OR @wk_law_fmt = '')
-</SqlCommand>
+        <SqlCommand>
+          SELECT kc_lawstatus.kc_case_no, kc_lawstatus.kc_doc_date, kc_lawstatus.kc_law_code, kc_lawstatus.kc_law_fmt, kc_lawstatus.kc_court_code, kc_lawstatus.kc_law_amt, kc_customerloan.kc_area_code,
+          kc_customerloan.kc_cust_nameu, kc_customerloan.kc_cust_name1u, kc_customerloan.kc_cust_name2u, kct_area.kc_area_desc
+          FROM kcsd.kc_lawstatus
+          LEFT JOIN kcsd.kc_customerloan ON kc_lawstatus.kc_case_no = kc_customerloan.kc_case_no
+          LEFT JOIN kcsd.kct_area ON kc_customerloan.kc_area_code = kct_area.kc_area_code
+          WHERE kc_lawstatus.kc_doc_date BETWEEN @wk_strt_date AND @wk_stop_date
+          AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_law_fmt OR @wk_law_fmt = '')
+        </SqlCommand>
       </DataSource1>
       <dsLawCode Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
         <Alias>dsLawCode</Alias>
@@ -58,7 +59,7 @@ AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_l
         </Columns>
         <CommandTimeout>180</CommandTimeout>
         <Dictionary isRef="1" />
-        <IsCloud>False</IsCloud>
+        <Key>482335d990da4c5c9120a9fc060e7c5b</Key>
         <Name>dsLawCode</Name>
         <NameInSource>Sys</NameInSource>
         <Parameters isList="true" count="0" />
@@ -72,7 +73,7 @@ AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_l
         </Columns>
         <CommandTimeout>180</CommandTimeout>
         <Dictionary isRef="1" />
-        <IsCloud>False</IsCloud>
+        <Key>745ffc3fea984ee4ba87d995ba97f2b7</Key>
         <Name>dsLawFmt</Name>
         <NameInSource>Sys</NameInSource>
         <Parameters isList="true" count="0" />
@@ -88,7 +89,7 @@ AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_l
         </Columns>
         <CommandTimeout>180</CommandTimeout>
         <Dictionary isRef="1" />
-        <IsCloud>False</IsCloud>
+        <Key>036332c513f84d17a00e99e163d32b99</Key>
         <Name>Statistics1</Name>
         <NameInSource>Dys</NameInSource>
         <Parameters isList="true" count="4">
@@ -97,13 +98,15 @@ AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_l
           <value>wk_law_code,,23,0</value>
           <value>wk_law_fmt,,23,0</value>
         </Parameters>
-        <SqlCommand>SELECT kc_customerloan.kc_area_code, kct_area.kc_area_desc, COUNT(*) AS 筆數, SUM(kc_lawstatus.kc_law_amt) AS 總計
-	FROM kcsd.kc_lawstatus
-	LEFT JOIN kcsd.kc_customerloan ON kc_lawstatus.kc_case_no = kc_customerloan.kc_case_no
-	LEFT JOIN kcsd.kct_area ON kc_customerloan.kc_area_code = kct_area.kc_area_code
-WHERE kc_lawstatus.kc_doc_date BETWEEN @wk_strt_date AND @wk_stop_date
-AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_law_fmt OR @wk_law_fmt = '')
-GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
+        <SqlCommand>
+          SELECT kc_customerloan.kc_area_code, kct_area.kc_area_desc, COUNT(*) AS 筆數, SUM(kc_lawstatus.kc_law_amt) AS 總計
+          FROM kcsd.kc_lawstatus
+          LEFT JOIN kcsd.kc_customerloan ON kc_lawstatus.kc_case_no = kc_customerloan.kc_case_no
+          LEFT JOIN kcsd.kct_area ON kc_customerloan.kc_area_code = kct_area.kc_area_code
+          WHERE kc_lawstatus.kc_doc_date BETWEEN @wk_strt_date AND @wk_stop_date
+          AND kc_lawstatus.kc_law_code = @wk_law_code AND (kc_lawstatus.kc_law_fmt = @wk_law_fmt OR @wk_law_fmt = '')
+          GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc
+        </SqlCommand>
       </Statistics1>
       <dsCourtCode Ref="8" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
         <Alias>dsCourtCode</Alias>
@@ -113,7 +116,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
         </Columns>
         <CommandTimeout>180</CommandTimeout>
         <Dictionary isRef="1" />
-        <IsCloud>False</IsCloud>
+        <Key>7db21aff1c2443cf819da219ae6bdc0c</Key>
         <Name>dsCourtCode</Name>
         <NameInSource>Sys</NameInSource>
         <Parameters isList="true" count="0" />
@@ -165,14 +168,16 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
       </dskc_court_code>
     </Relations>
     <Report isRef="0" />
+    <Resources isList="true" count="0" />
     <Variables isList="true" count="3">
-      <value>,pm_user_name,pm_user_name,System.String,TESTNAME,False,False,True</value>
-      <value>,pm_user_code,pm_user_code,System.String,super,False,False,True</value>
-      <value>,pm_user_area,pm_user_area,System.String,,False,False,True</value>
+      <value>,pm_user_name,pm_user_name,,System.String,TESTNAME,False,False,False,True</value>
+      <value>,pm_user_code,pm_user_code,,System.String,super,False,False,False,True</value>
+      <value>,pm_user_area,pm_user_area,,System.String,,False,False,False,True</value>
     </Variables>
   </Dictionary>
   <EngineVersion>EngineV2</EngineVersion>
   <GlobalizationStrings isList="true" count="0" />
+  <Key>05ecd788bfbd4528a2ff9416913c0c04</Key>
   <MetaTags isList="true" count="0" />
   <Pages isList="true" count="2">
     <Page1 Ref="12" type="Page" isKey="true">
@@ -196,7 +201,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Report ID: KCP_LAW23(20170418)</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text22>
@@ -213,7 +218,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Date:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text23>
@@ -232,7 +237,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Text>{Today}</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <TextFormat Ref="17" type="DateFormat" isKey="true" />
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text24>
@@ -251,7 +256,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Text>{Time}</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <TextFormat Ref="19" type="TimeFormat" isKey="true" />
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text25>
@@ -269,7 +274,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>{PageNofMThrough}</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text26>
@@ -287,7 +292,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>User:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text218>
@@ -335,7 +340,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>~</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text221>
@@ -352,7 +357,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Date:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text20>
@@ -385,7 +390,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>~</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text224>
@@ -403,7 +408,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Date:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text226>
@@ -421,7 +426,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Time:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text227>
@@ -439,7 +444,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>Page:</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text228>
@@ -457,7 +462,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>{pm_user_name}</Text>
               <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text229>
@@ -507,7 +512,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>客戶編號</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text16>
@@ -525,7 +530,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>姓名</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text9>
@@ -543,14 +548,14 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>保人二</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text10>
             <Text11 Ref="37" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>13.4,1.7,1.8,0.6</ClientRectangle>
+              <ClientRectangle>13.6,1.7,1.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>7451e852a2204e39ad5750710f2d2f57</Guid>
@@ -561,14 +566,14 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>法院</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text11>
             <Text12 Ref="38" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>15.3,1.7,1.6,0.6</ClientRectangle>
+              <ClientRectangle>15.45,1.7,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>dc5213e8908540379e10aae5ffe39e3d</Guid>
@@ -579,7 +584,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>分公司</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text12>
@@ -597,7 +602,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>金額</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text13>
@@ -615,7 +620,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>保人一</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text29>
@@ -633,14 +638,14 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>公文日</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text19>
             <Text21 Ref="42" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>11.5,1.7,1.8,0.6</ClientRectangle>
+              <ClientRectangle>11.4,1.7,2.1,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>fbdf46c9772540edb2d0f40f96622bf1</Guid>
@@ -651,14 +656,14 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>格式狀態</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text21>
             <Text27 Ref="43" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>9.6,1.7,1.8,0.6</ClientRectangle>
+              <ClientRectangle>9.5,1.7,1.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>20ca46d3bcdc460b877970873caa2cdf</Guid>
@@ -669,13 +674,14 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="13" />
               <Text>事件</Text>
               <TextBrush>[79:129:189]</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text27>
             <HorizontalLinePrimitive1 Ref="44" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0.1,2.3,18.8,0.0254</ClientRectangle>
               <Color>Black</Color>
+              <Conditions isList="true" count="0" />
               <EndCap Ref="45" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
@@ -777,7 +783,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Parent isRef="47" />
               <Text>{DataSource1.kc_law_amt}</Text>
               <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Text5>
@@ -800,7 +806,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
             </Text28>
             <Text30 Ref="55" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>9.6,0,1.8,0.6</ClientRectangle>
+              <ClientRectangle>9.5,0,1.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>b2a08e3ad1324d9cbeba3366509abdbe</Guid>
@@ -816,23 +822,22 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
             </Text30>
             <Text31 Ref="56" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>11.5,0,1.8,0.6</ClientRectangle>
+              <ClientRectangle>11.35,0,2.25,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>38dbe73164ca47cb8abc3568be510b36</Guid>
-              <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text31</Name>
               <Page isRef="12" />
               <Parent isRef="47" />
-              <Text>{DataSource1.dskc_law_fmt.Text}</Text>
+              <Text>{DataSource1.dskc_law_fmt.value}{DataSource1.dskc_law_fmt.Text}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
+              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text31>
             <Text3 Ref="57" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>13.4,0,1.8,0.6</ClientRectangle>
+              <ClientRectangle>13.6,0,1.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>a1cfe94ede4641f0a95af182b64cd6ca</Guid>
@@ -848,7 +853,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
             </Text3>
             <Text4 Ref="58" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>15.3,0,1.6,0.6</ClientRectangle>
+              <ClientRectangle>15.45,0,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>細明體,10</Font>
               <Guid>60272cbe13c740368aa1d7b9480b63fa</Guid>
@@ -865,6 +870,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
             <HorizontalLinePrimitive2 Ref="59" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0.1,0.6,18.8,0.0254</ClientRectangle>
               <Color>0, 0, 39</Color>
+              <Conditions isList="true" count="0" />
               <EndCap Ref="60" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
@@ -979,6 +985,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.2,0.8,7.4,1.3</ClientRectangle>
               <Components isList="true" count="0" />
+              <Conditions isList="true" count="0" />
               <Name>SubReport1</Name>
               <Page isRef="12" />
               <Parameters isList="true" count="0" />
@@ -988,6 +995,7 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
             <HorizontalLinePrimitive3 Ref="69" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0,0,19,0.0254</ClientRectangle>
               <Color>0, 0, 39</Color>
+              <Conditions isList="true" count="0" />
               <EndCap Ref="70" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
@@ -1158,13 +1166,8 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
       <PageHeight>29.7</PageHeight>
       <PageWidth>9.4</PageWidth>
       <Report isRef="0" />
-      <Watermark Ref="82" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
-        <Font>Arial,100</Font>
-        <TextBrush>[50:0:0:0]</TextBrush>
-      </Watermark>
     </subReport_1>
   </Pages>
-  <PrinterSettings Ref="83" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
   <ReferencedAssemblies isList="true" count="8">
     <value>System.Dll</value>
     <value>System.Drawing.Dll</value>
@@ -1176,35 +1179,37 @@ GROUP BY kc_customerloan.kc_area_code, kct_area.kc_area_desc</SqlCommand>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>8/28/2017 2:30:45 PM</ReportChanged>
+  <ReportChanged>9/5/2025 9:22:47 AM</ReportChanged>
   <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
-  <ReportFile>C:\ProjectFiles\DyWeb\CMS.Web\Areas\Dys\Reports\Index0023.mrt</ReportFile>
-  <ReportGuid>6f719993a4504420bd129884ddf7212c</ReportGuid>
+  <ReportFile>C:\Users\Ray\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\Index0023.mrt</ReportFile>
+  <ReportGuid>e956fdb9634d4e1a9da997391c62ad7a</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
-  <ReportVersion>2014.3.0</ReportVersion>
-  <Script>using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Data;
-using Stimulsoft.Controls;
-using Stimulsoft.Base.Drawing;
-using Stimulsoft.Report;
-using Stimulsoft.Report.Dialogs;
-using Stimulsoft.Report.Components;
+  <ReportVersion>2020.2.1.0</ReportVersion>
+  <Script>
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using System.Data;
+    using Stimulsoft.Controls;
+    using Stimulsoft.Base.Drawing;
+    using Stimulsoft.Report;
+    using Stimulsoft.Report.Dialogs;
+    using Stimulsoft.Report.Components;
 
-namespace Reports
-{
+    namespace Reports
+    {
     public class Report : Stimulsoft.Report.StiReport
     {
-        public Report()        {
-            this.InitializeComponent();
-        }
-
-        #region StiReport Designer generated code - do not modify
-		#endregion StiReport Designer generated code - do not modify
+    public Report()        {
+    this.InitializeComponent();
     }
-}</Script>
+
+    #region StiReport Designer generated code - do not modify
+    #endregion StiReport Designer generated code - do not modify
+    }
+    }
+  </Script>
   <ScriptLanguage>CSharp</ScriptLanguage>
   <Styles isList="true" count="0" />
 </StiSerializer>
