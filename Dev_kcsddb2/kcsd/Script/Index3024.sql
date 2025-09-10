@@ -1,4 +1,6 @@
 ﻿-- 報表 - 稅務類 : 預估年度分期營收表
+-- 25.09.10 -修改計算公式 1. 財務收入小計 = 利息收入 + 手續費收入
+                                             --2. 財務收入(未稅) = 財務收入小計 / 1.05
 DECLARE @wk_year_no int = '2027',  --年度
 				   @wk_issu_code varchar(2)='06' --公司別
 DECLARE @Result TABLE 
@@ -175,7 +177,8 @@ FROM (
 	    7 AS order_no,
         MONTH(P.kc_expt_date) AS _month,
         '財務收入小計' AS Item,
-        CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)*1.05,0)) AS _fee
+        --CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)*1.05,0)) AS _fee
+		SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -186,7 +189,9 @@ FROM (
 	    8 AS order_no,
         MONTH(P.kc_expt_date) AS _month,
         '財務收入小計(未稅)' AS Item,
-        SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
+        --SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
+		--CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)/1.05,0)) AS _fee
+		CONVERT(INT,ROUND(SUM(CONVERT(DECIMAL(18,2),R.kc_invo_amt2) + CONVERT(DECIMAL(18,2),R.kc_proc_amt2)) / 1.05, 0)) AS _fee
     FROM @Result R
     INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
     INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
