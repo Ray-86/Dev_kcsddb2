@@ -41,6 +41,8 @@
         </Parameters>
         <SqlCommand>
           -- 報表 - 稅務類 : 預估年度分期營收表
+          -- 25.09.10 -修改計算公式 1. 財務收入小計 = 利息收入 + 手續費收入
+          --2. 財務收入(未稅) = 財務收入小計 / 1.05
           DECLARE @Result TABLE
           (
           rate decimal(3, 2), --利率
@@ -195,7 +197,7 @@
           7 AS order_no,
           MONTH(P.kc_expt_date) AS _month,
           '財務收入小計' AS Item,
-          CONVERT(INT,ROUND(SUM(R.kc_invo_amt2+R.kc_proc_amt2)*1.05,0)) AS _fee
+          SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
           FROM @Result R
           INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
           INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -206,7 +208,7 @@
           8 AS order_no,
           MONTH(P.kc_expt_date) AS _month,
           '財務收入小計(未稅)' AS Item,
-          SUM(R.kc_invo_amt2+R.kc_proc_amt2) AS _fee
+          CONVERT(INT,ROUND(SUM(CONVERT(DECIMAL(18,2),R.kc_invo_amt2) + CONVERT(DECIMAL(18,2),R.kc_proc_amt2)) / 1.05, 0)) AS _fee
           FROM @Result R
           INNER JOIN kcsd.kc_loanpayment P ON R.kc_perd_item = P.kc_perd_no AND R.kc_case_no = P.kc_case_no
           INNER JOIN kcsd.kc_customerloan C ON R.kc_case_no = C.kc_case_no
@@ -318,7 +320,7 @@
               <Name>Text22</Name>
               <Page isRef="6" />
               <Parent isRef="7" />
-              <Text>Report ID : Index3024(20250825)</Text>
+              <Text>Report ID : Index3024(20250910)</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
@@ -2302,7 +2304,6 @@
         <DataBand7 Ref="152" type="DataBand" isKey="true">
           <Border>Bottom;Black;1;Solid;False;4;Black</Border>
           <Brush>[189:225:253]</Brush>
-          <BusinessObjectGuid isNull="true" />
           <ClientRectangle>0,11,41,1</ClientRectangle>
           <Components isList="true" count="14">
             <Text102 Ref="153" type="Text" isKey="true">
@@ -3444,10 +3445,10 @@
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>8/26/2025 10:12:26 AM</ReportChanged>
+  <ReportChanged>9/10/2025 11:23:21 AM</ReportChanged>
   <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
   <ReportFile>C:\Users\Ray\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\Index3024.mrt</ReportFile>
-  <ReportGuid>6bfc4dc8cdd04fdf901c1392a5ab4ea9</ReportGuid>
+  <ReportGuid>3ec3c5fdab6a4ebb9c2f4db8d103b848</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2020.2.1.0</ReportVersion>
