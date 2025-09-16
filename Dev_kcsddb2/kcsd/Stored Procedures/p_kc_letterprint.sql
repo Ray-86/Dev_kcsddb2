@@ -187,8 +187,12 @@ LEFT JOIN kcsd.kct_court P ON O.kc_court_code = P.kc_court_code
 LEFT JOIN (SELECT kc_case_no,'並賠償執行費及程序費用。' AS text FROM kcsd.kc_customerloan WHERE kc_oriclaims_amt = kc_claims_amt AND kc_orivalue_date = kc_value_date) AS Q ON B.kc_case_no = Q.kc_case_no
 --2024/10/15 修改B催款書-帳單金額
 left join(
-select c.kc_case_no , ISNULL(kc_over_amt,0) + (case when  kc_perd_fee <= 2000 then 500 else 700 end * ISNULL(kc_dday_count,0)) + ISNULL(X.fee,0) as new_kc_over_fee
+select c.kc_case_no , 
+		    ISNULL(kc_over_amt,0) + 
+			(case when  kc_perd_fee <= 2000 then 500 else 700 end * CASE WHEN P.kc_delay_code='M1' THEN 2 WHEN P.kc_delay_code='M2' THEN 3 WHEN P.kc_delay_code IN ('M3','M9') THEN 4 ELSE 0 END) + 
+			ISNULL(X.fee,0) as new_kc_over_fee
 from kcsd.kc_customerloan c
+INNER JOIN kcsd.kc_pushassign P ON C.kc_case_no=P.kc_case_no AND kc_stop_date IS NULL 
 --程序費
 left join (
 select A.kc_case_no,A.kc_law_amt - ISNULL(B.kc_pay_fee,0) as fee from(
