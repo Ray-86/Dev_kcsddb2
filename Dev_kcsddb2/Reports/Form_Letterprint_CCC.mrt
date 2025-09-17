@@ -9,7 +9,7 @@
         <Name>Dys</Name>
       </Dys>
     </Databases>
-    <DataSources isList="true" count="3">
+    <DataSources isList="true" count="4">
       <letter Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
         <Alias>letter</Alias>
         <Columns isList="true" count="112">
@@ -192,9 +192,25 @@ kcsd.kc_customerloan
 
 </SqlCommand>
       </kc_birth_date>
+      <CY Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>CY</Alias>
+        <Columns isList="true" count="1">
+          <value>kc_case_no,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>43e6f3bb442541dc8e685b05bfc2c3c4</Key>
+        <Name>CY</Name>
+        <NameInSource>Dys</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT kc_case_no
+FROM kcsd.kc_lawstatus
+WHERE kc_law_fmt='CY'
+GROUP BY kc_case_no</SqlCommand>
+      </CY>
     </DataSources>
-    <Relations isList="true" count="1">
-      <名稱 Ref="6" type="DataRelation" isKey="true">
+    <Relations isList="true" count="2">
+      <名稱 Ref="7" type="DataRelation" isKey="true">
         <Alias>名稱</Alias>
         <ChildColumns isList="true" count="1">
           <value>客戶編號</value>
@@ -208,6 +224,20 @@ kcsd.kc_customerloan
         </ParentColumns>
         <ParentSource isRef="5" />
       </名稱>
+      <本票正本 Ref="8" type="DataRelation" isKey="true">
+        <Alias>本票正本</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>客戶編號</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>本票正本</Name>
+        <NameInSource>Relation</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>kc_case_no</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </本票正本>
     </Relations>
     <Report isRef="0" />
     <Resources isList="true" count="0" />
@@ -221,17 +251,17 @@ kcsd.kc_customerloan
   <Key>ab724753de6c4a91b2ae9a97da578b12</Key>
   <MetaTags isList="true" count="0" />
   <Pages isList="true" count="1">
-    <Page1 Ref="7" type="Page" isKey="true">
+    <Page1 Ref="9" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Components isList="true" count="1">
-        <DataBand2 Ref="8" type="DataBand" isKey="true">
+        <DataBand2 Ref="10" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
           <BusinessObjectGuid isNull="true" />
           <CanGrow>False</CanGrow>
           <ClientRectangle>0,0.4,19.4,27.5</ClientRectangle>
           <Components isList="true" count="44">
-            <Text6 Ref="9" type="Text" isKey="true">
+            <Text6 Ref="11" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>11.9,0,7.4,0.3</ClientRectangle>
@@ -242,13 +272,13 @@ kcsd.kc_customerloan
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text6</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{letter.客戶編號}/{letter.法院名稱}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text6>
-            <Text7 Ref="10" type="Text" isKey="true">
+            <Text7 Ref="12" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,4.6,19.2,3.5</ClientRectangle>
@@ -259,14 +289,14 @@ kcsd.kc_customerloan
               <Guid>de0c07e9fdbf460aa6d57769230cec03</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text7</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{IIF(letter.本人身分證號 != "","債務人：" + letter.本人姓名 + " " + letter.本人身分證號 + " " + letter.名稱.本人生日 + " " + letter.本人戶籍地址 + "\n" + letter.本人法定代理人 + "\n","")}{IIF(letter.保一身分證號 != "","債務人：" + letter.保一姓名 + " " + letter.保一身分證號 + " " + letter.名稱.保1生日 + " " + letter.保一戶籍地址 + "\n" + letter.保一法定代理人 + "\n","")}{IIF(letter.保二身分證號 != "","債務人：" + letter.保二姓名 + " " + letter.保二身分證號 + " " + letter.名稱.保2生日 + " " + letter.保二戶籍地址 + "\n" + letter.保二法定代理人 ,"")}本次執行{letter.前所清名單}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text7>
-            <Text8 Ref="11" type="Text" isKey="true">
+            <Text8 Ref="13" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,0.4,19.2,1</ClientRectangle>
@@ -277,13 +307,13 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text8</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>強 制 執 行 聲 請 狀</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text8>
-            <Text15 Ref="12" type="Text" isKey="true">
+            <Text15 Ref="14" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,1.6,19.2,0.6</ClientRectangle>
@@ -293,13 +323,13 @@ kcsd.kc_customerloan
               <Guid>d40deba445f249d9ac89325764701ee3</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text15</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>訴訟標的金額或價額：新台幣{letter.債權金額}元整</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text15>
-            <Text18 Ref="13" type="Text" isKey="true">
+            <Text18 Ref="15" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,2.8,2.9,0.6</ClientRectangle>
@@ -309,13 +339,13 @@ kcsd.kc_customerloan
               <Guid>4da992f874014fa89037ad6f641fa7d2</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text18</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>法定代理人</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text18>
-            <Text55 Ref="14" type="Text" isKey="true">
+            <Text55 Ref="16" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,2.2,2.9,0.6</ClientRectangle>
@@ -325,13 +355,13 @@ kcsd.kc_customerloan
               <Guid>0c3453d9483b43c09bff311bd39c531c</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text55</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>債　權　人</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text55>
-            <Text66 Ref="15" type="Text" isKey="true">
+            <Text66 Ref="17" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,8.1,19.2,0.6</ClientRectangle>
@@ -341,13 +371,13 @@ kcsd.kc_customerloan
               <Guid>cbd86dbfe9c342dc98ecd71213c1a15d</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text66</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>為聲請強制執行事：</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text66>
-            <Text67 Ref="16" type="Text" isKey="true">
+            <Text67 Ref="18" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,8.7,18.2,0.6</ClientRectangle>
@@ -357,13 +387,13 @@ kcsd.kc_customerloan
               <Guid>ca508074d4164b659464cfc733ad5d89</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text67</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>聲請事項</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text67>
-            <Text68 Ref="17" type="Text" isKey="true">
+            <Text68 Ref="19" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,9.3,1,0.6</ClientRectangle>
@@ -373,13 +403,13 @@ kcsd.kc_customerloan
               <Guid>a2f099d463c54450ace69ffc9d837436</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text68</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>壹、</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text68>
-            <Text69 Ref="18" type="Text" isKey="true">
+            <Text69 Ref="20" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,9.9,18.2,2.4</ClientRectangle>
@@ -389,14 +419,14 @@ kcsd.kc_customerloan
               <Guid>aea1c8ad7efa48cb984c42ebceff5736</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text69</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>執行金額：債務人應給付債權人全部債權，即新台幣{letter.債權金額}元整及自中華民國{Year(letter.起息日)-1911}年{Month(letter.起息日)}月{Day(letter.起息日)}日起{IIF((letter.利率 &gt; 16 &amp;&amp; letter.起息日 &lt; System.DateTime.Parse("2021-07-20")),"至110年7月19日","")}按週年利率百分之{letter.利率}計算利息{IIF((letter.利率 &gt; 16 &amp;&amp; letter.起息日 &lt; System.DateTime.Parse("2021-07-20")),"，及自110年7月20日起按週年利率百分之16計算利息","")}至清償日。{letter.代查受償}{letter.代查受償2}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text69>
-            <Text70 Ref="19" type="Text" isKey="true">
+            <Text70 Ref="21" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,9.9,1,0.6</ClientRectangle>
@@ -406,13 +436,13 @@ kcsd.kc_customerloan
               <Guid>ae596802bc6c4e8dafc3589768715492</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text70</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>貳、</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text70>
-            <Text71 Ref="20" type="Text" isKey="true">
+            <Text71 Ref="22" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,12.3,1,0.6</ClientRectangle>
@@ -422,13 +452,13 @@ kcsd.kc_customerloan
               <Guid>e51a4211c74b4e0aac5a27008b5aea2e</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text71</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>參、</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text71>
-            <Text72 Ref="21" type="Text" isKey="true">
+            <Text72 Ref="23" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,9.3,18.2,0.6</ClientRectangle>
@@ -439,14 +469,14 @@ kcsd.kc_customerloan
               <Guid>58ce03613d394eb283a98c4b3cd7410f</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text72</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>執行名義：臺灣{letter.前案法院名稱}地方法院{letter.前案法院案號}債權憑證。</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text72>
-            <Text73 Ref="22" type="Text" isKey="true">
+            <Text73 Ref="24" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,12.3,18.2,0.6</ClientRectangle>
@@ -456,14 +486,14 @@ kcsd.kc_customerloan
               <Guid>62fa445d0e4b45f79daa7378aa4c14a0</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text73</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>請求實現之權利：</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text73>
-            <Text74 Ref="23" type="Text" isKey="true">
+            <Text74 Ref="25" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.8,12.9,17.5,4</ClientRectangle>
@@ -473,14 +503,14 @@ kcsd.kc_customerloan
               <Guid>aa680739ca5b4f249688f49356c68ef8</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text74</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>關於兩造間強制執行事件，為考量執行實益，債權人僅欲聲請執行債務人薪資或勞作金及保管金。債權人雖依稅捐稽征法規定，逕向國稅局申調債務人所得資料清單，惟查，所得資料清單查無所得資料，或雖查得相關資料，惟債務人已離職，是單憑資料清單尚難確定即時給薪單位資料。為迅速實現債權，狀請 鈞長援強制執行法第19條規定，函查勞保及健保投保單位，如不能提供健保資料，請准予函查債務人在監在押資料或提供特殊人口註記資料並請確認債務人現於何處監獄(看守所)執行。</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text74>
-            <Text75 Ref="24" type="Text" isKey="true">
+            <Text75 Ref="26" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>11.9,2.2,7.4,0.6</ClientRectangle>
@@ -490,13 +520,13 @@ kcsd.kc_customerloan
               <Guid>5d9b3369f7404fdf96d67fae6afcf03a</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text75</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>新北市中和區建八路202號二樓</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text75>
-            <Text76 Ref="25" type="Text" isKey="true">
+            <Text76 Ref="27" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>3,2.2,8.9,0.6</ClientRectangle>
@@ -506,13 +536,13 @@ kcsd.kc_customerloan
               <Guid>2cf4df52d1e94fff8a178b5a1cc5a93e</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text76</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{letter.債權人}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text76>
-            <Text77 Ref="26" type="Text" isKey="true">
+            <Text77 Ref="28" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>3,2.8,8.9,0.6</ClientRectangle>
@@ -522,13 +552,13 @@ kcsd.kc_customerloan
               <Guid>aba6b89b8e1d44139237cc6615f2a254</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text77</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{letter.法定代理人}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text77>
-            <Text78 Ref="27" type="Text" isKey="true">
+            <Text78 Ref="29" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>11.9,2.8,7.4,0.6</ClientRectangle>
@@ -538,13 +568,13 @@ kcsd.kc_customerloan
               <Guid>512c514c0dba4e9687fb128d3b7ebfab</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text78</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>同上</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text78>
-            <Text79 Ref="28" type="Text" isKey="true">
+            <Text79 Ref="30" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,3.4,2.9,0.6</ClientRectangle>
@@ -554,13 +584,13 @@ kcsd.kc_customerloan
               <Guid>f9ad61c7759e4dea86078417716b4a79</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text79</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>送達代收人</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text79>
-            <Text80 Ref="29" type="Text" isKey="true">
+            <Text80 Ref="31" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>3,3.4,8.9,0.6</ClientRectangle>
@@ -570,13 +600,13 @@ kcsd.kc_customerloan
               <Guid>a09ad6a5be4d4935b812c14307323f76</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text80</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{v_Employee.EmpName}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text80>
-            <Text81 Ref="30" type="Text" isKey="true">
+            <Text81 Ref="32" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>11.9,3.4,7.4,0.6</ClientRectangle>
@@ -586,13 +616,13 @@ kcsd.kc_customerloan
               <Guid>e4d6774a9d9844b0ab4c465560259e73</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text81</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>同上</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text81>
-            <Text82 Ref="31" type="Text" isKey="true">
+            <Text82 Ref="33" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>3,4,16.3,0.6</ClientRectangle>
@@ -602,13 +632,13 @@ kcsd.kc_customerloan
               <Guid>5f83e29bc6e849e89a21a432459c6295</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text82</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>聯絡電話：02-22268886＃{v_Employee.ExtensionNumber}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text82>
-            <Text83 Ref="32" type="Text" isKey="true">
+            <Text83 Ref="34" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,12.9,0.7,0.6</ClientRectangle>
@@ -618,14 +648,14 @@ kcsd.kc_customerloan
               <Guid>05ada69a6ca24b44b444c7626e6130a0</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text83</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>1.</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text83>
-            <Text84 Ref="33" type="Text" isKey="true">
+            <Text84 Ref="35" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.8,16.9,17.5,2.8</ClientRectangle>
@@ -635,8 +665,8 @@ kcsd.kc_customerloan
               <Guid>63320dab1ecd48c099e9aa1cef50a2dd</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text84</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>就勞保查得債務人對第三人每月得支領之各項薪資債權(包括薪資、獎金、津貼、補助費、研究費…等在內)。
 就健保投保在法務部矯正署，債務人為受刑人，對第三人勞作金及保管金債權。
 就健保投保在國防部，查得債務人為現役軍人，對第三人薪資債權。
@@ -645,7 +675,7 @@ kcsd.kc_customerloan
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text84>
-            <Text85 Ref="34" type="Text" isKey="true">
+            <Text85 Ref="36" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,16.9,0.7,0.6</ClientRectangle>
@@ -655,14 +685,14 @@ kcsd.kc_customerloan
               <Guid>8e775f87662f422b8b3d601e2c982bac</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text85</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>2.</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text85>
-            <Text86 Ref="35" type="Text" isKey="true">
+            <Text86 Ref="37" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.8,19.7,17.5,1.6</ClientRectangle>
@@ -672,14 +702,14 @@ kcsd.kc_customerloan
               <Guid>e7efad7c95d24e71bbf3cec56802880f</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text86</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>查得債務人之第三人所在地屬  鈞院轄區，請逕發執行命令，若非貴院管轄，懇請  鈞院發還執行名義並檢附第三人資料，若查無資料，懇請  核賜債權憑證或於債權憑證加註執行紀錄報結。</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text86>
-            <Text87 Ref="36" type="Text" isKey="true">
+            <Text87 Ref="38" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.1,19.7,0.7,0.6</ClientRectangle>
@@ -689,14 +719,14 @@ kcsd.kc_customerloan
               <Guid>30ea16b14be24aa2b9ea450bc5fc951f</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text87</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>3.</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text87>
-            <Text17 Ref="37" type="Text" isKey="true">
+            <Text17 Ref="39" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.8,21.3,3.5,0.7</ClientRectangle>
@@ -706,14 +736,14 @@ kcsd.kc_customerloan
               <Guid>7f34e31f6e364b03b2db252d13121829</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text17</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>謹      呈</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text17>
-            <Text56 Ref="38" type="Text" isKey="true">
+            <Text56 Ref="40" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.7,24.7,1.2,0.6</ClientRectangle>
@@ -724,14 +754,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text56</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>華</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text56>
-            <Text58 Ref="39" type="Text" isKey="true">
+            <Text58 Ref="41" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>3.3,24.7,1.2,0.6</ClientRectangle>
@@ -742,14 +772,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text58</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>民</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text58>
-            <Text59 Ref="40" type="Text" isKey="true">
+            <Text59 Ref="42" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>5,24.7,1.2,0.6</ClientRectangle>
@@ -760,14 +790,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text59</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>國</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text59>
-            <Text60 Ref="41" type="Text" isKey="true">
+            <Text60 Ref="43" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>6.7,24.7,1.8,0.6</ClientRectangle>
@@ -778,14 +808,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text60</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{int.Parse(Substring(letter.Parameters["wk_letter_date"].ParameterValue,0,4))-1911}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text60>
-            <Text61 Ref="42" type="Text" isKey="true">
+            <Text61 Ref="44" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>8.9,24.7,1.2,0.6</ClientRectangle>
@@ -796,14 +826,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text61</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>年</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text61>
-            <Text62 Ref="43" type="Text" isKey="true">
+            <Text62 Ref="45" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>10.5,24.7,1.8,0.6</ClientRectangle>
@@ -814,14 +844,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text62</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{int.Parse(Substring(letter.Parameters["wk_letter_date"].ParameterValue,5,2))}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text62>
-            <Text63 Ref="44" type="Text" isKey="true">
+            <Text63 Ref="46" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>12.8,24.7,1.2,0.6</ClientRectangle>
@@ -832,14 +862,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text63</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>月</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text63>
-            <Text64 Ref="45" type="Text" isKey="true">
+            <Text64 Ref="47" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>14.6,24.7,1.8,0.6</ClientRectangle>
@@ -850,14 +880,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text64</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>{int.Parse(Substring(letter.Parameters["wk_letter_date"].ParameterValue,8,2))}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text64>
-            <Text65 Ref="46" type="Text" isKey="true">
+            <Text65 Ref="48" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>16.8,24.7,2.5,0.6</ClientRectangle>
@@ -868,14 +898,14 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text65</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>日</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text65>
-            <Text91 Ref="47" type="Text" isKey="true">
+            <Text91 Ref="49" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>1.9,22.7,17.4,1.8</ClientRectangle>
@@ -886,16 +916,15 @@ kcsd.kc_customerloan
               <Guid>e49730e3a09747c882e4ec85732daaab</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text91</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
-              <Text>1.臺灣{letter.前案法院名稱}地方法院{letter.前案法院案號}債權憑證正本。
-2.本票正本。
-3.綜合所得稅各類所得資料清單。</Text>
+              <Page isRef="9" />
+              <Parent isRef="10" />
+              <Text>1.臺灣{letter.前案法院名稱}地方法院{letter.前案法院案號}債權憑證正本{IIF(letter.本票正本.kc_case_no == letter.客戶編號 ,"","、本票正本")}。
+2.綜合所得稅各類所得資料清單。</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text91>
-            <Text94 Ref="48" type="Text" isKey="true">
+            <Text94 Ref="50" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,22,19.2,0.7</ClientRectangle>
@@ -906,14 +935,14 @@ kcsd.kc_customerloan
               <Guid>a70a5563148b4b99ad634645f787a779</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text94</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>臺灣{letter.法院名稱}地方法院   民事執行處　　公鑒</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text94>
-            <Text95 Ref="49" type="Text" isKey="true">
+            <Text95 Ref="51" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,22.7,1.9,0.5</ClientRectangle>
@@ -923,14 +952,14 @@ kcsd.kc_customerloan
               <Guid>7af26000117041bb9602c448457895c4</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text95</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>附件：</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
             </Text95>
-            <Text96 Ref="50" type="Text" isKey="true">
+            <Text96 Ref="52" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,25.5,19.2,0.6</ClientRectangle>
@@ -940,13 +969,13 @@ kcsd.kc_customerloan
               <Guid>2f544d9133af4a30967f69a6643e3862</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text96</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>具  狀  人：{letter.債權人}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text96>
-            <Text97 Ref="51" type="Text" isKey="true">
+            <Text97 Ref="53" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,26.3,19.2,0.6</ClientRectangle>
@@ -956,13 +985,13 @@ kcsd.kc_customerloan
               <Guid>978ce07e751e417fb65ac020898aa065</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text97</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>法定代理人：{letter.法定代理人}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
             </Text97>
-            <Text98 Ref="52" type="Text" isKey="true">
+            <Text98 Ref="54" type="Text" isKey="true">
               <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <ClientRectangle>0.1,24.7,1.2,0.6</ClientRectangle>
@@ -973,8 +1002,8 @@ kcsd.kc_customerloan
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text98</Name>
-              <Page isRef="7" />
-              <Parent isRef="8" />
+              <Page isRef="9" />
+              <Parent isRef="10" />
               <Text>中</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
@@ -987,8 +1016,8 @@ kcsd.kc_customerloan
           <Filters isList="true" count="0" />
           <Guid>b812d2f83cb34db29621eac57d04afb5</Guid>
           <Name>DataBand2</Name>
-          <Page isRef="7" />
-          <Parent isRef="7" />
+          <Page isRef="9" />
+          <Parent isRef="9" />
           <SkipFirst>False</SkipFirst>
           <Sort isList="true" count="0" />
         </DataBand2>
@@ -1002,7 +1031,7 @@ kcsd.kc_customerloan
       <PageWidth>21</PageWidth>
       <PaperSize>A4</PaperSize>
       <Report isRef="0" />
-      <Watermark Ref="53" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="55" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>標楷體,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
@@ -1019,10 +1048,10 @@ kcsd.kc_customerloan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>4/11/2024 5:10:07 PM</ReportChanged>
+  <ReportChanged>9/17/2025 5:46:00 PM</ReportChanged>
   <ReportCreated>6/13/2013 11:41:30 AM</ReportCreated>
-  <ReportFile>C:\Users\kpwang\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_Letterprint_CCC.mrt</ReportFile>
-  <ReportGuid>50760e757328415b8954632f1d110b65</ReportGuid>
+  <ReportFile>C:\Users\Ray\Desktop\DyWeb\CMS.Web\CMS.Web\Areas\Dys\Reports\Form_Letterprint_CCC.mrt</ReportFile>
+  <ReportGuid>ebff10e730e04114b3f45a5034104ec0</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2020.2.1.0</ReportVersion>
