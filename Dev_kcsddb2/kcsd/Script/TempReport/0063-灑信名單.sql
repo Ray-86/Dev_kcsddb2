@@ -32,9 +32,13 @@ WHERE DATEDIFF(MONTH, D.最早應繳日, GETDATE()) >=18
      AND (D.最後繳費日 IS NULL OR DATEDIFF(MONTH, D.最後繳費日, GETDATE()) >= 6 )
 --ORDER BY 客編
 
-
+/*
 INSERT INTO #ID
-SELECT DISTINCT 本人身分證字號 FROM #TB
+SELECT DISTINCT 本人身分證字號 FROM #TB WHERE 本人身分證字號 IS NOT NULL
+INSERT INTO #ID
+SELECT DISTINCT 保1身分證字號 FROM #TB WHERE 保1身分證字號 IS NOT NULL
+INSERT INTO #ID
+SELECT DISTINCT 保2身分證字號 FROM #TB WHERE 保2身分證 IS NOT NULL
 
 
 INSERT INTO #CU
@@ -80,3 +84,89 @@ FROM
 		 AND 保2姓名 IS NOT NULL
 ) d
 ORDER BY  d.客編, d.順序
+
+*/
+
+SELECT 客編, [本/保], 姓名, 身分證字號, CASE WHEN 狀態 ='' THEN '' ELSE 狀態+SC.[Text] END '狀態', 戶籍地址,
+			   最早應繳日, 最後繳費日, 委派代號, 委派分類
+FROM 
+(
+	SELECT 客編, [本/保], 姓名, 身分證字號, 狀態, 戶籍地址,
+				   最早應繳日, 最後繳費日, 委派代號, 委派分類,
+				   ROW_NUMBER() OVER (PARTITION BY 身分證字號 ORDER BY 客編, Seq) AS rn
+	FROM
+	(
+		SELECT 客編, [本/保], 姓名, 身分證字號, 狀態, 戶籍地址, 
+		               最早應繳日, 最後繳費日, 委派代號, 委派分類, '1' 'Seq'
+		FROM
+		(
+			SELECT 
+				客編,
+				'本' '本/保',
+				本人姓名'姓名',
+				本人身分證字號'身分證字號',
+				本人狀態'狀態',
+				本人戶籍'戶籍地址',
+				最早應繳日,
+				最後繳費日,
+				委派代號,
+				委派分類,
+				ROW_NUMBER() OVER(PARTITION BY 本人身分證字號 ORDER BY 客編 DESC) AS rn
+			FROM #TB 
+			WHERE 本人狀態 NOT IN ('B', 'C', 'D')
+		) AS A
+		WHERE A.rn = 1
+
+		UNION
+
+		SELECT 客編, [本/保], 姓名, 身分證字號, 狀態, 戶籍地址, 
+		               最早應繳日, 最後繳費日, 委派代號, 委派分類, '2' 'Seq'
+		FROM
+		(
+			SELECT 
+				客編,
+				'保1' '本/保',
+				保1姓名'姓名',
+				保1身分證字號'身分證字號',
+				保1狀態'狀態',
+				保1戶籍'戶籍地址',
+				最早應繳日,
+				最後繳費日,
+				委派代號,
+				委派分類,
+				ROW_NUMBER() OVER(PARTITION BY 保1身分證字號 ORDER BY 客編 DESC) AS rn
+			FROM #TB 
+			WHERE 保1身分證字號 IS NOT NULL
+			    AND 保1狀態 NOT IN ('B', 'C', 'D')
+		) AS A
+		WHERE A.rn = 1
+
+		UNION
+
+		SELECT 客編, [本/保], 姓名, 身分證字號, 狀態, 戶籍地址, 
+		               最早應繳日, 最後繳費日, 委派代號, 委派分類, '3' 'Seq'
+		FROM
+		(
+			SELECT 
+				客編,
+				'保2' '本/保',
+				保2姓名'姓名',
+				保2身分證字號'身分證字號',
+				保2狀態'狀態',
+				保2戶籍'戶籍地址',
+				最早應繳日,
+				最後繳費日,
+				委派代號,
+				委派分類,
+				ROW_NUMBER() OVER(PARTITION BY 保2身分證字號 ORDER BY 客編 DESC) AS rn
+			FROM #TB 
+			WHERE 保2身分證字號 IS NOT NULL
+			     AND 保2狀態 NOT IN ('B', 'C', 'D')
+		) AS A
+		WHERE A.rn = 1
+	) AS D 
+)AS R
+LEFT JOIN [Zephyr.Sys].dbo.sys_code SC ON CodeType='CustStatus' AND 狀態=SC.[Value]
+WHERE rn=1
+ORDER BY 客編
+
