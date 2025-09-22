@@ -1,11 +1,4 @@
-﻿
-
-
--- ==========================================================================================
-
--- ==========================================================================================
-
-CREATE   PROCEDURE [kcsd].[p_kc_index3012]	@pm_strt_date datetime = '2003-05-01', @pm_stop_date datetime = NULL, @pm_strt_date2 datetime = '2003-05-01', @pm_stop_date2 datetime = NULL, @wk_issu_code varchar(2) = NULL, @IsShowkc_law_fmt varchar(5) = NULL
+﻿CREATE  PROCEDURE [kcsd].[p_kc_index3012]	@pm_strt_date datetime = '2003-05-01', @pm_stop_date datetime = NULL, @pm_strt_date2 datetime = '2003-05-01', @pm_stop_date2 datetime = NULL, @wk_issu_code varchar(2) = NULL, @IsShowkc_law_fmt varchar(5) = NULL
 AS
 
 DECLARE @tmp_debtage TABLE 
@@ -24,7 +17,7 @@ SELECT kc_customerloan.kc_case_no, kc_cust_nameu, kc_customerloan.kc_area_code, 
 FORMAT(kc_buy_date,'yyMM') AS wk_perd_yymm, kc_buy_date, tmp_debtage.kc_dday_count, tmp_debtage.kc_expt_sum AS kc_over_amt, tmp_debtage.kc_arec_amt
 FROM kcsd.kc_customerloan
 INNER JOIN @tmp_debtage AS tmp_debtage ON kc_customerloan.kc_case_no = tmp_debtage.kc_case_no
-WHERE (LEFT(kc_customerloan.kc_case_no,1) = 'T' OR LEFT(kc_customerloan.kc_case_no,1) BETWEEN '0' AND '5')
+WHERE (LEFT(kc_customerloan.kc_case_no,1) = 'T' OR LEFT(kc_customerloan.kc_case_no,1) BETWEEN '0' AND '5' OR LEFT(kc_customerloan.kc_case_no,1) = 'B')
 AND tmp_debtage.kc_dday_count >= 6
 AND kc_buy_date BETWEEN @pm_strt_date2 AND @pm_stop_date2
 AND kc_issu_code = @wk_issu_code
