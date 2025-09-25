@@ -5,6 +5,7 @@
     [kc_acc_type]     VARCHAR (10)  NULL,
     [kc_acc_sum]      VARCHAR (50)  NULL,
     [kc_agent_code]   VARCHAR (4)   NULL,
+    [kc_vendor_code]   VARCHAR (10)   NULL,
     [kc_emp_code]     VARCHAR (4)   NULL,
     [kc_expense_fee]  INT           NULL,
     [kc_revenue_fee]  INT           NULL,
@@ -36,3 +37,13 @@
     CONSTRAINT [PK_kc_pettycash] PRIMARY KEY CLUSTERED ([kc_apply_no] ASC)
 );
 
+
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'2509160002 - 客供商 (25.09.23 Ray)',
+    @level0type = N'SCHEMA',
+    @level0name = N'kcsd',
+    @level1type = N'TABLE',
+    @level1name = N'kc_pettycash',
+    @level2type = N'COLUMN',
+    @level2name = N'kc_vendor_code'
