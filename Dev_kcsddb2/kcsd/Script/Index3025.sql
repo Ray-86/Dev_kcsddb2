@@ -32,7 +32,7 @@ SELECT Y.Seq,
 				   SUBSTRING(kc_issu_desc, 1, 4)'公司別',
 				   kc_buy_date'購買日',
 				   kc_prod_type + ' ' + SC.[Text]'產品別',
-				   kc_loan_fee'撥款金額',
+				   kc_give_amt'撥款金額',
 				   kc_perd_fee * kc_loan_perd'應收分期款'
 	FROM kcsd.kc_customerloan L
 	INNER JOIN kcsd.kct_issuecompany I ON L.kc_issu_code = I.kc_issu_code
